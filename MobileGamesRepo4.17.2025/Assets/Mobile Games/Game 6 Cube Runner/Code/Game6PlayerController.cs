@@ -8,6 +8,7 @@ public class Game6PlayerController : MonoBehaviour
     void Start()
     {
         //comment
+        //comment2
     }
 
     // Update is called once per frame
