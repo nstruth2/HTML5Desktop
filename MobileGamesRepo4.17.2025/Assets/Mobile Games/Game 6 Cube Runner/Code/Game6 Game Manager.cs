@@ -1,74 +1,115 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class Game6GameManager : MonoBehaviour
 {
+    public static Game6GameManager instance;
+
+    [Header("Enemy Spawning")]
     public GameObject enemy;
     public Transform spawnPoint;
-    public float maxSpawnPointX;
+    public float maxSpawnPointX = 5f;
+
+    [Header("UI")]
     public GameObject menuPanel;
-    public static Game6GameManager instance;
-    int score = 0;
-    int highScore = 0;
     public Text scoreText;
     public Text highScoreText;
-    bool gameStarted = false;
+
+    [Header("Enemy Speed")]
+    public float currentEnemySpeed = 3f;
+    public float speedIncreaseRate = 0.5f;
+    public float maxEnemySpeed = 10f;
+
+    private int score = 0;
+    private int highScore = 0;
+    private bool gameStarted = false;
 
     private void Awake()
     {
-        if(instance==null)
+        if (instance == null)
         {
             instance = this;
         }
     }
-    void Start()
+
+    private void Start()
     {
-        if(PlayerPrefs.HasKey("highScore"))
+        if (PlayerPrefs.HasKey("highScore"))
         {
             highScore = PlayerPrefs.GetInt("highScore");
-            highScoreText.text = "HIGH SCORE: " + highScore.ToString();
         }
+
+        highScoreText.text = "HIGH SCORE: " + highScore;
+        scoreText.gameObject.SetActive(false);
+        StartCoroutine(IncreaseEnemySpeed());
     }
-    void Update()
+
+    private void Update()
     {
-        if(Input.anyKeyDown&&!gameStarted)
+        if (!gameStarted && Input.anyKeyDown)
         {
-            menuPanel.gameObject.SetActive(false);
-            scoreText.gameObject.SetActive(true);
-            StartCoroutine("SpawnEnemies");
-            gameStarted = true;
+            StartGame();
         }
     }
+
+    void StartGame()
+    {
+        menuPanel.SetActive(false);
+        scoreText.gameObject.SetActive(true);
+        gameStarted = true;
+        StartCoroutine(SpawnEnemies());
+    }
+
     IEnumerator SpawnEnemies()
     {
-        while(true)
+        while (true)
         {
             yield return new WaitForSeconds(0.8f);
-            Spawn();
+            SpawnEnemy();
         }
     }
-    public void Spawn()
+
+    IEnumerator IncreaseEnemySpeed()
     {
-        float randomSpawnX = Random.Range(-maxSpawnPointX,maxSpawnPointX);
-        Vector3 enemySpawnPos = spawnPoint.position;
-        enemySpawnPos.x = randomSpawnX;
-        Instantiate(enemy,enemySpawnPos,Quaternion.identity);
-    }
-    public void Restart()
-    {
-        if(score>highScore)
+        while (true)
         {
-            highScore = score;
-            PlayerPrefs.SetInt("highScore",highScore);
+            yield return new WaitForSeconds(5f);
+            currentEnemySpeed = Mathf.Min(currentEnemySpeed + speedIncreaseRate, maxEnemySpeed);
         }
-        SceneManager.LoadScene("Cube Runner");
     }
+
+    void SpawnEnemy()
+    {
+        if (enemy == null || spawnPoint == null) return;
+
+        float x = Random.Range(-maxSpawnPointX, maxSpawnPointX);
+        Vector3 spawnPos = new Vector3(x, spawnPoint.position.y, spawnPoint.position.z);
+
+        GameObject newEnemy = Instantiate(enemy, spawnPos, Quaternion.identity);
+
+        Game6Enemy enemyScript = newEnemy.GetComponent<Game6Enemy>();
+        if (enemyScript != null)
+        {
+            enemyScript.speed = currentEnemySpeed;
+        }
+    }
+
     public void ScoreUp()
     {
         score++;
         scoreText.text = score.ToString();
+    }
+
+    public void Restart()
+    {
+        if (score > highScore)
+        {
+            highScore = score;
+            PlayerPrefs.SetInt("highScore", highScore);
+        }
+
+        SceneManager.LoadScene("Cube Runner");
     }
 }
