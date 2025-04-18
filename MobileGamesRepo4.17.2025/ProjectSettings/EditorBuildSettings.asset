@@ -39,10 +39,13 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Mobile Games/Game 7 Ball Bounce/Scenes/Ball Bounce.unity
     guid: 3f7bf85a061d1fd4181c3450301d670f
-  - enabled: 1
+  - enabled: 0
     path: Assets/Mobile Games/3GamesPackSimpleDrivingGame2/Scenes/3GamesPackSimpleDrivingGame2MainMenu.unity
     guid: 32fe3e3654f804846870a8cd8ea9761c
-  - enabled: 1
+  - enabled: 0
     path: Assets/Mobile Games/3GamesPackSimpleDrivingGame2/Scenes/3GamesPackSimpleDrivingGame2Gameplay.unity
     guid: 2251efb0ecb60e84bbbab9de7f4b8aea
+  - enabled: 1
+    path: Assets/Mobile Games/Game 6 Cube Runner/Scenes/Cube Runner.unity
+    guid: 47be7881793d9b74496adb8338bb9b4b
   m_configObjects: {}
