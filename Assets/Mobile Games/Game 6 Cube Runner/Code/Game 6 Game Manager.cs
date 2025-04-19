@@ -80,15 +80,27 @@ public class Game6GameManager : MonoBehaviour
             PlayerPrefs.SetInt("highScore", highScore);
             highScoreText.text = "HIGH SCORE: " + highScore.ToString();
 
-            // Wait for player to enter name
-            keyboardPanel.SetActive(true);
-            Time.timeScale = 0f;
-            gameState = GameState.WaitingForName;
+            StartCoroutine(ShowKeyboardThenPause());
         }
         else
         {
             BackToMenu();
         }
+    }
+
+    private IEnumerator ShowKeyboardThenPause()
+    {
+        yield return null; // wait 1 frame to allow UI to update
+
+        keyboardPanel.SetActive(true);
+        nameInputField.text = "";
+        nameInputField.Select();
+        nameInputField.ActivateInputField(); // this brings up the keyboard
+
+        yield return null; // wait another frame to ensure keyboard appears
+
+        gameState = GameState.WaitingForName;
+        Time.timeScale = 0f;
     }
 
     public void OnNameEntered(string playerName)

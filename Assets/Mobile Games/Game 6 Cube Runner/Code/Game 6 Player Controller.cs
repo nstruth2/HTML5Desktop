@@ -38,7 +38,7 @@ public class Game6PlayerController : MonoBehaviour
     {
         if (col.gameObject.tag == "Enemy")
         {
-            Game6GameManager.instance.Restart();
+            Game6GameManager.instance.GameOver();
         }
     }
 }
