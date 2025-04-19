@@ -56,5 +56,5 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "MobileGamesNowHaveGame6Repo4.18.2025.sln"
+    "dotnet.defaultSolution": "MobileGamesAddVirtualKeyboard4.19.2025.sln"
 }

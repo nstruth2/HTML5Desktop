@@ -52,8 +52,13 @@ public class Game6VirtualKeyboard : MonoBehaviour
 
     void OnOKPressed()
     {
-        // Perform actions when the OK button is pressed
-        Debug.Log("OK button pressed!");
-        // You can close the keyboard or submit input here
+        if (targetInputField != null)
+        {
+            string playerName = targetInputField.text;
+            Debug.Log("OK button pressed! Name entered: " + playerName);
+
+            // Call GameManager and pass the name
+            Game6GameManager.instance.OnNameEntered(playerName);
+        }
     }
 }
