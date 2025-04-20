@@ -5,16 +5,18 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.Networking;
 
-public class SubmitNameOnlyGame4LineRunner : MonoBehaviour
+public class SubmitNameAndScoreOnlyGame4 : MonoBehaviour
 {
     public InputField playerNameInput;
     public Button submitButton;
 
     private string submitScoreURL = "https://ourgoodguide.com/MobileProject/submit_score.php";
-    private int score = 0; // Replace with actual score if needed
+    private int score = 0;
 
     private void Start()
     {
+        // Get the score stored in PlayerPrefs from previous scene
+        score = PlayerPrefs.GetInt("Game4_SubmitScore", 0);
         submitButton.onClick.AddListener(OnSubmitClicked);
     }
 
@@ -51,7 +53,10 @@ public class SubmitNameOnlyGame4LineRunner : MonoBehaviour
             }
         }
 
+        // Optionally clear the stored score
+        PlayerPrefs.DeleteKey("Game4_SubmitScore");
+
         // Load the main menu scene
-        SceneManager.LoadScene("MainMenu");
+        SceneManager.LoadScene("MainMenuGame4");
     }
 }
