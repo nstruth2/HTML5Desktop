@@ -20,12 +20,12 @@ public class GameManagerGame4 : MonoBehaviour
     private int lives = 3;
     private int score = 0;
     private int currentHighScore = 0;
-    private string currentHighScorePlayer = "PlayerName"; // Store the player name with the highest score
+    private string currentHighScorePlayer = ""; // Store the player name with the highest score
 
     public Text scoreText;
     public Text livesText;
     public Text highScoreText;
-
+    
     private void Awake()
     {
         instance = this;
@@ -40,8 +40,9 @@ public class GameManagerGame4 : MonoBehaviour
         gamePlayUI.SetActive(true);  // Hide the gameplay UI initially
         spawner.SetActive(false);     // Hide spawner initially
         backgroundParticle.SetActive(false);  // Hide background particles initially
-
+        highScoreText.text = "";
         StartCoroutine(FetchTopScorers());
+        
     }
 
     public void StartGame()
@@ -69,23 +70,28 @@ public class GameManagerGame4 : MonoBehaviour
     {
         player.SetActive(false);
 
-        if (score >= currentHighScore)
-        {
-            // Update high score without submitting the score to the server
-            PlayerPrefs.SetInt("Game4_SubmitScore", score);
-            PlayerPrefs.Save(); // Save to disk
-            SceneManager.LoadScene("SubmitScoreAndNameGame4");
-            return;
-        }
-
-        menuUI.SetActive(false);
-        gamePlayUI.SetActive(true);
-
-        // Still go to submit scene even if not high score, or remove this if you only want it for high scores
+        // Save the final score for reference
         PlayerPrefs.SetInt("Game4_SubmitScore", score);
         PlayerPrefs.Save();
-        SceneManager.LoadScene("SubmitScoreAndNameGame4");
+
+        if (score > currentHighScore)
+        {
+            // Player beat the high score, go to the submit scene
+            SceneManager.LoadScene("SubmitScoreAndNameGame4");
+        }
+        else
+        {
+            // Player did not beat the high score, just reload the game or show game over UI
+            Debug.Log("Game over - did not beat high score.");
+            SceneManager.LoadScene("MainMenu");
+            menuUI.SetActive(true);
+            gamePlayUI.SetActive(false);
+            spawner.SetActive(false);
+            backgroundParticle.SetActive(false);
+            // Optionally reset the game or show a retry button
+        }
     }
+
 
     private IEnumerator FreezeGameAfterDelay(float delay)
     {
@@ -132,7 +138,7 @@ public class GameManagerGame4 : MonoBehaviour
         if (score > currentHighScore)
         {
             currentHighScore = score;
-            currentHighScorePlayer = "PlayerName"; // Set a default value here (since player name input is removed)
+            currentHighScorePlayer = ""; // Set a default value here (since player name input is removed)
 
             // Ensure no references to directionsText, submitButton, or playerNameInput
         }
