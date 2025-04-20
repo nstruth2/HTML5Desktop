@@ -79,28 +79,22 @@ public class GameManagerGame4 : MonoBehaviour
     {
         player.SetActive(false);
 
-        // Delay freezing the game for 1.5 seconds, allowing UI events to be processed
-
-        // Show the submit button and input field only when the score is higher than the current high score
         if (score >= currentHighScore)
         {
-            directionsText.gameObject.SetActive(true);
-            submitButton.gameObject.SetActive(true);  // Show submit button
-            playerNameInput.gameObject.SetActive(true);  // Show the name input field
-            submitButton.interactable = true;
-            playerNameInput.interactable = true;
-            // Ensure UI elements are at the top of the canvas hierarchy
-            directionsText.transform.SetAsLastSibling();
-            submitButton.transform.SetAsLastSibling();
-            playerNameInput.transform.SetAsLastSibling();
-            // Make sure the input field is selected for immediate text input
-            EventSystem.current.SetSelectedGameObject(playerNameInput.gameObject);
+            // Save score and allow player to submit their name
+            PlayerPrefs.SetInt("Game4_SubmitScore", score);
+            PlayerPrefs.Save(); // Save to disk
+            SceneManager.LoadScene("SubmitScoreAndNameGame4");
+            return;
         }
 
-        // Enable the name input UI for score submission
-        menuUI.SetActive(false);  // Show the menu UI with input field
-        gamePlayUI.SetActive(true); // Hide the gameplay UI during score submission
-        StartCoroutine(FreezeGameAfterDelay(1)); // Adjust the delay time as needed
+        menuUI.SetActive(false);
+        gamePlayUI.SetActive(true);
+
+        // Still go to submit scene even if not high score, or remove this if you only want it for high scores
+        PlayerPrefs.SetInt("Game4_SubmitScore", score);
+        PlayerPrefs.Save();
+        SceneManager.LoadScene("SubmitScoreAndNameGame4");
     }
 
     private IEnumerator FreezeGameAfterDelay(float delay)
