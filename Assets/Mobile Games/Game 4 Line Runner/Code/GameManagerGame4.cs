@@ -60,8 +60,14 @@ public class GameManagerGame4 : MonoBehaviour
         scoreText.text = "Score: " + score;
 
         // Keep the high score on the screen with player name
-        highScoreText.text = $"Top Score: {currentHighScorePlayer}: {currentHighScore}";
-
+        if (!string.IsNullOrEmpty(currentHighScorePlayer) && currentHighScore > 0)
+        {
+            highScoreText.text = $"Top Score: {currentHighScorePlayer}: {currentHighScore}";
+        }
+        else
+        {
+            highScoreText.text = "";
+        }
         // Ensure game is running at normal speed
         Time.timeScale = 1;
     }
@@ -74,7 +80,7 @@ public class GameManagerGame4 : MonoBehaviour
         PlayerPrefs.SetInt("Game4_SubmitScore", score);
         PlayerPrefs.Save();
 
-        if (score > currentHighScore)
+        if (score >= currentHighScore)
         {
             // Player beat the high score, go to the submit scene
             SceneManager.LoadScene("SubmitScoreAndNameGame4");
@@ -83,7 +89,7 @@ public class GameManagerGame4 : MonoBehaviour
         {
             // Player did not beat the high score, just reload the game or show game over UI
             Debug.Log("Game over - did not beat high score.");
-            SceneManager.LoadScene("MainMenu");
+            SceneManager.LoadScene("MainMenuGame4");
             menuUI.SetActive(true);
             gamePlayUI.SetActive(false);
             spawner.SetActive(false);
