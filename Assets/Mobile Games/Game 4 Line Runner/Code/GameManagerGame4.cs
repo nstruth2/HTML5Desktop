@@ -2,9 +2,8 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using UnityEngine.Networking;
-using System.Collections.Generic;
 using UnityEngine.EventSystems;
+using System.Collections.Generic;
 
 public class GameManagerGame4 : MonoBehaviour
 {
@@ -17,8 +16,6 @@ public class GameManagerGame4 : MonoBehaviour
     Vector3 originalCamPos;
     public GameObject player;
     public InputField playerNameInput;
-
-    private string submitScoreURL = "https://ourgoodguide.com/MobileProject/submit_score.php";
 
     private int lives = 3;
     private int score = 0;
@@ -81,7 +78,7 @@ public class GameManagerGame4 : MonoBehaviour
 
         if (score >= currentHighScore)
         {
-            // Save score and allow player to submit their name
+            // Update high score without submitting the score to the server
             PlayerPrefs.SetInt("Game4_SubmitScore", score);
             PlayerPrefs.Save(); // Save to disk
             SceneManager.LoadScene("SubmitScoreAndNameGame4");
@@ -165,6 +162,7 @@ public class GameManagerGame4 : MonoBehaviour
 
         highScoreText.text = highScoreDisplayText;
     }
+
     public void ExitGame()
     {
         // Only run this on Android platform
@@ -205,47 +203,7 @@ public class GameManagerGame4 : MonoBehaviour
             return;
         }
 
-        StartCoroutine(SubmitScoreAndReload(playerName, score));
-
-        // Hide the input field and submit button after submitting the score
-        directionsText.gameObject.SetActive(false);
-        submitButton.gameObject.SetActive(false);  
-        playerNameInput.gameObject.SetActive(false);  
-
-        // Optionally, hide the menu UI after score submission
-        menuUI.SetActive(true);
-        gamePlayUI.SetActive(true);
-    }
-
-    private IEnumerator ReloadLevelWithDelay()
-    {
-        // Wait for a short period to ensure the UI updates with the new high score
-        yield return new WaitForSeconds(1f);
-
-        // Now reload the scene
-        ReloadLevel();
-    }
-
-    private IEnumerator SubmitScoreAndReload(string playerName, int score)
-    {
-        WWWForm form = new WWWForm();
-        form.AddField("player_name", playerName);
-        form.AddField("score", score);
-
-        using (UnityWebRequest www = UnityWebRequest.Post(submitScoreURL, form))
-        {
-            yield return www.SendWebRequest();
-
-            if (www.result == UnityWebRequest.Result.Success)
-            {
-                Debug.Log("Score submitted: " + www.downloadHandler.text);
-                StartCoroutine(FetchTopScorers()); // Refresh scores after submission
-            }
-            else
-            {
-                Debug.Log("Error submitting score: " + www.error);
-            }
-        }
+        // Removed the call to SubmitScoreAndReload() to exclude the submit score functionality.
         ReloadLevel();
     }
 
