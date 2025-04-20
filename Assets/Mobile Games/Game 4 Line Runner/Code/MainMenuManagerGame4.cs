@@ -1,21 +1,34 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class MainMenumanagerGame4 : MonoBehaviour
 {
-    private bool hasTapped = false;
+    public Button startButton; // Reference to the Start Button
+
+    private bool hasClicked = false;
+
+    void Start()
+    {
+        // Ensure the start button is clickable
+        if (startButton != null)
+        {
+            startButton.onClick.AddListener(OnStartButtonClicked);
+        }
+    }
 
     void Update()
     {
-        if (hasTapped)
-            return;
-
-        // Check for mouse click or touch input, ignoring UI elements
-        if ((Input.GetMouseButtonDown(0) || Input.touchCount > 0) && !IsPointerOverUI())
+        // Check for mouse click or touch input, allowing the scene load on first click/tap
+        if (!hasClicked && (Input.GetMouseButtonDown(0) || Input.touchCount > 0))
         {
-            hasTapped = true;
-            LoadGameplayScene();
+            if (!IsPointerOverUI())
+            {
+                hasClicked = true;
+                Debug.Log("Detected Click/Tap");
+                LoadGameplayScene();
+            }
         }
     }
 
@@ -25,8 +38,21 @@ public class MainMenumanagerGame4 : MonoBehaviour
         return EventSystem.current != null && EventSystem.current.IsPointerOverGameObject();
     }
 
-    private void LoadGameplayScene()
+    // This method will be called when the Start button is clicked
+    public void OnStartButtonClicked()
     {
+        if (!hasClicked)
+        {
+            hasClicked = true;
+            Debug.Log("Start Button Clicked!");
+            LoadGameplayScene();
+        }
+    }
+
+    // Load the gameplay scene
+    public void LoadGameplayScene()
+    {
+        Debug.Log("Loading GameplayGame4...");
         SceneManager.LoadScene("GameplayGame4");
     }
 }
