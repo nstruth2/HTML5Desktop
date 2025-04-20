@@ -15,7 +15,6 @@ public class GameManagerGame4 : MonoBehaviour
     public bool gameStarted = false;
     Vector3 originalCamPos;
     public GameObject player;
-    public InputField playerNameInput;
 
     private int lives = 3;
     private int score = 0;
@@ -25,8 +24,6 @@ public class GameManagerGame4 : MonoBehaviour
     public Text scoreText;
     public Text livesText;
     public Text highScoreText;
-    public Text directionsText;
-    public Button submitButton;
 
     private void Awake()
     {
@@ -36,11 +33,6 @@ public class GameManagerGame4 : MonoBehaviour
     private void Start()
     {
         originalCamPos = Camera.main.transform.position;
-
-        // Ensure the submit button and input field are hidden initially
-        directionsText.gameObject.SetActive(false);
-        submitButton.gameObject.SetActive(false);  // Hide submit button
-        playerNameInput.gameObject.SetActive(false);  // Hide input field
 
         // Disable the main menu during gameplay
         menuUI.SetActive(true);  // Always show the menu UI at the start
@@ -139,12 +131,9 @@ public class GameManagerGame4 : MonoBehaviour
         if (score > currentHighScore)
         {
             currentHighScore = score;
-            currentHighScorePlayer = playerNameInput.text; // Store the current player's name
+            currentHighScorePlayer = "PlayerName"; // Set a default value here (since player name input is removed)
 
-            // Re-enable the input field and submit button when a new high score is set
-            directionsText.gameObject.SetActive(false);
-            submitButton.gameObject.SetActive(false); // Hide submit button (it will appear after game over)
-            playerNameInput.gameObject.SetActive(false); // Hide the name input field
+            // Ensure no references to directionsText, submitButton, or playerNameInput
         }
 
         string highScoreDisplayText = $"Top Score: {currentHighScorePlayer}";
@@ -192,19 +181,6 @@ public class GameManagerGame4 : MonoBehaviour
             yield return null;
         }
         Camera.main.transform.position = originalCamPos;
-    }
-
-    public void SubmitHighScore()
-    {
-        string playerName = playerNameInput.text;
-        if (string.IsNullOrEmpty(playerName))
-        {
-            Debug.Log("Player name is required");
-            return;
-        }
-
-        // Removed the call to SubmitScoreAndReload() to exclude the submit score functionality.
-        ReloadLevel();
     }
 
     private void ReloadLevel()
