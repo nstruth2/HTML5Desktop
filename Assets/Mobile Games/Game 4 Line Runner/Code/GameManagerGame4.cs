@@ -17,6 +17,7 @@ public class GameManagerGame4 : MonoBehaviour
     private int lives = 3;
     private int score = 0;
     private int currentHighScore = 0;
+    private bool isShaking = false;
 
     public Text scoreText;
     public Text livesText;
@@ -129,7 +130,7 @@ public class GameManagerGame4 : MonoBehaviour
     {
         string topPlayer = PlayerPrefs.GetString("TopScorePlayer", "N/A");
         int topScore = PlayerPrefs.GetInt("TopScoreValue", 0);
-        highScoreText.text = "Top Score: " + topPlayer + " - " + topScore;
+        highScoreText.text = "Top Score: " + topPlayer + ": " + topScore;
     }
 
     public void ExitGame()
@@ -145,19 +146,27 @@ public class GameManagerGame4 : MonoBehaviour
 
     public void Shake()
     {
-        Debug.Log("SHAKE CALLED");
-        StartCoroutine(CameraShake());
+        if (!isShaking)
+        {
+            StartCoroutine(CameraShake());
+        }
     }
 
     private IEnumerator CameraShake()
     {
+        isShaking = true;
+        
+        Vector3 startPos = Camera.main.transform.position;
+
         for (int i = 0; i < 5; i++)
         {
             Vector2 randomPos = Random.insideUnitCircle * 0.5f;
-            Camera.main.transform.position = new Vector3(randomPos.x, randomPos.y, originalCamPos.z);
-            yield return null;
+            Camera.main.transform.position = new Vector3(randomPos.x, randomPos.y, startPos.z); // Don't modify z-axis
+            yield return new WaitForSeconds(0.05f);  // Add a small delay between shakes
         }
-        Camera.main.transform.position = originalCamPos;
+
+        Camera.main.transform.position = startPos;
+        isShaking = false;
     }
 
     private void ReloadLevel()

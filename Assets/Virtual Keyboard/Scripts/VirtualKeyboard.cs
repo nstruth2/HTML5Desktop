@@ -8,20 +8,61 @@ public class VirtualKeyboard : MonoBehaviour
     public GameObject keyButtonPrefab;
     public Transform keysParent;
 
-    private string[] keys = new string[] {
+    private bool showingSymbols = false;
+    private bool capsLock = true;
+
+    private string[] letterKeysBase = new string[] {
         "Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P",
         "A", "S", "D", "F", "G", "H", "J", "K", "L",
-        "Z", "X", "C", "V", "B", "N", "M", "Space", "Backspace", "OK"
+        "Z", "X", "C", "V", "B", "N", "M",
+        "Caps", "123", "Space", "Backspace", "OK"
     };
+
+    private string[] symbolKeys = new string[] {
+        "1", "2", "3", "4", "5", "6", "7", "8", "9", "0",
+        "!", "@", "#", "$", "%", "^", "&", "*", "(",
+        ")", "-", "_", "=", "+", "/", "?",
+        "ABC", "Space", "Backspace", "OK"
+    };
+
+    private List<GameObject> instantiatedKeys = new List<GameObject>();
 
     void Start()
     {
-        foreach (string key in keys)
+        BuildKeyboard();
+    }
+
+    void BuildKeyboard()
+    {
+        // Clear existing keys
+        foreach (GameObject key in instantiatedKeys)
         {
-            string capturedKey = key; // capture key for closure
+            Destroy(key);
+        }
+        instantiatedKeys.Clear();
+
+        // Pick layout
+        string[] layout = showingSymbols ? symbolKeys : letterKeysBase;
+
+        foreach (string key in layout)
+        {
+            string displayKey = key;
+
+            if (!showingSymbols && key.Length == 1 && char.IsLetter(key[0]))
+            {
+                // Adjust case for letters
+                displayKey = capsLock ? key.ToUpper() : key.ToLower();
+            }
+            else if (key == "Caps")
+            {
+                displayKey = capsLock ? "Caps (ON)" : "Caps (off)";
+            }
+
+            string capturedKey = key;
             GameObject keyObj = Instantiate(keyButtonPrefab, keysParent);
-            keyObj.GetComponentInChildren<Text>().text = key;
+            keyObj.GetComponentInChildren<Text>().text = displayKey;
             keyObj.GetComponent<Button>().onClick.AddListener(() => OnKeyPressed(capturedKey));
+            instantiatedKeys.Add(keyObj);
         }
     }
 
@@ -39,14 +80,34 @@ public class VirtualKeyboard : MonoBehaviour
         }
         else if (key == "OK")
         {
-            // Handle OK pressed (for example, submit or hide keyboard)
             Debug.Log("OK pressed. Input submitted: " + targetInputField?.text);
-            gameObject.SetActive(false); // hide the keyboard
+            gameObject.SetActive(false);
+        }
+        else if (key == "123")
+        {
+            showingSymbols = true;
+            BuildKeyboard();
+        }
+        else if (key == "ABC")
+        {
+            showingSymbols = false;
+            BuildKeyboard();
+        }
+        else if (key == "Caps")
+        {
+            capsLock = !capsLock;
+            BuildKeyboard();
         }
         else
         {
+            string inputChar = key;
+            if (!showingSymbols && key.Length == 1 && char.IsLetter(key[0]))
+            {
+                inputChar = capsLock ? key.ToUpper() : key.ToLower();
+            }
+
             if (targetInputField != null)
-                targetInputField.text += key;
+                targetInputField.text += inputChar;
         }
     }
 }
