@@ -17,6 +17,10 @@ public class SceneLoaderMainMenu : MonoBehaviour
     {
         SceneManager.LoadScene("Game 1 Simple Endless 3D Runner");
     }
+    public void LoadLineRunner()
+    {
+        SceneManager.LoadScene("MainMenuGame4");
+    }
     public void Quit()
     {
         Application.Quit();

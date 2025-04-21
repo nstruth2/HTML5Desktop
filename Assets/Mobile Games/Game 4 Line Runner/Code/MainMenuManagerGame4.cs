@@ -55,4 +55,9 @@ public class MainMenumanagerGame4 : MonoBehaviour
         Debug.Log("Loading GameplayGame4...");
         SceneManager.LoadScene("GameplayGame4");
     }
+
+    public void OnMainMenuButtonClicked()
+    {
+        SceneManager.LoadScene("Global Main Menu");
+    }
 }

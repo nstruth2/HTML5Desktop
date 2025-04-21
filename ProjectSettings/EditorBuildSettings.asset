@@ -5,44 +5,44 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
+  - enabled: 1
     path: Assets/Mobile Games/Main Menu/Global Main Menu.unity
     guid: 5e16d444f83278347ab9db9e64ea8b94
-  - enabled: 0
+  - enabled: 1
     path: Assets/Mobile Games/Game 2 Dodging Dog/Game 2 Dodging Dog 2D.unity
     guid: 4f599435c2f6445479d563cf46128390
-  - enabled: 0
+  - enabled: 1
     path: Assets/Mobile Games/Game 2 Dodging Dog/Main Menu Game 2.unity
     guid: c0dc9a70188ef4a4db182d6bdb98a3af
-  - enabled: 0
+  - enabled: 1
     path: Assets/Mobile Games/Game 8 Tappy Ball/Scenes/StartMenuGame8.unity
     guid: c43ab22e6018f3d44bef269d13bdb670
-  - enabled: 0
+  - enabled: 1
     path: Assets/Mobile Games/Game 8 Tappy Ball/Scenes/Game 8 Tappy Ball.unity
     guid: 2c4a4dfac35cb834aa8f31e0d5c3cff3
-  - enabled: 0
+  - enabled: 1
     path: Assets/Mobile Games/Game 1 Simple Endless 3D Runner/Game 1 Simple Endless
       3D Runner.unity
     guid: fd36cbfc4d727534ba9ae92b31f5983f
-  - enabled: 0
+  - enabled: 1
     path: Assets/Mobile Games/Game 3 Food Eater/Game 3 Food Eater.unity
     guid: 2cda990e2423bbf4892e6590ba056729
-  - enabled: 0
+  - enabled: 1
     path: Assets/Mobile Games/Reset Scores Scene/ResetScoresandTimes.unity
     guid: 5f036b0e612c8b049a89a56d26f6f6f1
-  - enabled: 0
+  - enabled: 1
     path: Assets/Mobile Games/Game 5 Ball Smash/Scenes/Scenes/Game 5 Ball Smash.unity
     guid: b5218b97ee6374245830ee7c410ad815
   - enabled: 1
     path: Assets/Mobile Games/Game 4 Line Runner/Scenes/GameplayGame4.unity
     guid: f58554037b0dd0645a8be8dd8d2f83b5
-  - enabled: 0
+  - enabled: 1
     path: Assets/Mobile Games/Game 7 Ball Bounce/Scenes/Ball Bounce.unity
     guid: 3f7bf85a061d1fd4181c3450301d670f
-  - enabled: 0
+  - enabled: 1
     path: Assets/Mobile Games/3GamesPackSimpleDrivingGame2/Scenes/3GamesPackSimpleDrivingGame2MainMenu.unity
     guid: 32fe3e3654f804846870a8cd8ea9761c
-  - enabled: 0
+  - enabled: 1
     path: Assets/Mobile Games/3GamesPackSimpleDrivingGame2/Scenes/3GamesPackSimpleDrivingGame2Gameplay.unity
     guid: 2251efb0ecb60e84bbbab9de7f4b8aea
   - enabled: 1
@@ -51,4 +51,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Mobile Games/Game 4 Line Runner/Scenes/MainMenuGame4.unity
     guid: 9c28139865c0d214881610d47958fb65
+  - enabled: 1
+    path: Assets/Mobile Games/Game 4 Line Runner/Scenes/SubmitScoreAndNameGame4.unity
+    guid: ce95de5d05e9a2b438da702ffcdd993a
   m_configObjects: {}
