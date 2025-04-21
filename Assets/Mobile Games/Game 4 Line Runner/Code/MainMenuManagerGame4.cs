@@ -71,7 +71,7 @@ public class MainMenumanagerGame4 : MonoBehaviour
         isLoadingScene = true;
         Debug.Log("Loading GameplayGame4...");
         Time.timeScale = 1f; // Reset time scale
-        SceneManager.LoadScene("GameplayGame4");
+        SceneManager.LoadScene("Gameplay Game 4");
     }
 
     // Load the main menu scene

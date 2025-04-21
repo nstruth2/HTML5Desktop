@@ -57,6 +57,6 @@ public class SubmitNameAndScoreOnlyGame4 : MonoBehaviour
         PlayerPrefs.DeleteKey("Game4_SubmitScore");
 
         // Load the main menu scene
-        SceneManager.LoadScene("MainMenuGame4");
+        SceneManager.LoadScene("Main Menu Game 4");
     }
 }

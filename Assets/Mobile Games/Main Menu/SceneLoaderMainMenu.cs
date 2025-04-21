@@ -11,7 +11,7 @@ public class SceneLoaderMainMenu : MonoBehaviour
     }
     public void LoadTappyBall()
     {
-        SceneManager.LoadScene("StartMenuGame8");
+        SceneManager.LoadScene("Start Menu Game 8");
     }
     public void LoadJumper()
     {
@@ -19,7 +19,7 @@ public class SceneLoaderMainMenu : MonoBehaviour
     }
     public void LoadLineRunner()
     {
-        SceneManager.LoadScene("MainMenuGame4");
+        SceneManager.LoadScene("Main Menu Game 4");
     }
     public void Quit()
     {

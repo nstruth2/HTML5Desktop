@@ -15,7 +15,25 @@ public class HighScoreFetcherGame4 : MonoBehaviour
 
     void Start()
     {
+        LoadTopScoreFromPlayerPrefs(); // Show saved score immediately
         StartCoroutine(FetchTopScorers());
+    }
+
+    void SaveTopScoreToPlayerPrefs(string playerName, int score)
+    {
+        PlayerPrefs.SetString("TopScorePlayer", playerName);
+        PlayerPrefs.SetInt("TopScoreValue", score);
+        PlayerPrefs.Save();
+    }
+
+    void LoadTopScoreFromPlayerPrefs()
+    {
+        if (PlayerPrefs.HasKey("TopScorePlayer") && PlayerPrefs.HasKey("TopScoreValue"))
+        {
+            string savedPlayer = PlayerPrefs.GetString("TopScorePlayer");
+            int savedScore = PlayerPrefs.GetInt("TopScoreValue");
+            highScoreText.text = $"Saved Top Score: {savedPlayer} {savedScore}";
+        }
     }
 
     IEnumerator FetchTopScorers()
@@ -66,6 +84,7 @@ public class HighScoreFetcherGame4 : MonoBehaviour
                         }
 
                         currentHighScore = highestScore;
+                        SaveTopScoreToPlayerPrefs(currentHighScorePlayer, currentHighScore);
                     }
                     else
                     {
