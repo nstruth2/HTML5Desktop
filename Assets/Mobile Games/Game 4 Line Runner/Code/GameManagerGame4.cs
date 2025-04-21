@@ -42,6 +42,7 @@ public class GameManagerGame4 : MonoBehaviour
         backgroundParticle.SetActive(false);  // Hide background particles initially
         highScoreText.text = "";
         StartCoroutine(FetchTopScorers());
+        StartGame();
         
     }
 
