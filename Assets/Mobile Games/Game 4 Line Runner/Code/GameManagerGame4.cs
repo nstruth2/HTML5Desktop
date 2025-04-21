@@ -85,6 +85,7 @@ public class GameManagerGame4 : MonoBehaviour
         {
             // Player beat the high score, go to the submit scene
             SceneManager.LoadScene("SubmitScoreAndNameGame4");
+            return;// Prevent the rest form running
         }
         else
         {
