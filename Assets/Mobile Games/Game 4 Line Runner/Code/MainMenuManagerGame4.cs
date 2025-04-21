@@ -5,48 +5,33 @@ using UnityEngine.UI;
 
 public class MainMenumanagerGame4 : MonoBehaviour
 {
-    public Button startButton; // Reference to the Start Button
+    public Button startButton;       // Reference to the Start button
+    public Button mainMenuButton;    // Reference to the Main Menu button
 
-    private bool hasClicked = false;
+    private bool isSceneLoading = false;  // Flag to prevent double-clicks for any button
 
     void Start()
     {
-        // Ensure the start button is clickable
+        // Ensure the Start button and Main Menu button are hooked up to their respective methods
         if (startButton != null)
         {
             startButton.onClick.AddListener(OnStartButtonClicked);
         }
-    }
 
-    void Update()
-    {
-        // Check for mouse click or touch input, allowing the scene load on first click/tap
-        if (!hasClicked && (Input.GetMouseButtonDown(0) || Input.touchCount > 0))
+        if (mainMenuButton != null)
         {
-            if (!IsPointerOverUI())
-            {
-                hasClicked = true;
-                Debug.Log("Detected Click/Tap");
-                LoadGameplayScene();
-            }
+            mainMenuButton.onClick.AddListener(OnMainMenuButtonClicked);
         }
-    }
-
-    private bool IsPointerOverUI()
-    {
-        // Checks if the pointer (mouse or touch) is over a UI element
-        return EventSystem.current != null && EventSystem.current.IsPointerOverGameObject();
     }
 
     // This method will be called when the Start button is clicked
     public void OnStartButtonClicked()
     {
-        if (!hasClicked)
-        {
-            hasClicked = true;
-            Debug.Log("Start Button Clicked!");
-            LoadGameplayScene();
-        }
+        if (isSceneLoading) return;  // Prevent double-clicks
+
+        isSceneLoading = true; // Set flag to prevent further clicks
+        Debug.Log("Start Button Clicked!");
+        LoadGameplayScene();
     }
 
     // Load the gameplay scene
@@ -56,8 +41,13 @@ public class MainMenumanagerGame4 : MonoBehaviour
         SceneManager.LoadScene("GameplayGame4");
     }
 
+    // This method will be called when the Main Menu button is clicked
     public void OnMainMenuButtonClicked()
     {
+        if (isSceneLoading) return;  // Prevent double-clicks
+
+        isSceneLoading = true; // Set flag to prevent further clicks
+        Debug.Log("Loading Global Main Menu...");
         SceneManager.LoadScene("Global Main Menu");
     }
 }
