@@ -7,7 +7,7 @@ public class VirtualKeyboard : MonoBehaviour
     public InputField targetInputField;
     public GameObject keyButtonPrefab;
     public Transform keysParent;
-    public Button submitButton;
+    public SubmitNameAndScoreOnlyGame4 submitHandler;
 
     private bool showingSymbols = false;
     private bool capsLock = true;
@@ -81,13 +81,18 @@ public class VirtualKeyboard : MonoBehaviour
         }
         else if (key == "OK")
         {
-            Debug.Log("OK pressed. Input submitted: " + targetInputField?.text);
-            gameObject.SetActive(false);
-
-            // Trigger the submit button click
-            if (submitButton != null)
+            if (submitHandler != null)
             {
-                submitButton.onClick.Invoke();
+                string playerName = targetInputField.text;
+                if (!string.IsNullOrEmpty(playerName))
+                {
+                    int score = PlayerPrefs.GetInt("Game4_SubmitScore", 0);
+                    submitHandler.StartCoroutine(submitHandler.SubmitScoreAndLoadMainMenu(playerName, score));
+                }
+                else
+                {
+                    Debug.Log("Player name is required.");
+                }
             }
         }
         else if (key == "123")
@@ -117,4 +122,5 @@ public class VirtualKeyboard : MonoBehaviour
                 targetInputField.text += inputChar;
         }
     }
+
 }

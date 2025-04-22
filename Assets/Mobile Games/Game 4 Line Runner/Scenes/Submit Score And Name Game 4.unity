@@ -508,6 +508,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 420001444}
     - target: {fileID: 2965074189519420813, guid: 112f528fa5619964290479ff7985b8ef, type: 3}
+      propertyPath: submitHandler
+      value: 
+      objectReference: {fileID: 1437484171}
+    - target: {fileID: 2965074189519420813, guid: 112f528fa5619964290479ff7985b8ef, type: 3}
       propertyPath: targetInputField
       value: 
       objectReference: {fileID: 420001445}

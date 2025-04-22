@@ -33,7 +33,7 @@ public class SubmitNameAndScoreOnlyGame4 : MonoBehaviour
         StartCoroutine(SubmitScoreAndLoadMainMenu(playerName, score));
     }
 
-    private IEnumerator SubmitScoreAndLoadMainMenu(string playerName, int score)
+    public IEnumerator SubmitScoreAndLoadMainMenu(string playerName, int score)
     {
         WWWForm form = new WWWForm();
         form.AddField("player_name", playerName);
