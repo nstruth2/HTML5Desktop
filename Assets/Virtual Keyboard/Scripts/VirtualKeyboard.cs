@@ -7,6 +7,7 @@ public class VirtualKeyboard : MonoBehaviour
     public InputField targetInputField;
     public GameObject keyButtonPrefab;
     public Transform keysParent;
+    public Button submitButton;
 
     private bool showingSymbols = false;
     private bool capsLock = true;
@@ -82,6 +83,12 @@ public class VirtualKeyboard : MonoBehaviour
         {
             Debug.Log("OK pressed. Input submitted: " + targetInputField?.text);
             gameObject.SetActive(false);
+
+            // Trigger the submit button click
+            if (submitButton != null)
+            {
+                submitButton.onClick.Invoke();
+            }
         }
         else if (key == "123")
         {

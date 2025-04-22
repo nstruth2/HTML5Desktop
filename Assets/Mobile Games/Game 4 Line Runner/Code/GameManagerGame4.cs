@@ -72,6 +72,7 @@ public class GameManagerGame4 : MonoBehaviour
         {
             PlayerPrefs.SetInt("Game4_HighScore", score);
             PlayerPrefs.Save();
+            Debug.Log("New high score! Loading submission scene.");
             SceneManager.LoadScene("Submit Score And Name Game 4");
             return;
         }
