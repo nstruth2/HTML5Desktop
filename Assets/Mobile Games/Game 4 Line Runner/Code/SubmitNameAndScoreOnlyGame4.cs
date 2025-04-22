@@ -20,7 +20,7 @@ public class SubmitNameAndScoreOnlyGame4 : MonoBehaviour
         submitButton.onClick.AddListener(OnSubmitClicked);
     }
 
-    private void OnSubmitClicked()
+    public void OnSubmitClicked()
     {
         string playerName = playerNameInput.text;
         if (string.IsNullOrEmpty(playerName))
