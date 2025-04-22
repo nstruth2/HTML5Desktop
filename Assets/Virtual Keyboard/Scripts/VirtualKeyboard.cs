@@ -119,7 +119,11 @@ public class VirtualKeyboard : MonoBehaviour
             }
 
             if (targetInputField != null)
+            {
                 targetInputField.text += inputChar;
+                targetInputField.MoveTextEnd(false);
+                targetInputField.ActivateInputField();
+            }
         }
     }
 
