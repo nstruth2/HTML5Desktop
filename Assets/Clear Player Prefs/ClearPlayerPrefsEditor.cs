@@ -1,3 +1,4 @@
+/*
 using UnityEditor;
 using UnityEngine;
 
@@ -10,3 +11,4 @@ public class ClearPlayerPrefsEditor : EditorWindow
         Debug.Log("All PlayerPrefs deleted!");
     }
 }
+*/

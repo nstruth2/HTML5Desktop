@@ -2,24 +2,74 @@
 <html lang="en-us">
   <head>
     <meta charset="utf-8">
-    <script type="text/javascript"> 
-    function ActivateNativeKeyboardJS(inputFieldID) {
-      console.log("Activating keyboard for input field with ID: " + inputFieldID);
-      // Your JavaScript logic to handle keyboard interaction here
-    }
-    </script>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>Unity WebGL Player | {{{ PRODUCT_NAME }}}</title>
+    <title>{{{ PRODUCT_NAME }}}</title>
     <link rel="shortcut icon" href="TemplateData/favicon.ico">
     <link rel="stylesheet" href="TemplateData/style.css">
-#if SHOW_DIAGNOSTICS
-    <link rel="stylesheet" href="<<<TemplateData/diagnostics.css>>>">
-    <script src="<<<TemplateData/diagnostics.js>>>"></script>
-#endif
+    <style>
+      html, body, #unity-container {
+        margin: 0;
+        padding: 0;
+        width: 100vw;
+        height: 100vh;
+        overflow: hidden;
+        background: black;
+      }
+
+      #unity-canvas {
+        width: 100vw;
+        height: 100vh;
+        display: block;
+        background: black;
+      }
+
+      #unity-loading-bar {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 100%;
+        height: 30px;
+        background-color: rgba(0, 0, 0, 0.8);
+      }
+
+      #unity-progress-bar-empty {
+        width: 100%;
+        height: 100%;
+        background-color: rgba(255, 255, 255, 0.3);
+      }
+
+      #unity-progress-bar-full {
+        width: 0;
+        height: 100%;
+        background-color: #4caf50;
+      }
+
+      @media screen and (orientation:portrait) {
+        body::before {
+          content: "Please rotate your device to landscape.";
+          color: white;
+          font-size: 24px;
+          position: absolute;
+          top: 0;
+          left: 0;
+          z-index: 9999;
+          background: black;
+          width: 100vw;
+          height: 100vh;
+          text-align: center;
+          padding-top: 50vh;
+        }
+
+        #unity-container, #unity-canvas {
+          display: none;
+        }
+      }
+    </style>
   </head>
   <body>
     <div id="unity-container" class="unity-desktop">
-      <canvas id="unity-canvas" width={{{ WIDTH }}} height={{{ HEIGHT }}} tabindex="-1"></canvas>
+      <canvas id="unity-canvas" tabindex="-1"></canvas>
       <div id="unity-loading-bar">
         <div id="unity-logo"></div>
         <div id="unity-progress-bar-empty">
@@ -30,30 +80,21 @@
       <div id="unity-footer">
         <div id="unity-webgl-logo"></div>
         <div id="unity-fullscreen-button"></div>
-#if SHOW_DIAGNOSTICS
-        <img id="diagnostics-icon" src="TemplateData/webmemd-icon.png">
-#endif
         <div id="unity-build-title">{{{ PRODUCT_NAME }}}</div>
       </div>
     </div>
-    <script>
 
+    <script>
       var container = document.querySelector("#unity-container");
       var canvas = document.querySelector("#unity-canvas");
       var loadingBar = document.querySelector("#unity-loading-bar");
       var progressBarFull = document.querySelector("#unity-progress-bar-full");
       var fullscreenButton = document.querySelector("#unity-fullscreen-button");
       var warningBanner = document.querySelector("#unity-warning");
-#if SHOW_DIAGNOSTICS
-      var diagnostics_icon = document.getElementById("diagnostics-icon");
-#endif
 
       // Shows a temporary message banner/ribbon for a few seconds, or
       // a permanent error message on top of the canvas if type=='error'.
       // If type=='warning', a yellow highlight color is used.
-      // Modify or remove this function to customize the visually presented
-      // way that non-critical warnings and error messages are presented to the
-      // user.
       function unityShowBanner(msg, type) {
         function updateBannerVisibility() {
           warningBanner.style.display = warningBanner.children.length ? 'block' : 'none';
@@ -77,64 +118,28 @@
       var config = {
         dataUrl: buildUrl + "/{{{ DATA_FILENAME }}}",
         frameworkUrl: buildUrl + "/{{{ FRAMEWORK_FILENAME }}}",
-#if USE_THREADS
-        workerUrl: buildUrl + "/{{{ WORKER_FILENAME }}}",
-#endif
-#if USE_WASM
         codeUrl: buildUrl + "/{{{ CODE_FILENAME }}}",
-#endif
-#if MEMORY_FILENAME
-        memoryUrl: buildUrl + "/{{{ MEMORY_FILENAME }}}",
-#endif
-#if SYMBOLS_FILENAME
-        symbolsUrl: buildUrl + "/{{{ SYMBOLS_FILENAME }}}",
-#endif
         streamingAssetsUrl: "StreamingAssets",
-        companyName: {{{ JSON.stringify(COMPANY_NAME) }}},
-        productName: {{{ JSON.stringify(PRODUCT_NAME) }}},
-        productVersion: {{{ JSON.stringify(PRODUCT_VERSION) }}},
+        companyName: "{{{ COMPANY_NAME }}}",
+        productName: "{{{ PRODUCT_NAME }}}",
+        productVersion: "{{{ PRODUCT_VERSION }}}",
         showBanner: unityShowBanner,
       };
 
-      // By default, Unity keeps WebGL canvas render target size matched with
-      // the DOM size of the canvas element (scaled by window.devicePixelRatio)
-      // Set this to false if you want to decouple this synchronization from
-      // happening inside the engine, and you would instead like to size up
-      // the canvas DOM size and WebGL render target sizes yourself.
-      // config.matchWebGLToCanvasSize = false;
-
+      // Handle mobile devices by showing a "please rotate" message
       if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
-        // Mobile device style: fill the whole browser client area with the game canvas:
-
         var meta = document.createElement('meta');
         meta.name = 'viewport';
         meta.content = 'width=device-width, height=device-height, initial-scale=1.0, user-scalable=no, shrink-to-fit=yes';
         document.getElementsByTagName('head')[0].appendChild(meta);
         container.className = "unity-mobile";
         canvas.className = "unity-mobile";
-
-        // To lower canvas resolution on mobile devices to gain some
-        // performance, uncomment the following line:
-        // config.devicePixelRatio = 1;
-
-#if SHOW_DIAGNOSTICS
-        // position the diagnostics icon in the corner on the canvas
-        diagnostics_icon.style.position = "fixed";
-        diagnostics_icon.style.bottom = "10px";
-        diagnostics_icon.style.right = "0px";
-        canvas.after(diagnostics_icon);
-#endif
-
       } else {
-        // Desktop style: Render the game canvas in a window that can be maximized to fullscreen:
-
-        canvas.style.width = "{{{ WIDTH }}}px";
-        canvas.style.height = "{{{ HEIGHT }}}px";
+        canvas.style.width = "100vw";
+        canvas.style.height = "100vh";
       }
 
-#if BACKGROUND_FILENAME
-      canvas.style.background = "url('" + buildUrl + "/{{{ BACKGROUND_FILENAME.replace(/'/g, '%27') }}}') center / cover";
-#endif
+      // Show loading bar
       loadingBar.style.display = "block";
 
       var script = document.createElement("script");
@@ -142,22 +147,44 @@
       script.onload = () => {
         createUnityInstance(canvas, config, (progress) => {
           progressBarFull.style.width = 100 * progress + "%";
-              }).then((unityInstance) => {
-                loadingBar.style.display = "none";
-#if SHOW_DIAGNOSTICS
-                diagnostics_icon.onclick = () => {
-                  unityDiagnostics.openDiagnosticsDiv(unityInstance.GetMemoryInfo);
-                };
-#endif
-                fullscreenButton.onclick = () => {
-                  unityInstance.SetFullscreen(1);
-                };
-              }).catch((message) => {
-                alert(message);
-              });
-            };
+        }).then((unityInstance) => {
+          loadingBar.style.display = "none";
+          fullscreenButton.onclick = () => {
+            unityInstance.SetFullscreen(1);
+          };
+        }).catch((message) => {
+          alert(message);
+        });
+      };
 
       document.body.appendChild(script);
+
+      window.addEventListener("resize", () => {
+        canvas.style.width = "100vw";
+        canvas.style.height = "100vh";
+      });
     </script>
+    <script src="Build/{{{ LOADER_FILENAME }}}"></script>
+    <script>
+      window.addEventListener('load', () => {
+        const canvas = document.getElementById("unity-canvas");
+        if (!canvas) return;
+    
+        function resizeCanvas() {
+          var chromeHeight = window.outerHeight - window.innerHeight;
+          var adjustedHeight = window.innerHeight - chromeHeight;
+          canvas.style.width = window.innerWidth + "px";
+          canvas.style.height = adjustedHeight + "px";
+          console.log("✅ Forced canvas resize");
+        }
+    
+        // Resize once after load
+        setTimeout(resizeCanvas, 2000);
+    
+        // Optional: resize on every reload or window resize
+        window.addEventListener('resize', resizeCanvas);
+      });
+    </script>
+    
   </body>
 </html>

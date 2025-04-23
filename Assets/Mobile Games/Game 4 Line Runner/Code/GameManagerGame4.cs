@@ -16,7 +16,7 @@ public class GameManagerGame4 : MonoBehaviour
 
     private int lives = 3;
     private int score = 0;
-    private int currentHighScore = 0;
+    private int savedHighScore = 0;
     private bool isShaking = false;
 
     public Text scoreText;
@@ -37,7 +37,7 @@ public class GameManagerGame4 : MonoBehaviour
         spawner.SetActive(false);
         backgroundParticle.SetActive(false);
 
-        currentHighScore = PlayerPrefs.GetInt("Game4_HighScore", 0);
+        savedHighScore = PlayerPrefs.GetInt("Game4_HighScore", 0);
         UpdateHighScoreText();
 
         StartGame();
@@ -57,7 +57,6 @@ public class GameManagerGame4 : MonoBehaviour
         score = 0;
         scoreText.text = "Score: " + score;
 
-        UpdateHighScoreText();
         Time.timeScale = 1;
     }
 
@@ -66,30 +65,22 @@ public class GameManagerGame4 : MonoBehaviour
         player.SetActive(false);
 
         PlayerPrefs.SetInt("Game4_SubmitScore", score);
-        PlayerPrefs.Save();
 
-        if (score >= currentHighScore)
+        if (score >= savedHighScore)
         {
             PlayerPrefs.SetInt("Game4_HighScore", score);
+            PlayerPrefs.SetInt("TopScoreValue", score);
+            PlayerPrefs.SetString("TopScorePlayer", "YOU");
             PlayerPrefs.Save();
+
             Debug.Log("New high score! Loading submission scene.");
             SceneManager.LoadScene("Submit Score And Name Game 4");
             return;
         }
         else
         {
+            PlayerPrefs.Save();
             SceneManager.LoadScene("Main Menu Game 4");
-        }
-    }
-
-    private IEnumerator FreezeGameAfterDelay(float delay)
-    {
-        yield return new WaitForSecondsRealtime(delay);
-        Time.timeScale = 0;
-
-        if (score < currentHighScore)
-        {
-            ReloadLevel();
         }
     }
 
@@ -114,18 +105,13 @@ public class GameManagerGame4 : MonoBehaviour
         score++;
         scoreText.text = "Score: " + score;
 
-        if (score > currentHighScore)
+        if (score > savedHighScore)
         {
-            currentHighScore = score;
-            PlayerPrefs.SetInt("Game4_HighScore", score);
-            PlayerPrefs.SetInt("TopScoreValue", score);
-            PlayerPrefs.SetString("TopScorePlayer", "YOU"); // You can customize this as needed
-            PlayerPrefs.Save();
+            savedHighScore = score; // Just update session variable
         }
 
         UpdateHighScoreText();
     }
-
 
     private void UpdateHighScoreText()
     {
@@ -156,14 +142,14 @@ public class GameManagerGame4 : MonoBehaviour
     private IEnumerator CameraShake()
     {
         isShaking = true;
-        
+
         Vector3 startPos = Camera.main.transform.position;
 
         for (int i = 0; i < 5; i++)
         {
             Vector2 randomPos = Random.insideUnitCircle * 0.5f;
-            Camera.main.transform.position = new Vector3(randomPos.x, randomPos.y, startPos.z); // Don't modify z-axis
-            yield return new WaitForSeconds(0.05f);  // Add a small delay between shakes
+            Camera.main.transform.position = new Vector3(randomPos.x, randomPos.y, startPos.z);
+            yield return new WaitForSeconds(0.05f);
         }
 
         Camera.main.transform.position = startPos;
