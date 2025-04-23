@@ -162,23 +162,11 @@
         progressBarFull.style.width = (100 * progress) + "%";
       }).then((unityInstance) => {
         loadingBar.style.display = "none";
+
         fullscreenButton.onclick = () => unityInstance.SetFullscreen(1);
 
-        // Try fullscreen automatically
-        setTimeout(() => {
-          try {
-            let result = unityInstance.SetFullscreen(1);
-            if (result instanceof Promise) {
-              result.catch(() => {
-                fullscreenPrompt.style.display = "block";
-              });
-            }
-          } catch (err) {
-            fullscreenPrompt.style.display = "block";
-          }
-        }, 500);
-
-        // Fallback button
+        // Manual fullscreen prompt if needed
+        fullscreenPrompt.style.display = "block";
         fullscreenPrompt.addEventListener("click", () => {
           unityInstance.SetFullscreen(1);
           fullscreenPrompt.style.display = "none";

@@ -37,7 +37,7 @@ public class GameManagerGame4 : MonoBehaviour
         spawner.SetActive(false);
         backgroundParticle.SetActive(false);
 
-        savedHighScore = PlayerPrefs.GetInt("Game4_HighScore", 0);
+        savedHighScore = PlayerPrefs.GetInt("Game4_TopScoreValue", 0); // Updated key
         UpdateHighScoreText();
 
         StartGame();
@@ -69,8 +69,8 @@ public class GameManagerGame4 : MonoBehaviour
         if (score >= savedHighScore)
         {
             PlayerPrefs.SetInt("Game4_HighScore", score);
-            PlayerPrefs.SetInt("TopScoreValue", score);
-            PlayerPrefs.SetString("TopScorePlayer", "YOU");
+            PlayerPrefs.SetInt("Game4_TopScoreValue", score); // Updated key
+            PlayerPrefs.SetString("Game4_TopScorePlayer", "YOU"); // Updated key
             PlayerPrefs.Save();
 
             Debug.Log("New high score! Loading submission scene.");
@@ -105,35 +105,27 @@ public class GameManagerGame4 : MonoBehaviour
         score++;
         scoreText.text = "Score: " + score;
 
-        // Check if the score has surpassed the saved high score
         if (score > savedHighScore)
         {
-            savedHighScore = score; // Update session variable
-            PlayerPrefs.SetInt("Game4_HighScore", savedHighScore); // Save the new high score
+            savedHighScore = score;
+            PlayerPrefs.SetInt("Game4_HighScore", savedHighScore);
+            PlayerPrefs.SetInt("Game4_TopScoreValue", score); // Updated key
+            PlayerPrefs.SetString("Game4_TopScorePlayer", "YOU"); // Updated key
             PlayerPrefs.Save();
 
-            // Update high score text to show "You: score"
             highScoreText.text = "Top Score: You: " + score;
-
-            // Optionally, save this new "You" score into PlayerPrefs for later
-            PlayerPrefs.SetInt("TopScoreValue", score);
-            PlayerPrefs.SetString("TopScorePlayer", "YOU");
-            PlayerPrefs.Save();
         }
         else
         {
-            // If the current score is not a new high score, show the previous top score
             UpdateHighScoreText();
         }
     }
 
     private void UpdateHighScoreText()
     {
-        // Retrieve the top player and their score from PlayerPrefs
-        string topPlayer = PlayerPrefs.GetString("TopScorePlayer", "N/A");
-        int topScore = PlayerPrefs.GetInt("TopScoreValue", 0);
+        string topPlayer = PlayerPrefs.GetString("Game4_TopScorePlayer", "N/A"); // Updated key
+        int topScore = PlayerPrefs.GetInt("Game4_TopScoreValue", 0); // Updated key
 
-        // Display the top player and score
         highScoreText.text = "Top Score: " + topPlayer + ": " + topScore;
     }
 

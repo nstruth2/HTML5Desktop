@@ -21,17 +21,17 @@ public class HighScoreFetcherGame4 : MonoBehaviour
 
     void SaveTopScoreToPlayerPrefs(string playerName, int score)
     {
-        PlayerPrefs.SetString("TopScorePlayer", playerName);
-        PlayerPrefs.SetInt("TopScoreValue", score);
+        PlayerPrefs.SetString("Game4_TopScorePlayer", playerName);
+        PlayerPrefs.SetInt("Game4_TopScoreValue", score);
         PlayerPrefs.Save();
     }
 
     void LoadTopScoreFromPlayerPrefs()
     {
-        if (PlayerPrefs.HasKey("TopScorePlayer") && PlayerPrefs.HasKey("TopScoreValue"))
+        if (PlayerPrefs.HasKey("Game4_TopScorePlayer") && PlayerPrefs.HasKey("Game4_TopScoreValue"))
         {
-            string savedPlayer = PlayerPrefs.GetString("TopScorePlayer");
-            int savedScore = PlayerPrefs.GetInt("TopScoreValue");
+            string savedPlayer = PlayerPrefs.GetString("Game4_TopScorePlayer");
+            int savedScore = PlayerPrefs.GetInt("Game4_TopScoreValue");
             highScoreText.text = $"Saved Top Score: {savedPlayer} {savedScore}";
         }
     }
