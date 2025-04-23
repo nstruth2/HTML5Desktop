@@ -105,18 +105,35 @@ public class GameManagerGame4 : MonoBehaviour
         score++;
         scoreText.text = "Score: " + score;
 
+        // Check if the score has surpassed the saved high score
         if (score > savedHighScore)
         {
-            savedHighScore = score; // Just update session variable
-        }
+            savedHighScore = score; // Update session variable
+            PlayerPrefs.SetInt("Game4_HighScore", savedHighScore); // Save the new high score
+            PlayerPrefs.Save();
 
-        UpdateHighScoreText();
+            // Update high score text to show "You: score"
+            highScoreText.text = "Top Score: You: " + score;
+
+            // Optionally, save this new "You" score into PlayerPrefs for later
+            PlayerPrefs.SetInt("TopScoreValue", score);
+            PlayerPrefs.SetString("TopScorePlayer", "YOU");
+            PlayerPrefs.Save();
+        }
+        else
+        {
+            // If the current score is not a new high score, show the previous top score
+            UpdateHighScoreText();
+        }
     }
 
     private void UpdateHighScoreText()
     {
+        // Retrieve the top player and their score from PlayerPrefs
         string topPlayer = PlayerPrefs.GetString("TopScorePlayer", "N/A");
         int topScore = PlayerPrefs.GetInt("TopScoreValue", 0);
+
+        // Display the top player and score
         highScoreText.text = "Top Score: " + topPlayer + ": " + topScore;
     }
 
