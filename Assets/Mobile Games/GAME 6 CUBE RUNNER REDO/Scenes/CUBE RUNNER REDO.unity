@@ -329,6 +329,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1083315190896763213, guid: 834c56ba0bd42b1408b4004ed47995d8, type: 3}
+      propertyPath: speed
+      value: -12
+      objectReference: {fileID: 0}
     - target: {fileID: 3498530593006562807, guid: 834c56ba0bd42b1408b4004ed47995d8, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -343,23 +347,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3498530593006562807, guid: 834c56ba0bd42b1408b4004ed47995d8, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.9999904
       objectReference: {fileID: 0}
     - target: {fileID: 3498530593006562807, guid: 834c56ba0bd42b1408b4004ed47995d8, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: 0.0043819547
       objectReference: {fileID: 0}
     - target: {fileID: 3498530593006562807, guid: 834c56ba0bd42b1408b4004ed47995d8, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 3498530593006562807, guid: 834c56ba0bd42b1408b4004ed47995d8, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 3498530593006562807, guid: 834c56ba0bd42b1408b4004ed47995d8, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
+      value: 0.502
       objectReference: {fileID: 0}
     - target: {fileID: 3498530593006562807, guid: 834c56ba0bd42b1408b4004ed47995d8, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
@@ -372,10 +376,6 @@ PrefabInstance:
     - target: {fileID: 8323958417597700935, guid: 834c56ba0bd42b1408b4004ed47995d8, type: 3}
       propertyPath: m_Name
       value: SpawnPoint
-      objectReference: {fileID: 0}
-    - target: {fileID: 8323958417597700935, guid: 834c56ba0bd42b1408b4004ed47995d8, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1167,6 +1167,8 @@ MonoBehaviour:
   scoreText: {fileID: 347250240}
   highScoreText: {fileID: 1296109038}
   menuPanel: {fileID: 1617971571}
+  baseSpeed: 2
+  speedIncreaseRate: 2
 --- !u!4 &1952950392
 Transform:
   m_ObjectHideFlags: 0

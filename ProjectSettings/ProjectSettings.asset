@@ -13,7 +13,7 @@ PlayerSettings:
   useOnDemandResources: 0
   accelerometerFrequency: 60
   companyName: OurGoodGuideInc
-  productName: Line Runner
+  productName: Cube Runner
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
   m_SplashScreenBackgroundColor: {r: 0.13725491, g: 0.12156863, b: 0.1254902, a: 1}
@@ -161,6 +161,7 @@ PlayerSettings:
   androidSupportedAspectRatio: 1
   androidMaxAspectRatio: 2.1
   applicationIdentifier:
+    Android: com.KewlGames.CubeRunner
     Standalone: com.DefaultCompany.2DProject
   buildNumber:
     Standalone: 0
@@ -286,7 +287,7 @@ PlayerSettings:
   - m_BuildTarget: 
     m_Icons:
     - serializedVersion: 2
-      m_Icon: {fileID: 2800000, guid: 5f46cc2f746be5146866947d1ce1d091, type: 3}
+      m_Icon: {fileID: 2800000, guid: 5881e26d64c65274cb8f5f7d969edb1e, type: 3}
       m_Width: 128
       m_Height: 128
       m_Kind: 0

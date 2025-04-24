@@ -5,10 +5,10 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Mobile Games/Game 4 Line Runner/Scenes/Main Menu Game 4.unity
     guid: 9c28139865c0d214881610d47958fb65
-  - enabled: 1
+  - enabled: 0
     path: Assets/Mobile Games/Main Menu/Global Main Menu.unity
     guid: 5e16d444f83278347ab9db9e64ea8b94
   - enabled: 0
@@ -35,7 +35,7 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Mobile Games/Game 5 Ball Smash/Scenes/Scenes/Ball Smash Game 5.unity
     guid: b5218b97ee6374245830ee7c410ad815
-  - enabled: 1
+  - enabled: 0
     path: Assets/Mobile Games/Game 4 Line Runner/Scenes/Gameplay Game 4.unity
     guid: f58554037b0dd0645a8be8dd8d2f83b5
   - enabled: 0
@@ -50,7 +50,7 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Mobile Games/Game 6 Cube Runner/Scenes/Gameplay Game 6.unity
     guid: 47be7881793d9b74496adb8338bb9b4b
-  - enabled: 1
+  - enabled: 0
     path: Assets/Mobile Games/Game 4 Line Runner/Scenes/Submit Score And Name Game
       4.unity
     guid: ce95de5d05e9a2b438da702ffcdd993a

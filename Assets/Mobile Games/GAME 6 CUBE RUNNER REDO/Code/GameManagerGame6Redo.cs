@@ -13,11 +13,19 @@ public class GameManagerGame6Redo : MonoBehaviour
     public Text scoreText;
     public Text highScoreText;
     public GameObject menuPanel;
-
+    
+    // Speed variables - will be shown in Unity Inspector
+    public float initialEnemySpeed = 5f;
+    public float speedIncreaseAmount = 2f;
+    public float speedIncreaseInterval = 1f;
+    
+    // Current speed used by all enemies
+    [HideInInspector] public float currentEnemySpeed;
+    
     int score = 0;
     int highScore = 0;
     bool gameStarted = false;
-
+    
     private void Awake()
     {
         if(instance == null)
@@ -25,18 +33,18 @@ public class GameManagerGame6Redo : MonoBehaviour
             instance = this;
         }
     }
-
-    // Start is called before the first frame update
+    
     void Start()
     {
+        currentEnemySpeed = initialEnemySpeed;
+        
         if(PlayerPrefs.HasKey("highScoreGame6Redo"))
         {
             highScore = PlayerPrefs.GetInt("highScoreGame6Redo");
-            highScoreText.text = "High SCore: " + highScore.ToString();
+            highScoreText.text = "High Score: " + highScore.ToString();
         }
     }
-
-    // Update is called once per frame
+    
     void Update()
     {
         if(Input.anyKeyDown && !gameStarted)
@@ -44,10 +52,11 @@ public class GameManagerGame6Redo : MonoBehaviour
             menuPanel.gameObject.SetActive(false);
             scoreText.gameObject.SetActive(true);
             StartCoroutine("SpawnEnemies");
+            StartCoroutine("IncreaseSpeed");
             gameStarted = true;
         }
     }
-
+    
     IEnumerator SpawnEnemies()
     {
         while(true)
@@ -56,16 +65,26 @@ public class GameManagerGame6Redo : MonoBehaviour
             Spawn();
         }
     }
-
+    
+    IEnumerator IncreaseSpeed()
+    {
+        while(true)
+        {
+            yield return new WaitForSeconds(speedIncreaseInterval);
+            currentEnemySpeed += speedIncreaseAmount;
+            Debug.Log("Enemy speed increased to: " + currentEnemySpeed);
+        }
+    }
+    
     public void Spawn()
     {
         float randomSpawnX = Random.Range(-maxSpawnPointX, maxSpawnPointX);
-
         Vector3 enemySpawnPos = spawnPoint.position;
         enemySpawnPos.x = randomSpawnX;
         Instantiate(enemy, enemySpawnPos, Quaternion.identity);
+        // No need to set speed on the enemy - it will use the global speed
     }
-
+    
     public void Restart()
     {
         if(score > highScore)
@@ -75,11 +94,10 @@ public class GameManagerGame6Redo : MonoBehaviour
         }
         SceneManager.LoadScene("CUBE RUNNER REDO");
     }
-
+    
     public void ScoreUp()
     {
         score++;
         scoreText.text = score.ToString();
     }
-
 }
