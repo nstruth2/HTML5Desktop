@@ -54,4 +54,7 @@ EditorBuildSettings:
     path: Assets/Mobile Games/Game 4 Line Runner/Scenes/Submit Score And Name Game
       4.unity
     guid: ce95de5d05e9a2b438da702ffcdd993a
+  - enabled: 1
+    path: Assets/Mobile Games/GAME 6 CUBE RUNNER REDO/Scenes/CUBE RUNNER REDO.unity
+    guid: 567f50dcef500cb4190dd8898da42d1a
   m_configObjects: {}

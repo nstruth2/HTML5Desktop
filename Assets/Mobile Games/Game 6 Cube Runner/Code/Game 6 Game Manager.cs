@@ -22,7 +22,6 @@ public class Game6GameManager : MonoBehaviour
 
     private int score = 0;
     private int highScore = 0;
-    private bool gameStarted = false;
 
     private enum GameState { Menu, Playing, GameOver, WaitingForName }
     private GameState gameState = GameState.Menu;
@@ -64,7 +63,6 @@ public class Game6GameManager : MonoBehaviour
         StartCoroutine(SpawnEnemies());
         StartCoroutine(IncreaseSpeedOverTime());
         gameState = GameState.Playing;
-        gameStarted = true;
         score = 0;
         currentSpeed = initialSpeed;
     }
@@ -118,7 +116,6 @@ public class Game6GameManager : MonoBehaviour
         menuPanel.SetActive(true);
         scoreText.gameObject.SetActive(false);
         gameState = GameState.Menu;
-        gameStarted = false;
     }
 
     IEnumerator SpawnEnemies()
