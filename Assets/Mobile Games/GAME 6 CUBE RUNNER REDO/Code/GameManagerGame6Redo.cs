@@ -11,6 +11,7 @@ public class GameManagerGame6Redo : MonoBehaviour
     public Transform spawnPoint;
     public float maxSpawnPointX;
     public Text scoreText;
+    public Text highScoreText;
     public GameObject menuPanel;
 
     int score = 0;
@@ -31,6 +32,7 @@ public class GameManagerGame6Redo : MonoBehaviour
         if(PlayerPrefs.HasKey("highScoreGame6Redo"))
         {
             highScore = PlayerPrefs.GetInt("highScoreGame6Redo");
+            highScoreText.text = "High SCore: " + highScore.ToString();
         }
     }
 
