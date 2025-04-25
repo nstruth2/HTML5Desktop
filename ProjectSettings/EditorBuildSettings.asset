@@ -24,7 +24,8 @@ EditorBuildSettings:
     path: Assets/Mobile Games/Game 8 Tappy Ball/Scenes/Gameplay Game 8.unity
     guid: 2c4a4dfac35cb834aa8f31e0d5c3cff3
   - enabled: 0
-    path: Assets/Mobile Games/Game 1 Simple Endless 3D Runner/Cube Jumper Game 1.unity
+    path: Assets/Mobile Games/Game 1 Simple Endless 3D Runner/Scenes/Cube Jumper
+      Game 1.unity
     guid: fd36cbfc4d727534ba9ae92b31f5983f
   - enabled: 0
     path: Assets/Mobile Games/Game 3 Food Eater/Food Eater Game 3.unity
@@ -42,13 +43,14 @@ EditorBuildSettings:
     path: Assets/Mobile Games/Game 7 Ball Bounce/Scenes/Gameplay Game 7.unity
     guid: 3f7bf85a061d1fd4181c3450301d670f
   - enabled: 0
-    path: Assets/Mobile Games/3GamesPackSimpleDrivingGame2/Scenes/3GamesPackSimpleDrivingGame2MainMenu.unity
+    path: Assets/Mobile Games/Game 8 Car Game/Scenes/3GamesPackSimpleDrivingGame2MainMenu.unity
     guid: 32fe3e3654f804846870a8cd8ea9761c
   - enabled: 0
-    path: Assets/Mobile Games/3GamesPackSimpleDrivingGame2/Scenes/3GamesPackSimpleDrivingGame2Gameplay.unity
+    path: Assets/Mobile Games/Game 8 Car Game/Scenes/3GamesPackSimpleDrivingGame2Gameplay.unity
     guid: 2251efb0ecb60e84bbbab9de7f4b8aea
   - enabled: 0
-    path: Assets/Mobile Games/Game 6 Cube Runner/Scenes/Gameplay Game 6.unity
+    path: Assets/Mobile Games/ObsoleteGame Game 6 Cube Runner/Scenes/Gameplay Game
+      6.unity
     guid: 47be7881793d9b74496adb8338bb9b4b
   - enabled: 0
     path: Assets/Mobile Games/Game 4 Line Runner/Scenes/Submit Score And Name Game

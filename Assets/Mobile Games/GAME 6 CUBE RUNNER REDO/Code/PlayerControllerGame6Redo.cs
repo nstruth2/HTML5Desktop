@@ -31,18 +31,19 @@ public class PlayerControllerGame6Redo : MonoBehaviour
 
     void TouchInput()
     {
-        if(Input.GetMouseButton(0))
+        if (Input.GetMouseButton(0))
         {
             Vector3 touchPos = Input.mousePosition;
-            float middle = Screen.width / 2;
-            if(touchPos.x < middle)
-            {
-                xInput = -1;
-            }
-            else if(touchPos.x > middle)
-            {
-                xInput = 1;
-            }
+            touchPos.z = Camera.main.WorldToScreenPoint(transform.position).z; // Maintain Z depth
+
+            Vector3 worldPos = Camera.main.ScreenToWorldPoint(touchPos);
+
+            // Snap to the touch X position instantly, clamped within maxX range
+            float clampedX = Mathf.Clamp(worldPos.x, -maxX, maxX);
+            transform.position = new Vector3(clampedX, transform.position.y, transform.position.z);
+
+            // Prevent keyboard input from interfering
+            xInput = 0;
         }
     }
 
