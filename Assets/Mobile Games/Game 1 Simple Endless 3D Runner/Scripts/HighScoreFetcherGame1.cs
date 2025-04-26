@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.UI;
 
-public class HighScoreFetcherGame4 : MonoBehaviour
+public class HighScoreFetcherGame1 : MonoBehaviour
 {
     public Text highScoreText; // Assign this in the Inspector (or use TextMeshProUGUI if needed)
     private int currentHighScore = 0;
@@ -21,17 +21,17 @@ public class HighScoreFetcherGame4 : MonoBehaviour
 
     void SaveTopScoreToPlayerPrefs(string playerName, int score)
     {
-        PlayerPrefs.SetString("Game4_TopScorePlayer", playerName);
-        PlayerPrefs.SetInt("Game4_TopScoreValue", score);
+        PlayerPrefs.SetString("Game1_TopScorePlayer", playerName);
+        PlayerPrefs.SetInt("Game1_TopScoreValue", score);
         PlayerPrefs.Save();
     }
 
     void LoadTopScoreFromPlayerPrefs()
     {
-        if (PlayerPrefs.HasKey("Game4_TopScorePlayer") && PlayerPrefs.HasKey("Game4_TopScoreValue"))
+        if (PlayerPrefs.HasKey("Game1_TopScorePlayer") && PlayerPrefs.HasKey("Game1_TopScoreValue"))
         {
-            string savedPlayer = PlayerPrefs.GetString("Game4_TopScorePlayer");
-            int savedScore = PlayerPrefs.GetInt("Game4_TopScoreValue");
+            string savedPlayer = PlayerPrefs.GetString("Game1_TopScorePlayer");
+            int savedScore = PlayerPrefs.GetInt("Game1_TopScoreValue");
             highScoreText.text = $"Saved Top Score: {savedPlayer} {savedScore}";
         }
     }
