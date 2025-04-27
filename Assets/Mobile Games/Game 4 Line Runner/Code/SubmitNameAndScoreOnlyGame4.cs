@@ -8,17 +8,21 @@ public class SubmitNameAndScoreOnlyGame4 : MonoBehaviour
 {
     public InputField playerNameInput;
     public Button submitButton;
-    public Text rankText;  // A Text UI element to display the rank
+    public Button continueButton; // New continue button
+    public Text rankText;  
 
     private string submitScoreURL = "https://ourgoodguide.com/MobileProject/ScoreandNameSubmission/submit_score_game_4.php";
-    private string checkRankURL = "https://ourgoodguide.com/MobileProject/CheckRank/check_rank_game_4.php"; // URL to check the player's rank
+    private string checkRankURL = "https://ourgoodguide.com/MobileProject/CheckRank/check_rank_game_4.php"; 
     private int score = 0;
 
     private void Start()
     {
-        // Get the score stored in PlayerPrefs from previous scene
         score = PlayerPrefs.GetInt("Game4_SubmitScore", 0);
         submitButton.onClick.AddListener(OnSubmitClicked);
+        continueButton.onClick.AddListener(OnContinueClicked);
+
+        // Hide Continue button at start
+        continueButton.gameObject.SetActive(false);
     }
 
     public void OnSubmitClicked()
@@ -31,81 +35,77 @@ public class SubmitNameAndScoreOnlyGame4 : MonoBehaviour
         }
 
         submitButton.interactable = false;
+
+        // First submit the score, then check the rank
         StartCoroutine(SubmitScoreAndCheckRank(playerName, score));
     }
 
     public IEnumerator SubmitScoreAndCheckRank(string playerName, int score)
     {
-        // Submit the score to the server
-        WWWForm form = new WWWForm();
-        form.AddField("player_name", playerName);
-        form.AddField("score", score);
+        // Submit score first
+        WWWForm submitForm = new WWWForm();
+        submitForm.AddField("player_name", playerName);
+        submitForm.AddField("score", score);
 
-        using (UnityWebRequest www = UnityWebRequest.Post(submitScoreURL, form))
+        using (UnityWebRequest submitRequest = UnityWebRequest.Post(submitScoreURL, submitForm))
         {
-            yield return www.SendWebRequest();
+            yield return submitRequest.SendWebRequest();
 
-            if (www.result == UnityWebRequest.Result.Success)
+            if (submitRequest.result != UnityWebRequest.Result.Success)
             {
-                Debug.Log("Score submitted successfully: " + www.downloadHandler.text);
+                Debug.Log("Error submitting score: " + submitRequest.error);
+                rankText.text = "Error submitting score. Please try again.";
+                submitButton.interactable = true; // Allow retry
+                yield break;
             }
             else
             {
-                Debug.Log("Error submitting score: " + www.error);
-                rankText.text = "Error submitting score. Please try again.";
-                yield break;
+                Debug.Log("Score submitted successfully: " + submitRequest.downloadHandler.text);
             }
         }
 
-        // Optionally clear the stored score
-        PlayerPrefs.DeleteKey("Game4_SubmitScore");
+        // After submitting, check the rank
+        WWWForm rankForm = new WWWForm();
+        rankForm.AddField("score", score);
 
-        // Now, check the player's rank after submission
-        yield return StartCoroutine(CheckPlayerRank(score));
-        
-        // Load the main menu scene after submission and rank check
-        SceneManager.LoadScene("Main Menu Game 4");
-    }
-
-    public IEnumerator CheckPlayerRank(int score)
-    {
-        // Send the score to check the rank
-        WWWForm form = new WWWForm();
-        form.AddField("score", score);  // Just pass the score to get the rank
-
-        using (UnityWebRequest www = UnityWebRequest.Post(checkRankURL, form))
+        using (UnityWebRequest rankRequest = UnityWebRequest.Post(checkRankURL, rankForm))
         {
-            yield return www.SendWebRequest();
+            yield return rankRequest.SendWebRequest();
 
-            if (www.result == UnityWebRequest.Result.Success)
+            if (rankRequest.result == UnityWebRequest.Result.Success)
             {
-                string response = www.downloadHandler.text;
+                string response = rankRequest.downloadHandler.text;
                 Debug.Log("Rank check response: " + response);
 
-                // Assuming the response is a JSON object with the rank
                 try
                 {
-                    var jsonResponse = JsonUtility.FromJson<RankResponse>(response);
-                    rankText.text = $"Your rank: {jsonResponse.rank}";
+                    RankResponse rankResponse = JsonUtility.FromJson<RankResponse>(response);
+                    rankText.text = $"Your rank: {rankResponse.rank}";
                 }
                 catch (System.Exception ex)
                 {
                     rankText.text = "Error retrieving rank.";
                     Debug.LogError("Error parsing rank response: " + ex.Message);
                 }
+
             }
             else
             {
-                Debug.Log("Error checking rank: " + www.error);
+                Debug.Log("Error checking rank: " + rankRequest.error);
                 rankText.text = "Error retrieving rank. Please try again.";
             }
         }
+
+        // After everything, show the Continue button
+        continueButton.gameObject.SetActive(true);
+
+        // Optionally clear stored score
+        PlayerPrefs.DeleteKey("Game4_SubmitScore");
     }
 
-    // Class to handle the rank response from the server
-    [System.Serializable]
-    public class RankResponse
+    private void OnContinueClicked()
     {
-        public int rank;
+        // Load the Main Menu when Continue button is clicked
+        SceneManager.LoadScene("Main Menu Game 4");
     }
 }
