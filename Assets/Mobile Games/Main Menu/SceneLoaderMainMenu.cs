@@ -20,7 +20,7 @@ public class SceneLoaderMainMenu : MonoBehaviour
     }
     public void LoadJumper()
     {
-        SceneManager.LoadScene("Game 1 Simple Endless 3D Runner");
+        SceneManager.LoadScene("Main Menu Game 1");
     }
     public void LoadLineRunner()
     {
