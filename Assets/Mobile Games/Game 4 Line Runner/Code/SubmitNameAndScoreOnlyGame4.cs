@@ -10,7 +10,7 @@ public class SubmitNameAndScoreOnlyGame4 : MonoBehaviour
     public InputField playerNameInput;
     public Button submitButton;
 
-    private string submitScoreURL = "https://ourgoodguide.com/MobileProject/submit_score.php";
+    private string submitScoreURL = "https://ourgoodguide.com/MobileProject/submit_score_game_4.php";
     private int score = 0;
 
     private void Start()

@@ -4,15 +4,36 @@ using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.UI;
 
-public class HighScoreFetcherGame4 : MonoBehaviour
+public class HighScoreFetcherGame4PreStripPlayerPrefs : MonoBehaviour
 {
-    public Text highScoreText; // Assign this in the Inspector
-    public int currentHighScore = 0;
-    public string currentHighScorePlayer = "";
+    public Text highScoreText; // Assign this in the Inspector (or use TextMeshProUGUI if needed)
+    private int currentHighScore = 0;
+    private string currentHighScorePlayer = "";
+    
+    // Optional: set this if you're comparing against the player's current score
+    public int score = 0;
 
     void Start()
     {
+        LoadTopScoreFromPlayerPrefs(); // Show saved score immediately
         StartCoroutine(FetchTopScorers());
+    }
+
+    void SaveTopScoreToPlayerPrefs(string playerName, int score)
+    {
+        PlayerPrefs.SetString("Game4_TopScorePlayer", playerName);
+        PlayerPrefs.SetInt("Game4_TopScoreValue", score);
+        PlayerPrefs.Save();
+    }
+
+    void LoadTopScoreFromPlayerPrefs()
+    {
+        if (PlayerPrefs.HasKey("Game4_TopScorePlayer") && PlayerPrefs.HasKey("Game4_TopScoreValue"))
+        {
+            string savedPlayer = PlayerPrefs.GetString("Game4_TopScorePlayer");
+            int savedScore = PlayerPrefs.GetInt("Game4_TopScoreValue");
+            highScoreText.text = $"Saved Top Score: {savedPlayer} {savedScore}";
+        }
     }
 
     IEnumerator FetchTopScorers()
@@ -31,7 +52,7 @@ public class HighScoreFetcherGame4 : MonoBehaviour
                 {
                     HighScoreArray topScorers = JsonUtility.FromJson<HighScoreArray>("{\"scores\":" + json + "}");
 
-                    if (topScorers != null && topScorers.scores.Length > 0)
+                    if (topScorers.scores.Length > 0)
                     {
                         int highestScore = topScorers.scores[0].score;
                         List<string> topPlayers = new List<string>();
@@ -44,20 +65,26 @@ public class HighScoreFetcherGame4 : MonoBehaviour
                             }
                         }
 
-                        currentHighScore = highestScore;
-                        currentHighScorePlayer = topPlayers[0];
-
-                        // If there's one player with the highest score, show "Top Score: PlayerName: Score"
                         if (topPlayers.Count == 1)
                         {
-                            highScoreText.text = $"Top Score: {currentHighScorePlayer}: {currentHighScore}";
+                            if (score <= currentHighScore)
+                            {
+                                highScoreText.text = $"Top Score: {topPlayers[0]}: {highestScore}";
+                            }
+                            else
+                            {
+                                highScoreText.text = $"Top Score: {topPlayers[0]} {highestScore}";
+                            }
+                            currentHighScorePlayer = topPlayers[0];
                         }
                         else
                         {
-                            // Sort players alphabetically if there are multiple top scorers
-                            topPlayers.Sort();
-                            highScoreText.text = $"Top Score: {string.Join(", ", topPlayers)}: {currentHighScore}";
+                            highScoreText.text = $"Top Scorers: {string.Join(", ", topPlayers)} {highestScore}";
+                            currentHighScorePlayer = topPlayers[0];
                         }
+
+                        currentHighScore = highestScore;
+                        SaveTopScoreToPlayerPrefs(currentHighScorePlayer, currentHighScore);
                     }
                     else
                     {

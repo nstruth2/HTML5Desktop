@@ -3,28 +3,25 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class GameManagerGame4 : MonoBehaviour
+public class GameManagerGame4PreStripSomePlayerPrefs : MonoBehaviour
 {
     public GameObject menuUI;
     public GameObject gamePlayUI;
     public GameObject spawner;
     public GameObject backgroundParticle;
-    public static GameManagerGame4 instance;
+    public static GameManagerGame4PreStripSomePlayerPrefs instance;
     public bool gameStarted = false;
     Vector3 originalCamPos;
     public GameObject player;
 
     private int lives = 3;
     private int score = 0;
+    private int savedHighScore = 0;
     private bool isShaking = false;
 
     public Text scoreText;
     public Text livesText;
     public Text highScoreText;
-
-    private int currentHighScore = 0; // Store the fetched high score
-
-    private HighScoreFetcherGame4 highScoreFetcher;
 
     private void Awake()
     {
@@ -40,28 +37,10 @@ public class GameManagerGame4 : MonoBehaviour
         spawner.SetActive(false);
         backgroundParticle.SetActive(false);
 
-        // Get the HighScoreFetcherGame4 script to fetch high score
-        highScoreFetcher = FindObjectOfType<HighScoreFetcherGame4>();
-
-        // Wait for high score to be fetched
-        StartCoroutine(WaitForHighScore());
+        savedHighScore = PlayerPrefs.GetInt("Game4_TopScoreValue", 0); // Updated key
+        UpdateHighScoreText();
 
         StartGame();
-    }
-
-    private IEnumerator WaitForHighScore()
-    {
-        // Wait for the high score to be fetched
-        while (highScoreFetcher == null || highScoreFetcher.currentHighScore == 0)
-        {
-            yield return null;
-        }
-
-        // Set the fetched high score
-        currentHighScore = highScoreFetcher.currentHighScore;
-
-        // Update the UI with the fetched high score
-        highScoreText.text = $"Top Score: {highScoreFetcher.currentHighScorePlayer}: {currentHighScore}";
     }
 
     public void StartGame()
@@ -84,17 +63,25 @@ public class GameManagerGame4 : MonoBehaviour
     public void GameOver()
     {
         player.SetActive(false);
+
         PlayerPrefs.SetInt("Game4_SubmitScore", score);
 
-        // If score is higher than the current top score, update it
-        if (score > currentHighScore)  // Player beat the high score
+        if (score >= savedHighScore)
         {
-            // Update the high score text immediately
-            highScoreText.text = $"Top Score: You: {score}";
-        }
+            PlayerPrefs.SetInt("Game4_HighScore", score);
+            PlayerPrefs.SetInt("Game4_TopScoreValue", score); // Updated key
+            PlayerPrefs.SetString("Game4_TopScorePlayer", "YOU"); // Updated key
+            PlayerPrefs.Save();
 
-        // Transition to the high score scene
-        SceneManager.LoadScene("Submit Score And Name Game 4");  // Replace with your actual high score scene name
+            Debug.Log("New high score! Loading submission scene.");
+            SceneManager.LoadScene("Submit Score And Name Game 4");
+            return;
+        }
+        else
+        {
+            PlayerPrefs.Save();
+            SceneManager.LoadScene("Main Menu Game 4");
+        }
     }
 
     public void UpdateLives()
@@ -118,13 +105,28 @@ public class GameManagerGame4 : MonoBehaviour
         score++;
         scoreText.text = "Score: " + score;
 
-        // Check if the current score surpasses the stored high score
-        if (score > currentHighScore)
+        if (score > savedHighScore)
         {
-            // Update the fetched high score immediately
-            currentHighScore = score;
-            highScoreText.text = $"Top Score: You: {score}";
+            savedHighScore = score;
+            PlayerPrefs.SetInt("Game4_HighScore", savedHighScore);
+            PlayerPrefs.SetInt("Game4_TopScoreValue", score); // Updated key
+            PlayerPrefs.SetString("Game4_TopScorePlayer", "YOU"); // Updated key
+            PlayerPrefs.Save();
+
+            highScoreText.text = "Top Score: You: " + score;
         }
+        else
+        {
+            UpdateHighScoreText();
+        }
+    }
+
+    private void UpdateHighScoreText()
+    {
+        string topPlayer = PlayerPrefs.GetString("Game4_TopScorePlayer", "N/A"); // Updated key
+        int topScore = PlayerPrefs.GetInt("Game4_TopScoreValue", 0); // Updated key
+
+        highScoreText.text = "Top Score: " + topPlayer + ": " + topScore;
     }
 
     public void ExitGame()
