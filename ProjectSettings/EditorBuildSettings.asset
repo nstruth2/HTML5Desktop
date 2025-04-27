@@ -56,11 +56,15 @@ EditorBuildSettings:
       6.unity
     guid: 47be7881793d9b74496adb8338bb9b4b
   - enabled: 1
-    path: Assets/Mobile Games/Game 4 Line Runner/Scenes/Submit Score And Name Game
-      4.unity
+    path: Assets/Mobile Games/Game 4 Line Runner/Scenes/Submit Score And Name Backup
+      Game 4.unity
     guid: ce95de5d05e9a2b438da702ffcdd993a
   - enabled: 1
     path: Assets/Mobile Games/Game 1 Simple Endless 3D Runner/Scenes/Main Menu Game
       1.unity
     guid: a63faf53b85e0f840bf72bd332cf90d2
+  - enabled: 1
+    path: Assets/Mobile Games/Game 4 Line Runner/Scenes/Submit Score And Name Game
+      4.unity
+    guid: 54cf7de3c396af64ebb2426048c46bb3
   m_configObjects: {}

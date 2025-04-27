@@ -87,7 +87,7 @@ public class VirtualKeyboard : MonoBehaviour
                 if (!string.IsNullOrEmpty(playerName))
                 {
                     int score = PlayerPrefs.GetInt("Game4_SubmitScore", 0);
-                    submitHandler.StartCoroutine(submitHandler.SubmitScoreAndLoadMainMenu(playerName, score));
+                    submitHandler.StartCoroutine(submitHandler.SubmitScoreAndCheckRank(playerName, score));
                 }
                 else
                 {
