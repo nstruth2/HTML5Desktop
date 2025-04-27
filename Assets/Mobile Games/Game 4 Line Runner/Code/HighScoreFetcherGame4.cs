@@ -47,16 +47,16 @@ public class HighScoreFetcherGame4 : MonoBehaviour
                         currentHighScore = highestScore;
                         currentHighScorePlayer = topPlayers[0];
 
-                        // If there's one player with the highest score, show their name and score
+                        // If there's one player with the highest score, show "Top Score: PlayerName: Score"
                         if (topPlayers.Count == 1)
                         {
-                            highScoreText.text = $"{currentHighScorePlayer}: {currentHighScore}";
+                            highScoreText.text = $"Top Score: {currentHighScorePlayer}: {currentHighScore}";
                         }
                         else
                         {
                             // Sort players alphabetically if there are multiple top scorers
                             topPlayers.Sort();
-                            highScoreText.text = $"{string.Join(", ", topPlayers)}: {currentHighScore}";
+                            highScoreText.text = $"Top Score: {string.Join(", ", topPlayers)}: {currentHighScore}";
                         }
                     }
                     else
