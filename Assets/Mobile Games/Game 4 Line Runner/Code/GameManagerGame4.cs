@@ -86,15 +86,12 @@ public class GameManagerGame4 : MonoBehaviour
         player.SetActive(false);
         PlayerPrefs.SetInt("Game4_SubmitScore", score);
 
-        // If score is higher than the current top score, update it
-        if (score > currentHighScore)  // Player beat the high score
-        {
-            // Update the high score text immediately
-            highScoreText.text = $"Top Score: You: {score}";
-        }
+        // Store player's score before transitioning to the submit scene
+        PlayerPrefs.SetInt("CurrentScore", score);  // Save score
+        PlayerPrefs.SetInt("CurrentHighScore", currentHighScore);  // Save current high score
 
-        // Transition to the high score scene
-        SceneManager.LoadScene("Submit Score And Name Game 4");  // Replace with your actual high score scene name
+        // Load the Submit Score And Name Game 4 scene where users can enter their name and score
+        SceneManager.LoadScene("Submit Score And Name Game 4");  // Transition to score submission scene
     }
 
     public void UpdateLives()
