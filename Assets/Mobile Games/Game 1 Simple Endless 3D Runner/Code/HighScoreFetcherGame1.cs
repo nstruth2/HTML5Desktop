@@ -15,25 +15,7 @@ public class HighScoreFetcherGame1 : MonoBehaviour
 
     void Start()
     {
-        LoadTopScoreFromPlayerPrefs(); // Show saved score immediately
         StartCoroutine(FetchTopScorers());
-    }
-
-    void SaveTopScoreToPlayerPrefs(string playerName, int score)
-    {
-        PlayerPrefs.SetString("Game1_TopScorePlayer", playerName);
-        PlayerPrefs.SetInt("Game1_TopScoreValue", score);
-        PlayerPrefs.Save();
-    }
-
-    void LoadTopScoreFromPlayerPrefs()
-    {
-        if (PlayerPrefs.HasKey("Game1_TopScorePlayer") && PlayerPrefs.HasKey("Game1_TopScoreValue"))
-        {
-            string savedPlayer = PlayerPrefs.GetString("Game1_TopScorePlayer");
-            int savedScore = PlayerPrefs.GetInt("Game1_TopScoreValue");
-            highScoreText.text = $"Saved Top Score: {savedPlayer} {savedScore}";
-        }
     }
 
     IEnumerator FetchTopScorers()
@@ -84,7 +66,6 @@ public class HighScoreFetcherGame1 : MonoBehaviour
                         }
 
                         currentHighScore = highestScore;
-                        SaveTopScoreToPlayerPrefs(currentHighScorePlayer, currentHighScore);
                     }
                     else
                     {
