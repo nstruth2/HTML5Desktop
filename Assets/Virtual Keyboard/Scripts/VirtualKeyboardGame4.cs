@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
 
-public class VirtualKeyboard : MonoBehaviour
+public class VirtualKeyboardGame4 : MonoBehaviour
 {
     public InputField targetInputField;
     public GameObject keyButtonPrefab;

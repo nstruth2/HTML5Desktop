@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
+    public GameManagerGame1 gameManager; // Drag this in Inspector
     Rigidbody rb;
     public float jumpForce;
     bool canJump;
@@ -45,7 +46,7 @@ public class PlayerController : MonoBehaviour
     {
         if(other.gameObject.tag == "Obstacle")
         {
-            SceneManager.LoadScene("Game 1 Simple Endless 3D Runner");
+            gameManager.GameOver(); // instead of SceneManager.LoadScene
         }
     }
 }

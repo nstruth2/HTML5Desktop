@@ -15,7 +15,7 @@ EditorBuildSettings:
     path: Assets/Mobile Games/Main Menu/Global Main Menu.unity
     guid: 5e16d444f83278347ab9db9e64ea8b94
   - enabled: 0
-    path: Assets/Mobile Games/Game 2 Dodging Dog/Dodging Dog Game 2.unity
+    path: Assets/Mobile Games/Game 2 Dodging Dog/Gameplay Game 2.unity
     guid: 4f599435c2f6445479d563cf46128390
   - enabled: 0
     path: Assets/Mobile Games/Game 2 Dodging Dog/Main Menu Game 2.unity
@@ -67,4 +67,8 @@ EditorBuildSettings:
     path: Assets/Mobile Games/Game 4 Line Runner/Scenes/Submit Score And Name Game
       4.unity
     guid: 54cf7de3c396af64ebb2426048c46bb3
+  - enabled: 1
+    path: Assets/Mobile Games/Game 1 Simple Endless 3D Runner/Scenes/Submit Score
+      and Name Game 1.unity
+    guid: b5ee8b8345821624a906de826e5e273b
   m_configObjects: {}

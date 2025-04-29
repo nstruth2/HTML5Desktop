@@ -1,8 +1,10 @@
 using System.Collections;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
-public class GameManager : MonoBehaviour
+public class GameManagerGame1 : MonoBehaviour
 {
     public GameObject obstacle;
     public Transform spawnPoint;
@@ -11,7 +13,7 @@ public class GameManager : MonoBehaviour
     int score = 0;
     int highScore = 0;
     public TextMeshProUGUI scoreText;
-    public TextMeshProUGUI highScoreText;
+    public Text highScoreText;
     public GameObject playButton;
     public GameObject player;
     public GameObject mainMenu; // Reference to the Main Menu UI container
@@ -92,9 +94,8 @@ public class GameManager : MonoBehaviour
         CancelInvoke("ScoreUp");
         StopCoroutine("SpawnObstacles");
 
-        // Reset the score to 0 and update the UI
-        score = 0;
-        scoreText.text = "Score: 0"; // Ensure score text is reset when game ends
+        PlayerPrefs.SetInt("Game1_SubmitScore", score);
+        PlayerPrefs.Save();
 
         // Reset UI and game state
         player.SetActive(false);
@@ -103,6 +104,7 @@ public class GameManager : MonoBehaviour
         // Reactivate the main menu and clear high score button when the game is over
         mainMenu.SetActive(true);
         clearHighScoreButton.SetActive(true);
+        SceneManager.LoadScene("Submit Score and Name Game 1");  // Transition to score submission scene
     }
 
     public void ClearHighScore()

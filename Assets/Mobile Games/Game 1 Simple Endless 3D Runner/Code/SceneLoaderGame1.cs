@@ -7,6 +7,6 @@ public class SceneLoaderGame1 : MonoBehaviour
 {
     public void ExitToMainMenu()
     {
-        SceneManager.LoadScene("Global Main Menu");
+        SceneManager.LoadScene("Main Menu Game 1");
     }
 }

@@ -69,7 +69,7 @@ public class MainMenumanagerGame1 : MonoBehaviour
             return;
 
         isLoadingScene = true;
-        Debug.Log("Loading GameplayGame4...");
+        Debug.Log("Loading GameplayGame1...");
         Time.timeScale = 1f; // Reset time scale
         SceneManager.LoadScene("Gameplay Game 1");
     }

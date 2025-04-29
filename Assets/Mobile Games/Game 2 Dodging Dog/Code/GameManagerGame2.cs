@@ -58,7 +58,7 @@ public class GameManagerGame2 : MonoBehaviour
 
     public void Restart()
     {
-        SceneManager.LoadScene("Game 2 Dodging Dog 2D");
+        SceneManager.LoadScene("Gameplay Game 2");
     }
 
     public void Menu()
