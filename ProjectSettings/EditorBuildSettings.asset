@@ -15,10 +15,10 @@ EditorBuildSettings:
     path: Assets/Mobile Games/Main Menu/Global Main Menu.unity
     guid: 5e16d444f83278347ab9db9e64ea8b94
   - enabled: 0
-    path: Assets/Mobile Games/Game 2 Dodging Dog/Gameplay Game 2.unity
+    path: Assets/Mobile Games/Game 2 Dodging Dog/Scenes/Gameplay Game 2.unity
     guid: 4f599435c2f6445479d563cf46128390
   - enabled: 0
-    path: Assets/Mobile Games/Game 2 Dodging Dog/Main Menu Game 2.unity
+    path: Assets/Mobile Games/Game 2 Dodging Dog/Scenes/Main Menu Game 2.unity
     guid: c0dc9a70188ef4a4db182d6bdb98a3af
   - enabled: 0
     path: Assets/Mobile Games/Game 8 Tappy Ball/Scenes/Start Menu Game8.unity
@@ -46,10 +46,10 @@ EditorBuildSettings:
     path: Assets/Mobile Games/Game 7 Ball Bounce/Scenes/Gameplay Game 7.unity
     guid: 3f7bf85a061d1fd4181c3450301d670f
   - enabled: 0
-    path: Assets/Mobile Games/Game 8 Car Game/Scenes/3GamesPackSimpleDrivingGame2MainMenu.unity
+    path: Assets/Mobile Games/Game 3 Car Game/Scenes/Main Menu Game 3.unity
     guid: 32fe3e3654f804846870a8cd8ea9761c
   - enabled: 0
-    path: Assets/Mobile Games/Game 8 Car Game/Scenes/3GamesPackSimpleDrivingGame2Gameplay.unity
+    path: Assets/Mobile Games/Game 3 Car Game/Scenes/Gameplay Game 3.unity
     guid: 2251efb0ecb60e84bbbab9de7f4b8aea
   - enabled: 0
     path: Assets/Mobile Games/ObsoleteGame Game 6 Cube Runner/Scenes/Gameplay Game
