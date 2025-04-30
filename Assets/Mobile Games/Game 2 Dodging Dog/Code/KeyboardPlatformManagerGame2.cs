@@ -1,7 +1,7 @@
 using System.Runtime.InteropServices;
 using UnityEngine;
 
-public class KeyboardPlatformManagerGame4 : MonoBehaviour
+public class KeyboardPlatformManagerGame2 : MonoBehaviour
 {
     public GameObject keysParent;
     public GameObject submitScoreAndNameButton;

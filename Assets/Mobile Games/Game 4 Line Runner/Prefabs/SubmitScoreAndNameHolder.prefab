@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7742818316090902225}
-  - component: {fileID: 5156261196457397128}
+  - component: {fileID: 2926591242599795534}
   m_Layer: 0
   m_Name: SubmitScoreAndNameHolder
   m_TagString: Untagged
@@ -32,7 +32,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5156261196457397128
+--- !u!114 &2926591242599795534
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -41,8 +41,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 107978663645293608}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ec1dd2bd62ac9914ca7a12d38eb7def2, type: 3}
+  m_Script: {fileID: 11500000, guid: 6e38e795745e33d48af9788ee4e93468, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   playerNameInput: {fileID: 0}
   submitButton: {fileID: 0}
+  continueButton: {fileID: 0}
+  rankText: {fileID: 0}

@@ -1495,21 +1495,6 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: 'Top Score: 0'
---- !u!114 &1296118579111253162
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3418241302504080773}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 541bd503c394e4c4bbbc272601183ddf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  highScoreText: {fileID: 406226082235690126}
-  currentHighScore: 0
-  currentHighScorePlayer: 
 --- !u!224 &1606387563553638893
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1557,7 +1542,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 63674200277428005}
-  - component: {fileID: 1296118579111253162}
   - component: {fileID: 3418241302504080774}
   m_Layer: 0
   m_Name: Get Top Score
@@ -1575,9 +1559,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 3418241302504080773}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 70405aa7489ab6a4f84ac2c1b6d1d562, type: 3}
+  m_Script: {fileID: 11500000, guid: 6493c3ab2cc15944b8d426ddea163fb9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  highScoreText: {fileID: 406226082235690126}
+  currentHighScore: 0
+  currentHighScorePlayer: 
 --- !u!1 &3658547666180056327
 GameObject:
   m_ObjectHideFlags: 0

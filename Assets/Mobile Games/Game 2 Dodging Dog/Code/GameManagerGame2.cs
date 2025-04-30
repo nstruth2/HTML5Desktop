@@ -25,7 +25,7 @@ public class GameManagerGame2 : MonoBehaviour
     void Start()
     {
         // Load the saved high score from PlayerPrefs
-        highScore = PlayerPrefs.GetInt("HighScore", 0);
+        highScore = PlayerPrefs.GetInt("HighScoreGame2", 0);
         // Display the high score
         UpdateHighScoreText();
 
@@ -39,8 +39,12 @@ public class GameManagerGame2 : MonoBehaviour
         GameObject.Find("ObstacleSpawner").GetComponent<ObstacleSpawnerGame2>().StopSpawning();
         gameOverPanel.SetActive(true);
 
+        // Save the current score for later submission
+        PlayerPrefs.SetInt("Game2_SubmitScore", score);
+        PlayerPrefs.Save();
+
         // Make the Clear High Score button visible again after the game ends
-        clearHighScoreButton.SetActive(true); // Show the button at game over
+        SceneManager.LoadScene("Submit Score And Name Game 2");
     }
 
     public void IncrementScore()
