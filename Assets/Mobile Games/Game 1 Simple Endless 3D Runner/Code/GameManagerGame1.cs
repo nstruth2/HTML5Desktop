@@ -1,6 +1,5 @@
 using System.Collections;
 using UnityEngine;
-using TMPro;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -8,113 +7,110 @@ public class GameManagerGame1 : MonoBehaviour
 {
     public GameObject obstacle;
     public Transform spawnPoint;
-    public Transform playerStartPoint; // Reference to the player's starting point
+    public Transform playerStartPoint;
 
     int score = 0;
-    int highScore = 0;
-    public TextMeshProUGUI scoreText;
+    int cachedHighScore = 0;
+    bool highScoreFetched = false;
+
+    public Text scoreText;
     public Text highScoreText;
+
     public GameObject playButton;
     public GameObject player;
-    public GameObject mainMenu; // Reference to the Main Menu UI container
-    public GameObject clearHighScoreButton; // Reference to the Clear High Score button
+    public GameObject mainMenu;
+
+    public HighScoreFetcherGame1 highScoreFetcher;
 
     void Start()
     {
-        // Load the saved high score from PlayerPrefs
-        highScore = PlayerPrefs.GetInt("HighScoreGame1", 0);
-        highScoreText.text = "High Score: " + highScore.ToString();
-
-        // Initially show the score as 0
-        scoreText.text = "Score: 0";
-
-        // Ensure the main menu and clear button are active and player is inactive at the start
+        highScoreText.text = "Fetching top score...";
         mainMenu.SetActive(true);
-        clearHighScoreButton.SetActive(true);
         player.SetActive(false);
+        playButton.SetActive(false);
+
+        // Find and cache the high score fetcher
+        highScoreFetcher = FindObjectOfType<HighScoreFetcherGame1>();
+
+        if (highScoreFetcher == null)
+        {
+            Debug.LogError("HighScoreFetcherGame1 not found in scene.");
+            return;
+        }
+
+        StartCoroutine(CacheHighScoreWhenReady());
+    }
+
+    IEnumerator CacheHighScoreWhenReady()
+    {
+        while (highScoreFetcher.currentHighScore == 0 && !highScoreFetcher.hasFetched)
+        {
+            yield return null;
+        }
+
+        cachedHighScore = highScoreFetcher.currentHighScore;
+        highScoreText.text = $"High Score: {highScoreFetcher.currentHighScorePlayer}: {cachedHighScore}";
+        highScoreFetched = true;
+        playButton.SetActive(true);
     }
 
     IEnumerator SpawnObstacles()
     {
         while (true)
         {
-            float waitTime = Random.Range(0.5f, 2f);
-            yield return new WaitForSeconds(waitTime);
+            yield return new WaitForSeconds(Random.Range(0.5f, 2f));
             Instantiate(obstacle, spawnPoint.position, Quaternion.identity);
         }
     }
 
     void ScoreUp()
     {
+        if (!highScoreFetched) return;
+
         score++;
-        scoreText.text = "Score: " + score.ToString();
+        scoreText.text = $"Score: {score}";
 
-        // Check and update the high score in real-time
-        if (score > highScore)
+        if (score > cachedHighScore)
         {
-            highScore = score;
-            highScoreText.text = "High Score: " + highScore.ToString();
-
-            // Save the new high score in PlayerPrefs
-            PlayerPrefs.SetInt("HighScoreGame1", highScore);
+            cachedHighScore = score;
+            highScoreText.text = $"High Score: You: {score}";
+            PlayerPrefs.SetInt("HighScoreGame1", cachedHighScore);
             PlayerPrefs.Save();
         }
     }
 
-    // This method is called when the Play button is pressed
     public void OnPlayButtonPressed()
     {
-        GameStart();
+        if (highScoreFetched)
+            GameStart();
     }
 
-    public void GameStart()
+    void GameStart()
     {
-        // Hide the main menu and clear high score button when the game starts
-        mainMenu.SetActive(false);
-        clearHighScoreButton.SetActive(false);
-
-        // Reset the score and display it
         score = 0;
-        scoreText.text = "Score: " + score.ToString();
+        scoreText.text = $"Score: {score}";
 
-        // Reset player position to the starting point
         player.transform.position = playerStartPoint.position;
-
-        // Activate player and start game logic
         player.SetActive(true);
-        playButton.SetActive(false); // Hide play button after starting the game
+        mainMenu.SetActive(false);
+        playButton.SetActive(false);
 
-        StartCoroutine("SpawnObstacles");
-        InvokeRepeating("ScoreUp", 2f, 1f); // Start scoring after 2 seconds
+        StartCoroutine(SpawnObstacles());
+        InvokeRepeating(nameof(ScoreUp), 2f, 1f);
     }
 
     public void GameOver()
     {
-        // Stop scoring and spawning obstacles
-        CancelInvoke("ScoreUp");
-        StopCoroutine("SpawnObstacles");
+        CancelInvoke(nameof(ScoreUp));
+        StopAllCoroutines();
 
         PlayerPrefs.SetInt("Game1_SubmitScore", score);
         PlayerPrefs.Save();
 
-        // Reset UI and game state
         player.SetActive(false);
-        playButton.SetActive(true); // Show the play button for a new game
-
-        // Reactivate the main menu and clear high score button when the game is over
+        playButton.SetActive(true);
         mainMenu.SetActive(true);
-        clearHighScoreButton.SetActive(true);
-        SceneManager.LoadScene("Submit Score and Name Game 1");  // Transition to score submission scene
-    }
 
-    public void ClearHighScore()
-    {
-        // Delete the high score from PlayerPrefs
-        PlayerPrefs.DeleteKey("HighScoreGame1");
-        PlayerPrefs.Save(); // Ensure the deletion is saved
-
-        // Set highScore to 0 and update the UI
-        highScore = 0;
-        highScoreText.text = "High Score: 0"; // Update the high score text
+        SceneManager.LoadScene("Submit Score and Name Game 1");
     }
 }

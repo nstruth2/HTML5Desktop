@@ -895,7 +895,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   highScoreText: {fileID: 7448680595339049988}
-  score: 0
+  fetchedHighScore: 0
+  isFetched: 0
 --- !u!224 &4298939156449882226
 RectTransform:
   m_ObjectHideFlags: 0

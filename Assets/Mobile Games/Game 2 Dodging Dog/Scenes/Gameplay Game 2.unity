@@ -899,8 +899,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scoreText: {fileID: 605948701}
-  gameOverPanel: {fileID: 1995982224}
   highScoreText: {fileID: 758831976}
+  gameOverPanel: {fileID: 1995982224}
   clearHighScoreButton: {fileID: 847701242}
 --- !u!4 &723512098
 Transform:
@@ -951,8 +951,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -195.3009, y: 96.836}
-  m_SizeDelta: {x: 304.1781, y: 220.25}
+  m_AnchoredPosition: {x: -210.73795, y: 156.86896}
+  m_SizeDelta: {x: 273.304, y: 100.1841}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &758831976
 MonoBehaviour:
@@ -975,8 +975,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 36
+    m_Font: {fileID: 12800000, guid: ca2fcfb91f09e8847876ae47a0f1be1b, type: 3}
+    m_FontSize: 17
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 10

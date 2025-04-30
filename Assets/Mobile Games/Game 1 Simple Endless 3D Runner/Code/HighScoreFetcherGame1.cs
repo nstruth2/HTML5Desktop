@@ -6,15 +6,14 @@ using UnityEngine.UI;
 
 public class HighScoreFetcherGame1 : MonoBehaviour
 {
-    public Text highScoreText; // Assign this in the Inspector (or use TextMeshProUGUI if needed)
-    private int currentHighScore = 0;
-    private string currentHighScorePlayer = "";
-    
-    // Optional: set this if you're comparing against the player's current score
-    public int score = 0;
+    public Text highScoreText; // Assign this in the Inspector
+    public int currentHighScore = 0;
+    public string currentHighScorePlayer = "";
+    public bool hasFetched = false; // <-- Added to indicate fetch completion
 
     void Start()
     {
+        hasFetched = false;
         StartCoroutine(FetchTopScorers());
     }
 
@@ -34,7 +33,7 @@ public class HighScoreFetcherGame1 : MonoBehaviour
                 {
                     HighScoreArray topScorers = JsonUtility.FromJson<HighScoreArray>("{\"scores\":" + json + "}");
 
-                    if (topScorers.scores.Length > 0)
+                    if (topScorers != null && topScorers.scores.Length > 0)
                     {
                         int highestScore = topScorers.scores[0].score;
                         List<string> topPlayers = new List<string>();
@@ -47,40 +46,38 @@ public class HighScoreFetcherGame1 : MonoBehaviour
                             }
                         }
 
+                        currentHighScore = highestScore;
+                        currentHighScorePlayer = topPlayers[0];
+
                         if (topPlayers.Count == 1)
                         {
-                            if (score <= currentHighScore)
-                            {
-                                highScoreText.text = $"Top Score: {topPlayers[0]}: {highestScore}";
-                            }
-                            else
-                            {
-                                highScoreText.text = $"Top Score: {topPlayers[0]} {highestScore}";
-                            }
-                            currentHighScorePlayer = topPlayers[0];
+                            highScoreText.text = $"Top Score: {currentHighScorePlayer}: {currentHighScore}";
                         }
                         else
                         {
-                            highScoreText.text = $"Top Scorers: {string.Join(", ", topPlayers)} {highestScore}";
-                            currentHighScorePlayer = topPlayers[0];
+                            topPlayers.Sort();
+                            highScoreText.text = $"Top Score: {string.Join(", ", topPlayers)}: {currentHighScore}";
                         }
 
-                        currentHighScore = highestScore;
+                        hasFetched = true;
                     }
                     else
                     {
                         highScoreText.text = "No high scores yet.";
+                        hasFetched = true;
                     }
                 }
                 else
                 {
                     highScoreText.text = "No high scores yet.";
+                    hasFetched = true;
                 }
             }
             else
             {
                 Debug.LogError("Error fetching top scorers: " + www.error);
                 highScoreText.text = "Failed to load scores.";
+                hasFetched = true;
             }
         }
     }
