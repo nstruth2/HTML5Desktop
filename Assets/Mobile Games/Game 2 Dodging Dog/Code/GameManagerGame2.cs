@@ -60,16 +60,6 @@ public class GameManagerGame2 : MonoBehaviour
         }
     }
 
-    public void Restart()
-    {
-        SceneManager.LoadScene("Gameplay Game 2");
-    }
-
-    public void Menu()
-    {
-        SceneManager.LoadScene("Main Menu Game 2");
-    }
-
     public void ClearHighScore()
     {
         // Delete the high score from PlayerPrefs

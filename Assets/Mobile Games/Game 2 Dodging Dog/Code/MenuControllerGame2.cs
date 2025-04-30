@@ -7,7 +7,7 @@ public class MenuControllerGame2 : MonoBehaviour
 {
     public void Play()
     {
-        SceneManager.LoadScene("Game 2 Dodging Dog 2D");
+        SceneManager.LoadScene("Gameplay Game 2");
     }
     public void ExitToMainMenu()
     {

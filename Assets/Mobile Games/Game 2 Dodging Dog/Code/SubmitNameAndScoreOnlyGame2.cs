@@ -1,29 +1,35 @@
-using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.Networking;
+using System.Collections;
 
 public class SubmitNameAndScoreOnlyGame2 : MonoBehaviour
 {
     public InputField playerNameInput;
     public Button submitButton;
-    public Button continueButton; // New continue button
-    public Text rankText;  
+    public Button continueButton;
+    public Button retryButton; // 🔹 New retry button
+    public Text rankText;
 
     private string submitScoreURL = "https://ourgoodguide.com/MobileProject/ScoreandNameSubmission/submit_score_game_2.php";
-    private string checkRankURL = "https://ourgoodguide.com/MobileProject/CheckRank/check_rank_game_2.php"; 
+    private string checkRankURL = "https://ourgoodguide.com/MobileProject/CheckRank/check_rank_game_2.php";
     private int score = 0;
 
     private void Start()
     {
         score = PlayerPrefs.GetInt("Game2_SubmitScore", 0);
+
         submitButton.onClick.AddListener(OnSubmitClicked);
         continueButton.onClick.AddListener(OnContinueClicked);
-        if (continueButton == null) Debug.LogError("Continue button is NULL!");
+        retryButton.onClick.AddListener(OnRetryClicked); // 🔹 Add listener
 
-        // Hide Continue button at start
+        if (continueButton == null) Debug.LogError("Continue button is NULL!");
+        if (retryButton == null) Debug.LogError("Retry button is NULL!");
+
+        // Hide buttons at start
         continueButton.gameObject.SetActive(false);
+        retryButton.gameObject.SetActive(false); // 🔹 Initially inactive
     }
 
     public void OnSubmitClicked()
@@ -36,14 +42,12 @@ public class SubmitNameAndScoreOnlyGame2 : MonoBehaviour
         }
 
         submitButton.interactable = false;
-
-        // First submit the score, then check the rank
         StartCoroutine(SubmitScoreAndCheckRank(playerName, score));
     }
 
     public IEnumerator SubmitScoreAndCheckRank(string playerName, int score)
     {
-        // Submit score first
+        // Submit score
         WWWForm submitForm = new WWWForm();
         submitForm.AddField("player_name", playerName);
         submitForm.AddField("score", score);
@@ -56,7 +60,7 @@ public class SubmitNameAndScoreOnlyGame2 : MonoBehaviour
             {
                 Debug.Log("Error submitting score: " + submitRequest.error);
                 rankText.text = "Error submitting score. Please try again.";
-                submitButton.interactable = true; // Allow retry
+                submitButton.interactable = true;
                 yield break;
             }
             else
@@ -65,7 +69,7 @@ public class SubmitNameAndScoreOnlyGame2 : MonoBehaviour
             }
         }
 
-        // After submitting, check the rank
+        // Check rank
         WWWForm rankForm = new WWWForm();
         rankForm.AddField("score", score);
 
@@ -88,7 +92,6 @@ public class SubmitNameAndScoreOnlyGame2 : MonoBehaviour
                     rankText.text = "Error retrieving rank.";
                     Debug.LogError("Error parsing rank response: " + ex.Message);
                 }
-
             }
             else
             {
@@ -97,17 +100,26 @@ public class SubmitNameAndScoreOnlyGame2 : MonoBehaviour
             }
         }
 
-        // After everything, show the Continue button
+        // Show buttons after submitting
         continueButton.gameObject.SetActive(true);
+        retryButton.gameObject.SetActive(true); // 🔹 Show retry button too
 
-        // Optionally clear stored score
         PlayerPrefs.DeleteKey("Game2_SubmitScore");
     }
 
     public void OnContinueClicked()
     {
-        // Load the Main Menu when Continue button is clicked
-        Debug.Log("Continue button clicked. Attempting to load scene...");
         SceneManager.LoadScene("Main Menu Game 2");
+    }
+
+    public void OnRetryClicked()
+    {
+        SceneManager.LoadScene("Gameplay Game 2"); // 🔹 Reload current scene
+    }
+
+    [System.Serializable]
+    public class RankResponse
+    {
+        public int rank;
     }
 }
