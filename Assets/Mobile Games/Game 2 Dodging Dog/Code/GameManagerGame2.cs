@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
@@ -7,15 +5,16 @@ using UnityEngine.SceneManagement;
 public class GameManagerGame2 : MonoBehaviour
 {
     public static GameManagerGame2 instance;
-    bool gameOver = false;
-    int score = 0;
-    public Text scoreText;
-    public GameObject gameOverPanel;
-    public Text highScoreText; // Assign via the Inspector
-    private int highScore;
 
-    // Add a reference to the Clear High Score button
+    private bool gameOver = false;
+    private int score = 0;
+
+    public Text scoreText;
+    public Text highScoreText; // Shared with HighScoreFetcher
+    public GameObject gameOverPanel;
     public GameObject clearHighScoreButton;
+
+    private HighScoreFetcherGame2 highScoreFetcher;
 
     private void Awake()
     {
@@ -24,70 +23,67 @@ public class GameManagerGame2 : MonoBehaviour
 
     void Start()
     {
-        // Load the saved high score from PlayerPrefs
-        highScore = PlayerPrefs.GetInt("HighScoreGame2", 0);
-        // Display the high score
-        UpdateHighScoreText();
+        // Fetch reference to HighScoreFetcher in scene
+        highScoreFetcher = FindObjectOfType<HighScoreFetcherGame2>();
 
-        // Make the Clear High Score button visible when the game first loads
-        clearHighScoreButton.SetActive(true); // Show the button initially
-    }
+        if (highScoreFetcher == null)
+        {
+            Debug.LogError("HighScoreFetcherGame2 not found in scene.");
+        }
 
-    public void GameOver()
-    {
-        gameOver = true;
-        GameObject.Find("ObstacleSpawner").GetComponent<ObstacleSpawnerGame2>().StopSpawning();
-        gameOverPanel.SetActive(true);
-
-        // Save the current score for later submission
-        PlayerPrefs.SetInt("Game2_SubmitScore", score);
-        PlayerPrefs.Save();
-
-        // Make the Clear High Score button visible again after the game ends
-        SceneManager.LoadScene("Submit Score And Name Game 2");
+        UpdateScoreText();
     }
 
     public void IncrementScore()
     {
         if (gameOver) return;
+
         score++;
         UpdateScoreText();
 
-        // Check and update high score
-        if (score > highScore)
+        if (highScoreFetcher != null)
         {
-            SetHighScore(score);
+            int fetchedHighScore = highScoreFetcher.currentHighScore;
+            if (score > fetchedHighScore)
+            {
+                // Display your own score as new top
+                highScoreText.text = $"High Score: You: {score}";
+            }
         }
+    }
+
+    public void GameOver()
+    {
+        gameOver = true;
+
+        ObstacleSpawnerGame2 spawner = GameObject.Find("ObstacleSpawner")?.GetComponent<ObstacleSpawnerGame2>();
+        if (spawner != null)
+            spawner.StopSpawning();
+
+        PlayerPrefs.SetInt("Game2_SubmitScore", score);
+        PlayerPrefs.Save();
+
+        SceneManager.LoadScene("Submit Score And Name Game 2");
     }
 
     public void ClearHighScore()
     {
-        // Delete the high score from PlayerPrefs
-        PlayerPrefs.DeleteKey("HighScore");
+        PlayerPrefs.DeleteKey("HighScoreGame2");
         PlayerPrefs.Save();
 
-        // Reset the high score and update the display
-        highScore = 0;
-        UpdateHighScoreText();
+        // Reset display to the database score if fetcher is available
+        if (highScoreFetcher != null)
+        {
+            highScoreText.text = $"Top Score: {highScoreFetcher.currentHighScorePlayer}: {highScoreFetcher.currentHighScore}";
+        }
+        else
+        {
+            highScoreText.text = "High Score: 0";
+        }
     }
 
-    private void SetHighScore(int newHighScore)
-    {
-        highScore = newHighScore;
-        PlayerPrefs.SetInt("HighScore", highScore);
-        PlayerPrefs.Save();
-        UpdateHighScoreText();
-    }
-
-    // Updates the high score text UI
-    private void UpdateHighScoreText()
-    {
-        highScoreText.text = $"High Score: {highScore}";
-    }
-
-    // Updates the current score UI text
     private void UpdateScoreText()
     {
-        scoreText.text = $"{score}";
+        scoreText.text = score.ToString();
     }
 }
