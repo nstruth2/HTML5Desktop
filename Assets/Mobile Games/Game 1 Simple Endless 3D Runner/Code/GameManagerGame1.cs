@@ -108,8 +108,6 @@ public class GameManagerGame1 : MonoBehaviour
         PlayerPrefs.Save();
 
         player.SetActive(false);
-        playButton.SetActive(true);
-        mainMenu.SetActive(true);
 
         SceneManager.LoadScene("Submit Score and Name Game 1");
     }
