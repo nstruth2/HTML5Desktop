@@ -43,14 +43,15 @@ public class ScoreSystemFrom3GamesPackGame2 : MonoBehaviour
 
     public void OnGameEnd()
     {
-        if (gameEnded) return; // Avoid double-call
+        if (gameEnded) return;
         gameEnded = true;
 
         string lastTimeStr = FormatTime(timeElapsed);
         PlayerPrefs.SetString(LastTimeKey, lastTimeStr);
+        PlayerPrefs.SetString("Game3_SubmitTime", lastTimeStr);              // 🔹 formatted
+        PlayerPrefs.SetString("Game3_SubmitTimeRaw", timeElapsed.ToString()); // 🔹 raw decimal
 
-        // Check if the best time should be updated for longer times
-        if (bestTime == 0 || timeElapsed > bestTime) // Changed from < to >
+        if (bestTime == 0 || timeElapsed > bestTime)
         {
             bestTime = timeElapsed;
             string bestTimeStr = FormatTime(bestTime);
@@ -62,8 +63,10 @@ public class ScoreSystemFrom3GamesPackGame2 : MonoBehaviour
         {
             PlayerPrefs.SetInt(BeatBestTimeKey, 0);
         }
-        PlayerPrefs.Save(); // Ensure it's written before changing scenes
+
+        PlayerPrefs.Save();
     }
+
 
     public void ReturnToMainMenu(string sceneName)
     {
@@ -74,7 +77,7 @@ public class ScoreSystemFrom3GamesPackGame2 : MonoBehaviour
     private System.Collections.IEnumerator DelayedSceneLoad(string sceneName)
     {
         yield return new WaitForSeconds(1f); // delay ensures PlayerPrefs save completes
-        SceneManager.LoadScene(sceneName);
+        SceneManager.LoadScene("Submit Time and Name Game 3");
     }
 
     private string FormatTime(decimal time)

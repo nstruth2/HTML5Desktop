@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class MenumanagerGame3 : MonoBehaviour
+public class MainMenumanagerGame3 : MonoBehaviour
 {
     public Button startButton; // Reference to the Start Button prefab
     public Button mainMenuButton; // Reference to the Main Menu Button prefab

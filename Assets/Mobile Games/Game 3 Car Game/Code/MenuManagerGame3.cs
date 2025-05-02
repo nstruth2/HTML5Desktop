@@ -3,7 +3,7 @@ using UnityEngine.SceneManagement;
 using TMPro;
 using System;
 
-public class MainMenuFrom3GamePackGame2 : MonoBehaviour
+public class MenuFrom3GamePackGame2 : MonoBehaviour
 {
     [SerializeField] private TMP_Text bestTimeText;
     [SerializeField] private TMP_Text lastTimeText;
