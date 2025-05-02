@@ -109,17 +109,11 @@ public class SubmitNameAndScoreOnlyGame2 : MonoBehaviour
 
     public void OnContinueClicked()
     {
-        SceneManager.LoadScene("Main Menu Game 2");
+        SceneManager.LoadScene("Menu Game 2");
     }
 
     public void OnRetryClicked()
     {
         SceneManager.LoadScene("Gameplay Game 2"); // 🔹 Reload current scene
-    }
-
-    [System.Serializable]
-    public class RankResponse
-    {
-        public int rank;
     }
 }

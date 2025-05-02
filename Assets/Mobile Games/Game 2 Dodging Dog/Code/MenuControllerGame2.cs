@@ -11,6 +11,6 @@ public class MenuControllerGame2 : MonoBehaviour
     }
     public void ExitToMainMenu()
     {
-        SceneManager.LoadScene("Global Main Menu");
+        SceneManager.LoadScene("Main Menu");
     }
 }

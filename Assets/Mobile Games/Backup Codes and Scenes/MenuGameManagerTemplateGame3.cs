@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class MainMenumanagerGame1 : MonoBehaviour
+public class MainMenumanagerGame3 : MonoBehaviour
 {
     public Button startButton; // Reference to the Start Button prefab
     public Button mainMenuButton; // Reference to the Main Menu Button prefab
@@ -69,9 +69,9 @@ public class MainMenumanagerGame1 : MonoBehaviour
             return;
 
         isLoadingScene = true;
-        Debug.Log("Loading GameplayGame1...");
+        Debug.Log("Loading GameplayGame3...");
         Time.timeScale = 1f; // Reset time scale
-        SceneManager.LoadScene("Gameplay Game 1");
+        SceneManager.LoadScene("Gameplay Game 3");
     }
 
     // Load the main menu scene

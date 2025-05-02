@@ -29,7 +29,7 @@ public class CarFrom3GamesPackGame2 : MonoBehaviour
             {
                 scoreSystem.OnGameEnd();  // Trigger OnGameEnd in ScoreSystem
             }
-            SceneManager.LoadScene("3GamesPackSimpleDrivingGame2MainMenu");
+            SceneManager.LoadScene("Menu Game 3");
         }
     }
 }

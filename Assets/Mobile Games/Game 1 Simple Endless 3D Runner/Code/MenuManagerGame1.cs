@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class MainMenumanagerGame4 : MonoBehaviour
+public class MenumanagerGame1 : MonoBehaviour
 {
     public Button startButton; // Reference to the Start Button prefab
     public Button mainMenuButton; // Reference to the Main Menu Button prefab
@@ -58,7 +58,7 @@ public class MainMenumanagerGame4 : MonoBehaviour
         if (isLoadingScene)
             return;
 
-        Debug.Log("Menu Button Clicked!");
+        Debug.Log("Main Menu Button Clicked!");
         LoadMainMenuScene();
     }
 
@@ -69,9 +69,9 @@ public class MainMenumanagerGame4 : MonoBehaviour
             return;
 
         isLoadingScene = true;
-        Debug.Log("Loading GameplayGame4...");
+        Debug.Log("Loading GameplayGame1...");
         Time.timeScale = 1f; // Reset time scale
-        SceneManager.LoadScene("Gameplay Game 4");
+        SceneManager.LoadScene("Gameplay Game 1");
     }
 
     // Load the main menu scene
@@ -81,7 +81,7 @@ public class MainMenumanagerGame4 : MonoBehaviour
             return;
 
         isLoadingScene = true;
-        Debug.Log("Loading Main Menu...");
+        Debug.Log("Loading Global Main Menu...");
         SceneManager.LoadScene("Main Menu");
     }
 }

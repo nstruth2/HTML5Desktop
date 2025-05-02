@@ -33,7 +33,12 @@ public class MainMenuFrom3GamePackGame2 : MonoBehaviour
 
     public void Play()
     {
-        SceneManager.LoadScene("3GamesPackSimpleDrivingGame2Gameplay");
+        SceneManager.LoadScene("Gameplay Game 3");
+    }
+
+    public void ExitToMainMenu()
+    {
+        SceneManager.LoadScene("Main Menu");
     }
 
     string FormatTime(decimal time)
@@ -60,4 +65,3 @@ public class MainMenuFrom3GamePackGame2 : MonoBehaviour
         return 0m;
     }
 }
-

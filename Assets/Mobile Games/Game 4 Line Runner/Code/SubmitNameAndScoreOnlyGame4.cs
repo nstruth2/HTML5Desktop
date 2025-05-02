@@ -8,21 +8,25 @@ public class SubmitNameAndScoreOnlyGame4 : MonoBehaviour
 {
     public InputField playerNameInput;
     public Button submitButton;
-    public Button continueButton; // New continue button
-    public Text rankText;  
+    public Button continueButton;
+    public Button retryButton; // 🔹 New retry button
+    public Text rankText;
 
     private string submitScoreURL = "https://ourgoodguide.com/MobileProject/ScoreandNameSubmission/submit_score_game_4.php";
-    private string checkRankURL = "https://ourgoodguide.com/MobileProject/CheckRank/check_rank_game_4.php"; 
+    private string checkRankURL = "https://ourgoodguide.com/MobileProject/CheckRank/check_rank_game_4.php";
     private int score = 0;
 
     private void Start()
     {
         score = PlayerPrefs.GetInt("Game4_SubmitScore", 0);
+
         submitButton.onClick.AddListener(OnSubmitClicked);
         continueButton.onClick.AddListener(OnContinueClicked);
+        retryButton.onClick.AddListener(OnRetryClicked); // 🔹 Attach retry listener
 
-        // Hide Continue button at start
+        // 🔹 Hide buttons initially
         continueButton.gameObject.SetActive(false);
+        retryButton.gameObject.SetActive(false);
     }
 
     public void OnSubmitClicked()
@@ -35,14 +39,12 @@ public class SubmitNameAndScoreOnlyGame4 : MonoBehaviour
         }
 
         submitButton.interactable = false;
-
-        // First submit the score, then check the rank
         StartCoroutine(SubmitScoreAndCheckRank(playerName, score));
     }
 
     public IEnumerator SubmitScoreAndCheckRank(string playerName, int score)
     {
-        // Submit score first
+        // 🔹 Submit score
         WWWForm submitForm = new WWWForm();
         submitForm.AddField("player_name", playerName);
         submitForm.AddField("score", score);
@@ -55,7 +57,7 @@ public class SubmitNameAndScoreOnlyGame4 : MonoBehaviour
             {
                 Debug.Log("Error submitting score: " + submitRequest.error);
                 rankText.text = "Error submitting score. Please try again.";
-                submitButton.interactable = true; // Allow retry
+                submitButton.interactable = true;
                 yield break;
             }
             else
@@ -64,7 +66,7 @@ public class SubmitNameAndScoreOnlyGame4 : MonoBehaviour
             }
         }
 
-        // After submitting, check the rank
+        // 🔹 Check rank
         WWWForm rankForm = new WWWForm();
         rankForm.AddField("score", score);
 
@@ -87,7 +89,6 @@ public class SubmitNameAndScoreOnlyGame4 : MonoBehaviour
                     rankText.text = "Error retrieving rank.";
                     Debug.LogError("Error parsing rank response: " + ex.Message);
                 }
-
             }
             else
             {
@@ -96,16 +97,26 @@ public class SubmitNameAndScoreOnlyGame4 : MonoBehaviour
             }
         }
 
-        // After everything, show the Continue button
+        // 🔹 Show Continue and Retry buttons
         continueButton.gameObject.SetActive(true);
+        retryButton.gameObject.SetActive(true);
 
-        // Optionally clear stored score
         PlayerPrefs.DeleteKey("Game4_SubmitScore");
     }
 
     private void OnContinueClicked()
     {
-        // Load the Main Menu when Continue button is clicked
-        SceneManager.LoadScene("Main Menu Game 4");
+        SceneManager.LoadScene("Menu Game 4");
+    }
+
+    private void OnRetryClicked()
+    {
+        SceneManager.LoadScene("Gameplay Game 4"); // 🔹 Load gameplay scene
+    }
+
+    [System.Serializable]
+    public class RankResponse
+    {
+        public int rank;
     }
 }
