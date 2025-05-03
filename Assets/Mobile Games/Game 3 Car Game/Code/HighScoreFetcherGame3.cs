@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 using TMPro;
+using System;
 
 public class HighScoreFetcherGame3 : MonoBehaviour
 {
@@ -17,7 +18,7 @@ public class HighScoreFetcherGame3 : MonoBehaviour
         StartCoroutine(FetchTopTimes());
     }
 
-    IEnumerator FetchTopTimes()
+   IEnumerator FetchTopTimes()
     {
         string url = "https://ourgoodguide.com/MobileProject/GetTopScoresandNames/get_top_time_game_3.php";
         using (UnityWebRequest www = UnityWebRequest.Get(url))
@@ -31,39 +32,62 @@ public class HighScoreFetcherGame3 : MonoBehaviour
 
                 if (!string.IsNullOrEmpty(json))
                 {
-                    TimeScoreArray topTimes = JsonUtility.FromJson<TimeScoreArray>("{\"scores\":" + json + "}");
-
-                    if (topTimes != null && topTimes.scores.Length > 0)
+                    try
                     {
-                        string bestTime = topTimes.scores[0].time;
-                        List<string> topPlayers = new List<string>();
+                        // Deserialize JSON into TimeScoreArray
+                        TimeScoreArray topTimes = JsonUtility.FromJson<TimeScoreArray>("{\"scores\":" + json + "}");
 
-                        foreach (TimeScoreData scorer in topTimes.scores)
+                        if (topTimes != null && topTimes.scores.Length > 0)
                         {
-                            if (scorer.time == bestTime)
+                            decimal bestTime = 0m;
+
+                            // Try to parse the best time safely
+                            if (!decimal.TryParse(topTimes.scores[0].time_raw, out bestTime))
                             {
-                                topPlayers.Add(scorer.player_name);
+                                Debug.LogError("Failed to parse best time.");
+                                bestTimeText.text = "Error parsing best times.";
+                                hasFetched = true;
+                                yield break;
                             }
-                        }
 
-                        currentBestTime = bestTime;
-                        currentBestTimePlayer = topPlayers[0];
+                            List<string> topPlayers = new List<string>();
 
-                        if (topPlayers.Count == 1)
-                        {
-                            bestTimeText.text = $"Best Time: {currentBestTimePlayer}: {currentBestTime}";
+                            foreach (TimeScoreData scorer in topTimes.scores)
+                            {
+                                decimal rawTime = 0m;
+
+                                // Try to parse each player's raw time safely
+                                if (decimal.TryParse(scorer.time_raw, out rawTime) && rawTime == bestTime)
+                                {
+                                    topPlayers.Add(scorer.player_name);
+                                }
+                            }
+
+                            currentBestTime = bestTime.ToString("0.###");  // Format to a decimal string (you can adjust precision)
+                            currentBestTimePlayer = topPlayers[0];
+
+                            if (topPlayers.Count == 1)
+                            {
+                                bestTimeText.text = $"Best Time: {currentBestTimePlayer}: {currentBestTime}";
+                            }
+                            else
+                            {
+                                topPlayers.Sort();
+                                bestTimeText.text = $"Best Time: {string.Join(", ", topPlayers)}: {currentBestTime}";
+                            }
+
+                            hasFetched = true;
                         }
                         else
                         {
-                            topPlayers.Sort();
-                            bestTimeText.text = $"Best Time: {string.Join(", ", topPlayers)}: {currentBestTime}";
+                            bestTimeText.text = "No best times yet.";
+                            hasFetched = true;
                         }
-
-                        hasFetched = true;
                     }
-                    else
+                    catch (System.Exception ex)
                     {
-                        bestTimeText.text = "No best times yet.";
+                        Debug.LogError("Error parsing JSON: " + ex.Message);
+                        bestTimeText.text = "Error parsing best times.";
                         hasFetched = true;
                     }
                 }
@@ -81,4 +105,5 @@ public class HighScoreFetcherGame3 : MonoBehaviour
             }
         }
     }
+
 }

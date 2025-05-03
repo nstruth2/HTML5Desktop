@@ -12,6 +12,7 @@ public class ScoreSystemFrom3GamesPackGame2 : MonoBehaviour
     public const string BestTimeKey = "BestTime3GamesPackGame2";
     public const string LastTimeKey = "LastTime3GamesPackGame2";
     public const string BeatBestTimeKey = "BeatBestTime3GamesPackGame2";
+    public const string Game3_SubmitTimeRaw = "Game3_SubmitTimeRaw";
 
     private decimal timeElapsed;
     private decimal bestTime;
@@ -19,6 +20,7 @@ public class ScoreSystemFrom3GamesPackGame2 : MonoBehaviour
 
     void Start()
     {
+        // Load best time from PlayerPrefs (use decimal here)
         string bestTimeStr = PlayerPrefs.GetString(BestTimeKey, "00:00.00");
         bestTime = ParseTime(bestTimeStr);
 
@@ -31,6 +33,7 @@ public class ScoreSystemFrom3GamesPackGame2 : MonoBehaviour
     {
         if (gameEnded) return;
 
+        // Increment timeElapsed by the time spent per frame
         timeElapsed += (decimal)Time.deltaTime;
         timeText.text = "Time: " + FormatTime(timeElapsed);
 
@@ -46,18 +49,17 @@ public class ScoreSystemFrom3GamesPackGame2 : MonoBehaviour
         if (gameEnded) return;
         gameEnded = true;
 
-        Debug.Log("Game Ended, starting scene load.");
-
+        // Store raw decimal time and formatted time
         string lastTimeStr = FormatTime(timeElapsed);
         PlayerPrefs.SetString(LastTimeKey, lastTimeStr);
-        PlayerPrefs.SetString("Game3_SubmitTime", lastTimeStr);              // 🔹 formatted
-        PlayerPrefs.SetString("Game3_SubmitTimeRaw", timeElapsed.ToString()); // 🔹 raw decimal
-
+        PlayerPrefs.SetString(Game3_SubmitTimeRaw, timeElapsed.ToString()); // Save the raw decimal time
+        
+        // Check if the player beat the best time
         if (bestTime == 0 || timeElapsed > bestTime)
         {
             bestTime = timeElapsed;
             string bestTimeStr = FormatTime(bestTime);
-            PlayerPrefs.SetString(BestTimeKey, bestTimeStr);
+            PlayerPrefs.SetString(BestTimeKey, bestTimeStr); // Save the best time as formatted string
             PlayerPrefs.SetInt(BeatBestTimeKey, 1);
             messageText.text = "You beat the best time!";
         }
@@ -67,28 +69,30 @@ public class ScoreSystemFrom3GamesPackGame2 : MonoBehaviour
         }
 
         PlayerPrefs.Save();
+
+        // Load the next scene after saving the data
         StartCoroutine(DelayedSceneLoad());
     }
-
 
     private System.Collections.IEnumerator DelayedSceneLoad()
     {
         Debug.Log("Coroutine started. Waiting for 1 second...");
-        yield return new WaitForSeconds(1f); // delay ensures PlayerPrefs save completes
-        SceneManager.LoadScene("Submit Time and Name Game 3");  // Load the specific scene directly
+        yield return new WaitForSeconds(1f); // Delay ensures PlayerPrefs save completes
+        Debug.Log("Loading scene: Submit Time and Name Game 3");
+        SceneManager.LoadScene("Submit Time and Name Game 3");
     }
 
     private string FormatTime(decimal time)
     {
-        int minutes = (int)(time / 60m);
-        int seconds = (int)(time % 60m);
-        int centiseconds = (int)((time * 100m) % 100m);
-        return $"{minutes:00}:{seconds:00}.{centiseconds:00}";
+        int minutes = (int)(time / 60m);               // Extract minutes
+        int seconds = (int)(time % 60m);               // Extract seconds
+        int centiseconds = (int)((time * 100m) % 100m); // Extract centiseconds
+        return $"{minutes:00}:{seconds:00}.{centiseconds:00}"; // Format as MM:SS.CC
     }
 
     private decimal ParseTime(string timeStr)
     {
-        string[] parts = timeStr.Split(':', '.');
+        string[] parts = timeStr.Split(':', '.'); // Split the formatted string into parts
         if (parts.Length == 3)
         {
             int minutes = int.Parse(parts[0]);
@@ -98,6 +102,6 @@ public class ScoreSystemFrom3GamesPackGame2 : MonoBehaviour
             decimal time = (decimal)minutes * 60 + (decimal)seconds + (decimal)centiseconds / 100;
             return time;
         }
-        return 0m;
+        return 0m; // Return 0 if the format is invalid
     }
 }
