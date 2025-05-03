@@ -46,6 +46,8 @@ public class ScoreSystemFrom3GamesPackGame2 : MonoBehaviour
         if (gameEnded) return;
         gameEnded = true;
 
+        Debug.Log("Game Ended, starting scene load.");
+
         string lastTimeStr = FormatTime(timeElapsed);
         PlayerPrefs.SetString(LastTimeKey, lastTimeStr);
         PlayerPrefs.SetString("Game3_SubmitTime", lastTimeStr);              // 🔹 formatted
@@ -65,19 +67,15 @@ public class ScoreSystemFrom3GamesPackGame2 : MonoBehaviour
         }
 
         PlayerPrefs.Save();
+        StartCoroutine(DelayedSceneLoad());
     }
 
 
-    public void ReturnToMainMenu(string sceneName)
+    private System.Collections.IEnumerator DelayedSceneLoad()
     {
-        OnGameEnd(); // Ensure data is saved
-        StartCoroutine(DelayedSceneLoad(sceneName));
-    }
-
-    private System.Collections.IEnumerator DelayedSceneLoad(string sceneName)
-    {
+        Debug.Log("Coroutine started. Waiting for 1 second...");
         yield return new WaitForSeconds(1f); // delay ensures PlayerPrefs save completes
-        SceneManager.LoadScene("Submit Time and Name Game 3");
+        SceneManager.LoadScene("Submit Time and Name Game 3");  // Load the specific scene directly
     }
 
     private string FormatTime(decimal time)
