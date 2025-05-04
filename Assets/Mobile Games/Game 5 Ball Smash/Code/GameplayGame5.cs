@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class Game5GameManager : MonoBehaviour
+public class GameplayGame5 : MonoBehaviour
 {
     public GameObject winText;
     public GameObject restartButton;
@@ -43,6 +43,7 @@ public class Game5GameManager : MonoBehaviour
 
         // Save formatted time string for display
         PlayerPrefs.SetString("Game5_SubmitTime", FormatTime(elapsedTime));
+        SceneManager.LoadScene("Submit Score and Name Game 5");
     }
 
     public void Restart()

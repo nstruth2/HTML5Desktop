@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Game5Ball : MonoBehaviour
+public class MenuGame5 : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()
@@ -14,10 +14,5 @@ public class Game5Ball : MonoBehaviour
     void Update()
     {
         
-    }
-    private void OnMouseDown()
-    {
-        GameObject.Find("GameManager").GetComponent<GameplayGame5>().ScoreUp();;
-        Destroy(gameObject);
     }
 }

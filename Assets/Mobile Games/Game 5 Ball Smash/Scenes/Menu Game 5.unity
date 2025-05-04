@@ -824,7 +824,7 @@ GameObject:
   - component: {fileID: 1596916332250364871}
   - component: {fileID: 4160021978385406312}
   m_Layer: 0
-  m_Name: Get Top Score
+  m_Name: Get Best Time
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -839,12 +839,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 4160021978385406311}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1a682c90b21e86948a6db130afd1276f, type: 3}
+  m_Script: {fileID: 11500000, guid: 52412283ea3a68e4389a0f179076c4e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  highScoreText: {fileID: 7448680595339049988}
-  currentHighScore: 0
-  currentHighScorePlayer: 
+  bestTimeText: {fileID: 0}
+  currentBestTime: 
+  currentBestTimePlayer: 
   hasFetched: 0
 --- !u!224 &4298939156449882226
 RectTransform:
@@ -1002,7 +1002,7 @@ GameObject:
   - component: {fileID: 3355608531165570375}
   - component: {fileID: 6189541801748063431}
   m_Layer: 0
-  m_Name: Main Menu Game Manager
+  m_Name: MainMenuGameManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1017,7 +1017,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6189541801748063430}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ac475a69daabdbf468bb8d3571d2f0c1, type: 3}
+  m_Script: {fileID: 11500000, guid: 7f71426fc0c11c246a6be6c44c23ccd6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   startButton: {fileID: 7090119415743483920}
@@ -1055,7 +1055,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Cube Jumper
+  m_Text: Ball Smash
 --- !u!1 &6944215794758397162
 GameObject:
   m_ObjectHideFlags: 0
@@ -1069,7 +1069,7 @@ GameObject:
   - component: {fileID: 431720991989488491}
   - component: {fileID: 522735906583486414}
   m_Layer: 5
-  m_Name: Menu Canvas
+  m_Name: CanvasforMainMenu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1265,8 +1265,8 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 8410255748400355687}
   - {fileID: 5973877579462604731}
+  - {fileID: 8410255748400355687}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -1360,7 +1360,7 @@ GameObject:
   - component: {fileID: 2251154249947374846}
   - component: {fileID: 7448680595339049988}
   m_Layer: 5
-  m_Name: HighScoreText
+  m_Name: BestTimeText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
