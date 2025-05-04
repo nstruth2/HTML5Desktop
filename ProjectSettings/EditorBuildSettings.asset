@@ -31,13 +31,10 @@ EditorBuildSettings:
       1.unity
     guid: fd36cbfc4d727534ba9ae92b31f5983f
   - enabled: 0
-    path: Assets/Mobile Games/Food Eater/Food Eater Game 3.unity
-    guid: 2cda990e2423bbf4892e6590ba056729
-  - enabled: 0
     path: Assets/Mobile Games/Reset Scores Scene/ResetScoresandTimes.unity
     guid: 5f036b0e612c8b049a89a56d26f6f6f1
   - enabled: 0
-    path: Assets/Mobile Games/Game 5 Ball Smash/Scenes/Scenes/Ball Smash Game 5.unity
+    path: Assets/Mobile Games/Game 5 Ball Smash/Scenes/Ball Smash Game 5.unity
     guid: b5218b97ee6374245830ee7c410ad815
   - enabled: 1
     path: Assets/Mobile Games/Game 4 Line Runner/Scenes/Gameplay Game 4.unity
@@ -46,16 +43,11 @@ EditorBuildSettings:
     path: Assets/Mobile Games/Game 7 Ball Bounce/Scenes/Gameplay Game 7.unity
     guid: 3f7bf85a061d1fd4181c3450301d670f
   - enabled: 1
+    path: Assets/Mobile Games/Game 3 Car Game/Scenes/Submit Time and Name Game 3.unity
+    guid: d5389229435b7434d855cd1c3e429930
+  - enabled: 1
     path: Assets/Mobile Games/Game 3 Car Game/Scenes/Gameplay Game 3.unity
     guid: 2251efb0ecb60e84bbbab9de7f4b8aea
-  - enabled: 0
-    path: Assets/Mobile Games/ObsoleteGame Game 6 Cube Runner/Scenes/Gameplay Game
-      6.unity
-    guid: 47be7881793d9b74496adb8338bb9b4b
-  - enabled: 1
-    path: Assets/Mobile Games/Backup Codes and Scenes/Submit Score And Name Backup
-      Game 4.unity
-    guid: ce95de5d05e9a2b438da702ffcdd993a
   - enabled: 1
     path: Assets/Mobile Games/Game 1 Simple Endless 3D Runner/Scenes/Menu Game 1.unity
     guid: a63faf53b85e0f840bf72bd332cf90d2
