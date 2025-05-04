@@ -4,9 +4,9 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class GameManagerGame6Redo : MonoBehaviour
+public class GameManagerGame6 : MonoBehaviour
 {
-    public static GameManagerGame6Redo instance;
+    public static GameManagerGame6 instance;
     public GameObject enemy;
     public Transform spawnPoint;
     public float maxSpawnPointX;
@@ -40,7 +40,7 @@ public class GameManagerGame6Redo : MonoBehaviour
         
         if(PlayerPrefs.HasKey("highScoreGame6Redo"))
         {
-            highScore = PlayerPrefs.GetInt("highScoreGame6Redo");
+            highScore = PlayerPrefs.GetInt("highScoreGame6");
             highScoreText.text = "High Score: " + highScore.ToString();
         }
     }

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerControllerGame6Redo : MonoBehaviour
+public class PlayerControllerGame6 : MonoBehaviour
 {
 
     public float dodgeSpeed;
@@ -51,7 +51,7 @@ public class PlayerControllerGame6Redo : MonoBehaviour
     {
         if(col.gameObject.tag == "Enemy")
         {
-            GameManagerGame6Redo.instance.Restart();
+            GameManagerGame6.instance.Restart();
         }
     }
 
