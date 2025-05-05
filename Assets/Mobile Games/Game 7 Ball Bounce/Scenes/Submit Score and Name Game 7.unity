@@ -500,24 +500,7 @@ MonoBehaviour:
   targetInputField: {fileID: 2826035862323202162}
   keyButtonPrefab: {fileID: 1262930024667803505, guid: a41440ef769c0704fbccb7f0a0357b30, type: 3}
   keysParent: {fileID: 7500328919221093924}
-  submitHandler: {fileID: 1587279929}
---- !u!114 &1587279929
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 107978663068029983}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6e587a744df544f42ab7624d08d18d3f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerNameInput: {fileID: 2826035862323202162}
-  submitButton: {fileID: 8266956691282513038}
-  continueButton: {fileID: 7791621819164464462}
-  retryButton: {fileID: 845414106}
-  rankText: {fileID: 6934577284370691186}
+  submitHandler: {fileID: 0}
 --- !u!1 &1675482007
 GameObject:
   m_ObjectHideFlags: 0
@@ -741,7 +724,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7742818316785778406}
-  - component: {fileID: 1587279929}
+  - component: {fileID: 7742818316785778407}
   m_Layer: 0
   m_Name: SubmitScoreAndNameHolder
   m_TagString: Untagged
@@ -1410,8 +1393,8 @@ RectTransform:
   - {fileID: 2406870726162226837}
   - {fileID: 8689648625502646106}
   - {fileID: 6150063784083530977}
-  - {fileID: 3355888180183292632}
   - {fileID: 845414103}
+  - {fileID: 3355888180183292632}
   m_Father: {fileID: 1740083080}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -1866,6 +1849,23 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7742818316785778407
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 107978663068029983}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b027f45e887ada4090d23027e4da755, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerNameInput: {fileID: 2826035862323202162}
+  submitButton: {fileID: 8266956691282513038}
+  continueButton: {fileID: 7791621819164464462}
+  retryButton: {fileID: 845414106}
+  rankText: {fileID: 6934577284370691186}
 --- !u!114 &7791621819164464462
 MonoBehaviour:
   m_ObjectHideFlags: 0
