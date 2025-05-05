@@ -51,7 +51,8 @@ public class PlayerControllerGame6 : MonoBehaviour
     {
         if(col.gameObject.tag == "Enemy")
         {
-            GameManagerGame6.instance.Restart();
+            GameManagerGame6.instance.GameOver();
+            Destroy(gameObject);
         }
     }
 

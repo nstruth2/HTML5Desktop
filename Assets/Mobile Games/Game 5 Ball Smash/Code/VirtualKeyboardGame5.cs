@@ -86,8 +86,8 @@ public class VirtualKeyboardGame5 : MonoBehaviour
                 string playerName = targetInputField.text;
                 if (!string.IsNullOrEmpty(playerName))
                 {
-                    string time_achieved = PlayerPrefs.GetString("Game5_SubmitTime", "");
-                    submitHandler.StartCoroutine(submitHandler.SubmitScoreAndCheckRank(playerName, time_achieved));
+                    string time_raw = PlayerPrefs.GetString("Game5_SubmitTimeRaw", "");
+                    submitHandler.StartCoroutine(submitHandler.SubmitScoreAndCheckRank(playerName, time_raw));
                 }
                 else
                 {
