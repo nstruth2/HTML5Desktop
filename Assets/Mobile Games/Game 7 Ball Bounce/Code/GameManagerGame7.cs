@@ -53,7 +53,7 @@ public class GameManagerGame7 : MonoBehaviour
         {
             PlayerPrefs.SetInt("Game7_SubmitScore", score);
             PlayerPrefs.Save();
-            SceneManager.LoadScene("Submit Score and Name Game 7");
+            SceneManager.LoadScene("Submit Score and Name Game 7");//comment
         }
     }
 
