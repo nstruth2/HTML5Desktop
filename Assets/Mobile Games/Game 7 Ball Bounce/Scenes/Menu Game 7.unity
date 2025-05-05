@@ -839,7 +839,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4160021978385406311}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1a682c90b21e86948a6db130afd1276f, type: 3}
+  m_Script: {fileID: 11500000, guid: 12ed5a1d7875e8f4e9aef6d99912434a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   highScoreText: {fileID: 7448680595339049988}
@@ -1017,7 +1017,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6189541801748063430}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ac475a69daabdbf468bb8d3571d2f0c1, type: 3}
+  m_Script: {fileID: 11500000, guid: 6e9a460657af03b4e85c045a8578399c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   startButton: {fileID: 7090119415743483920}
@@ -1055,7 +1055,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Cube Jumper
+  m_Text: Ball Bounce
 --- !u!1 &6944215794758397162
 GameObject:
   m_ObjectHideFlags: 0
