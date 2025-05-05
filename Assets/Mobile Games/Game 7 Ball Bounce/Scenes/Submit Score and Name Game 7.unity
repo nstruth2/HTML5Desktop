@@ -485,22 +485,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1280728851}
   m_CullTransparentMesh: 1
---- !u!114 &1360743518
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7807148818118314597}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eb09442ee9ee4d14090446ecb551382d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  targetInputField: {fileID: 2826035862323202162}
-  keyButtonPrefab: {fileID: 1262930024667803505, guid: a41440ef769c0704fbccb7f0a0357b30, type: 3}
-  keysParent: {fileID: 7500328919221093924}
-  submitHandler: {fileID: 0}
 --- !u!1 &1675482007
 GameObject:
   m_ObjectHideFlags: 0
@@ -1921,7 +1905,7 @@ GameObject:
   - component: {fileID: 2069593437758904009}
   - component: {fileID: 5688535966726621631}
   - component: {fileID: 2044084044372994099}
-  - component: {fileID: 1360743518}
+  - component: {fileID: 7807148818118314598}
   m_Layer: 5
   m_Name: VirtualKeyboard
   m_TagString: Untagged
@@ -1929,6 +1913,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &7807148818118314598
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7807148818118314597}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e932561618d47da4489130471972ae65, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetInputField: {fileID: 2826035862323202162}
+  keyButtonPrefab: {fileID: 1262930024667803505, guid: a41440ef769c0704fbccb7f0a0357b30, type: 3}
+  keysParent: {fileID: 7500328919221093924}
+  submitHandler: {fileID: 7742818316785778407}
 --- !u!224 &7826143804796815315
 RectTransform:
   m_ObjectHideFlags: 0

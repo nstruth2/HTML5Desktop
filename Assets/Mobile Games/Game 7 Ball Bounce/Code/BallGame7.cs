@@ -50,7 +50,7 @@ public class BallGame7 : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("FallCheck"))
         {
-            GameManagerGame7.instance.Restart();
+            GameManagerGame7.instance.GameOver();
         }
         else if (collision.gameObject.CompareTag("Paddle"))
         {

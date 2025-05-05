@@ -9,16 +9,11 @@ public class GameManagerGame7 : MonoBehaviour
     public static GameManagerGame7 instance;
     int score;
     int highScore;
-    string highScorePlayer;
 
     public Text scoreText;
     public Text highScoreText;
     public GameObject mainMenuUI;
     public BallGame7 ballScript;
-
-    public InputField nameInputField;
-    public Button submitButton;
-    public GameObject nameInputPanel;
 
     private void Awake()
     {
@@ -26,27 +21,17 @@ public class GameManagerGame7 : MonoBehaviour
     }
 
     void Start()
-    {    
-        highScore = PlayerPrefs.GetInt("PlayerPrefsGame7_HighScore", 0);
-        highScorePlayer = PlayerPrefs.GetString("PlayerPrefsGame7_HighScorePlayer", "No One");
-
-        highScoreText.text = "High Score: " + highScorePlayer + " - " + highScore;
-
+    {
         mainMenuUI.SetActive(true);
         scoreText.gameObject.SetActive(false);
-        nameInputPanel.SetActive(false);
-        highScoreText.gameObject.SetActive(true); // Ensure high score is always visible
+        highScoreText.gameObject.SetActive(true);
 
         Time.timeScale = 0;
-
-        // Ensure Submit Button is hooked up
-        submitButton.onClick.RemoveAllListeners(); // Remove previous listeners to avoid duplicates
-        submitButton.onClick.AddListener(SubmitHighScore);
     }
 
     void Update()
-    {    
-        if (Input.GetMouseButtonDown(0) && Time.timeScale == 0 && !nameInputPanel.activeSelf)
+    {
+        if (Input.GetMouseButtonDown(0) && Time.timeScale == 0)
         {
             StartGame();
         }
@@ -59,56 +44,17 @@ public class GameManagerGame7 : MonoBehaviour
         Time.timeScale = 1;
         ballScript.BeginGame();
     }
-    public void ClearHighScore()
+
+    public void GameOver()
     {
-        // Reset the high score and player name in PlayerPrefs
-        PlayerPrefs.DeleteKey("PlayerPrefsGame7_HighScore");
-        PlayerPrefs.DeleteKey("PlayerPrefsGame7_HighScorePlayer");
+        Time.timeScale = 0;
 
-        // Reset the high score variables in the script
-        highScore = 0;
-        highScorePlayer = "No One";
-
-        // Update the UI to reflect the reset high score
-        highScoreText.text = "High Score: " + highScorePlayer + " - " + highScore;
-
-        // Optionally, save the changes to PlayerPrefs (although PlayerPrefs.DeleteKey already does this)
-        PlayerPrefs.Save();
-    }
-    public void Restart()
-    {
-        if (score > highScore)
+        if (score > PlayerPrefs.GetInt("Game7_SubmitScore", 0))
         {
-            highScore = score;
-            PlayerPrefs.SetInt("PlayerPrefsGame7_HighScore", highScore);
+            PlayerPrefs.SetInt("Game7_SubmitScore", score);
             PlayerPrefs.Save();
-
-            highScoreText.text = "High Score: No One - " + highScore; // Show placeholder name
-            nameInputPanel.SetActive(true);
-            Time.timeScale = 0;
+            SceneManager.LoadScene("Submit Score and Name Game 7");
         }
-        else
-        {
-            SceneManager.LoadScene("Ball Bounce");
-        }
-    }
-
-    public void SubmitHighScore()
-    {
-        string playerName = nameInputField.text.Trim();
-        if (string.IsNullOrWhiteSpace(playerName))
-        {
-            playerName = "Whoever";
-        }
-
-        highScorePlayer = playerName;
-        PlayerPrefs.SetString("PlayerPrefsGame7_HighScorePlayer", highScorePlayer);
-        PlayerPrefs.Save();
-
-        highScoreText.text = "High Score: " + highScorePlayer + " - " + highScore;
-
-        nameInputPanel.SetActive(false);
-        SceneManager.LoadScene("Ball Bounce");
     }
 
     public void ScoreUp()
@@ -116,9 +62,11 @@ public class GameManagerGame7 : MonoBehaviour
         score++;
         scoreText.text = "Score: " + score;
 
+        // Update top score live and change label if new top score is reached
         if (score > highScore)
         {
-            highScoreText.text = "High Score: No One - " + score;
+            highScore = score;
+            highScoreText.text = "Top Score: You - " + highScore;
         }
     }
 }
