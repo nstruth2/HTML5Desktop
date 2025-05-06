@@ -69,15 +69,19 @@ EditorBuildSettings:
       6.unity
     guid: 2fd4e36d5abe2fc44a787ed741a8cb32
   - enabled: 1
+    path: Assets/Mobile Games/Game 7 Ball Bounce/Scenes/Menu Game 7.unity
+    guid: e54cc530517865940a6de32bbc945104
+  - enabled: 1
     path: Assets/Mobile Games/Game 7 Ball Bounce/Scenes/Gameplay Game 7.unity
     guid: 3f7bf85a061d1fd4181c3450301d670f
+  - enabled: 1
+    path: Assets/Mobile Games/Game 7 Ball Bounce/Scenes/Submit Score and Name Game
+      7.unity
+    guid: 2629132edd4e8d648bab2d0ec6ec359d
   - enabled: 1
     path: Assets/Mobile Games/Game 8 Tappy Ball/Scenes/Start Menu Game8.unity
     guid: c43ab22e6018f3d44bef269d13bdb670
   - enabled: 1
     path: Assets/Mobile Games/Game 8 Tappy Ball/Scenes/Gameplay Game 8.unity
     guid: 2c4a4dfac35cb834aa8f31e0d5c3cff3
-  - enabled: 0
-    path: Assets/Mobile Games/Reset Scores Scene/ResetScoresandTimes.unity
-    guid: 5f036b0e612c8b049a89a56d26f6f6f1
   m_configObjects: {}
