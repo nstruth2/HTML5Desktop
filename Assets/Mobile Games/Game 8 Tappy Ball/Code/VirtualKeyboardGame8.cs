@@ -2,12 +2,12 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
 
-public class VirtualKeyboardGame4 : MonoBehaviour
+public class VirtualKeyboardGame8 : MonoBehaviour
 {
     public InputField targetInputField;
-    public Transform keysParent;
     public GameObject keyButtonPrefab;
-    public SubmitNameAndScoreOnlyGame4 submitHandler;
+    public Transform keysParent;
+    public SubmitNameAndScoreOnlyGame8 submitHandler;
 
     private bool showingSymbols = false;
     private bool capsLock = true;
@@ -86,7 +86,7 @@ public class VirtualKeyboardGame4 : MonoBehaviour
                 string playerName = targetInputField.text;
                 if (!string.IsNullOrEmpty(playerName))
                 {
-                    int score = PlayerPrefs.GetInt("Game4_SubmitScore", 0);
+                    int score = PlayerPrefs.GetInt("Game8_SubmitScore", 0);
                     submitHandler.StartCoroutine(submitHandler.SubmitScoreAndCheckRank(playerName, score));
                 }
                 else

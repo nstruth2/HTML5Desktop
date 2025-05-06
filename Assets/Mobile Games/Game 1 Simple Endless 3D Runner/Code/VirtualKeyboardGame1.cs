@@ -5,8 +5,8 @@ using System.Collections.Generic;
 public class VirtualKeyboardGame1 : MonoBehaviour
 {
     public InputField targetInputField;
-    public GameObject keyButtonPrefab;
     public Transform keysParent;
+    public GameObject keyButtonPrefab;
     public SubmitNameAndScoreOnlyGame1 submitHandler;
 
     private bool showingSymbols = false;

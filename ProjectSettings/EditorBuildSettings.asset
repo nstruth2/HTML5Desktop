@@ -79,9 +79,13 @@ EditorBuildSettings:
       7.unity
     guid: 2629132edd4e8d648bab2d0ec6ec359d
   - enabled: 1
-    path: Assets/Mobile Games/Game 8 Tappy Ball/Scenes/Start Menu Game8.unity
-    guid: c43ab22e6018f3d44bef269d13bdb670
+    path: Assets/Mobile Games/Game 8 Tappy Ball/Scenes/Menu Game 8.unity
+    guid: 5b971e5027261ca489fccdebc838b390
   - enabled: 1
     path: Assets/Mobile Games/Game 8 Tappy Ball/Scenes/Gameplay Game 8.unity
     guid: 2c4a4dfac35cb834aa8f31e0d5c3cff3
+  - enabled: 1
+    path: Assets/Mobile Games/Game 8 Tappy Ball/Scenes/Submit Score and Name Game
+      8.unity
+    guid: fc0592c0c583af34ba0c8c7d43c94709
   m_configObjects: {}

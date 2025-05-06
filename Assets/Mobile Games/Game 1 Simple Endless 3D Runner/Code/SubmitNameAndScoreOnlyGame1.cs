@@ -9,8 +9,8 @@ public class SubmitNameAndScoreOnlyGame1 : MonoBehaviour
     public InputField playerNameInput;
     public Button submitButton;
     public Button continueButton;
-    public Button retryButton; // 🔹 New retry button
     public Text rankText;
+    public Button retryButton; // 🔹 New retry button
 
     private string submitScoreURL = "https://ourgoodguide.com/MobileProject/ScoreandNameSubmission/submit_score_game_1.php";
     private string checkRankURL = "https://ourgoodguide.com/MobileProject/CheckRank/check_rank_game_1.php";

@@ -1,47 +1,81 @@
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class GameSceneManager : MonoBehaviour
+public class GameManagerGame8 : MonoBehaviour
 {
-    public GameObject player; // Reference to the player object
-    public GameObject gameOverPanel; // Reference to the Game Over UI panel
+    public static GameManagerGame8 instance;
+
+    public Text scoreText;
+    public Text highScoreText;
+
+    private int score = 0;
+    private int highScore = 0;
+
+    private bool isGameOver = false;
+
+    private void Awake()
+    {
+        // Singleton pattern
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
 
     private void Start()
     {
-        if (gameOverPanel != null)
+        score = 0;
+        highScore = PlayerPrefs.GetInt("Game8_SubmitScore", 0);
+        UpdateUI();
+    }
+
+    public void ScoreUp()
+    {
+        if (isGameOver) return;
+
+        score++;
+
+        if (score > highScore)
         {
-            gameOverPanel.SetActive(false); // Ensure the Game Over UI is hidden at the start
+            highScore = score;
+            PlayerPrefs.SetInt("Game8_SubmitScore", highScore);
         }
 
-        if (player != null)
-        {
-            player.SetActive(true); // Make sure the player is active at the start
-        }
-
-        Time.timeScale = 1f; // Ensure the game is running from the start
-        Debug.Log("Game Started!");
+        UpdateUI();
     }
 
     public void GameOver()
     {
-        if (gameOverPanel != null)
+        isGameOver = true;
+
+        // Save final score for submission
+        PlayerPrefs.SetInt("Game8_SubmitScore", score);
+        PlayerPrefs.Save();
+
+        Debug.Log($"Game Over. Final Score: {score}, High Score: {highScore}");
+
+        // Load the score submission scene
+        SceneManager.LoadScene("Submit Score and Name Game 8"); // Replace with your actual submission scene name
+    }
+
+    private void UpdateUI()
+    {
+        if (scoreText != null)
         {
-            gameOverPanel.SetActive(true); // Display Game Over UI
+            scoreText.text = "Score: " + score;
         }
-        Time.timeScale = 0f; // Pause the game
-        Debug.Log("Game Over. Displaying Game Over UI.");
+
+        if (highScoreText != null)
+        {
+            highScoreText.text = "High Score: " + highScore;
+        }
     }
 
-    public void RestartGame()
-    {
-        Time.timeScale = 1f; // Ensure time is normal
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name); // Reload the current scene
-    }
-
-    public void BackToStartMenu()
-    {
-        Time.timeScale = 1f; // Ensure time is normal
-        SceneManager.LoadScene("StartScene"); // Load the start scene
-        Debug.Log("Returning to Start Menu.");
-    }
+    public int GetCurrentScore() => score;
+    public int GetHighScore() => highScore;
 }

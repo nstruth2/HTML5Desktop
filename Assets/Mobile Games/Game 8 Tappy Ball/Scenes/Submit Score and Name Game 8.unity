@@ -485,39 +485,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1280728851}
   m_CullTransparentMesh: 1
---- !u!114 &1360743518
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7807148818118314597}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eb09442ee9ee4d14090446ecb551382d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  targetInputField: {fileID: 2826035862323202162}
-  keyButtonPrefab: {fileID: 1262930024667803505, guid: a41440ef769c0704fbccb7f0a0357b30, type: 3}
-  keysParent: {fileID: 7500328919221093924}
-  submitHandler: {fileID: 1587279929}
---- !u!114 &1587279929
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 107978663068029983}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6e587a744df544f42ab7624d08d18d3f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerNameInput: {fileID: 2826035862323202162}
-  submitButton: {fileID: 8266956691282513038}
-  continueButton: {fileID: 7791621819164464462}
-  retryButton: {fileID: 845414106}
-  rankText: {fileID: 6934577284370691186}
 --- !u!1 &1675482007
 GameObject:
   m_ObjectHideFlags: 0
@@ -741,7 +708,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7742818316785778406}
-  - component: {fileID: 1587279929}
+  - component: {fileID: 7742818316785778407}
   m_Layer: 0
   m_Name: SubmitScoreAndNameHolder
   m_TagString: Untagged
@@ -1866,6 +1833,23 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7742818316785778407
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 107978663068029983}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fa920d8c79597a46b53d71da12f225b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerNameInput: {fileID: 2826035862323202162}
+  submitButton: {fileID: 8266956691282513038}
+  continueButton: {fileID: 7791621819164464462}
+  retryButton: {fileID: 845414106}
+  rankText: {fileID: 6934577284370691186}
 --- !u!114 &7791621819164464462
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1921,7 +1905,7 @@ GameObject:
   - component: {fileID: 2069593437758904009}
   - component: {fileID: 5688535966726621631}
   - component: {fileID: 2044084044372994099}
-  - component: {fileID: 1360743518}
+  - component: {fileID: 7807148818118314598}
   m_Layer: 5
   m_Name: VirtualKeyboard
   m_TagString: Untagged
@@ -1929,6 +1913,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &7807148818118314598
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7807148818118314597}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 615e71576312f85479790811d5bef076, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetInputField: {fileID: 2826035862323202162}
+  keyButtonPrefab: {fileID: 1262930024667803505, guid: a41440ef769c0704fbccb7f0a0357b30, type: 3}
+  keysParent: {fileID: 7500328919221093924}
+  submitHandler: {fileID: 7742818316785778407}
 --- !u!224 &7826143804796815315
 RectTransform:
   m_ObjectHideFlags: 0

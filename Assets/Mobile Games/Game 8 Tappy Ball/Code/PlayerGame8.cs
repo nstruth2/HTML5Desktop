@@ -6,12 +6,7 @@ public class PlayerGame8 : MonoBehaviour
     private Rigidbody rb;
     public float jumpForce; // Force applied when the player "flaps"
     public GameObject gameOverPanel; // Reference to the Game Over UI
-    public Text scoreText; // Reference to the UI text for the score
-    public Text highScoreText; // Reference to the UI text for the high score
-    public Button clearPlayerPrefsButton; // Reference to the "Clear High Score" button
-
-    private int score = 0; // Current score
-    private int highScore = 0; // High score
+    public Button clearPlayerPrefsButton; // Optional: Reference to clear score button
 
     private void Awake()
     {
@@ -23,15 +18,6 @@ public class PlayerGame8 : MonoBehaviour
         if (gameOverPanel != null)
         {
             gameOverPanel.SetActive(false); // Ensure the Game Over panel is initially hidden
-        }
-
-        // Load the high score from PlayerPrefs
-        highScore = PlayerPrefs.GetInt("HighScore", 0);
-        UpdateScoreUI();
-
-        if (clearPlayerPrefsButton != null)
-        {
-            clearPlayerPrefsButton.onClick.AddListener(ClearPlayerPrefs);
         }
     }
 
@@ -52,7 +38,11 @@ public class PlayerGame8 : MonoBehaviour
         else if (other.gameObject.CompareTag("ScoreZone"))
         {
             Debug.Log("ScoreZone triggered!");
-            AddScore();
+
+            if (GameManagerGame8.instance != null)
+            {
+                GameManagerGame8.instance.ScoreUp();
+            }
         }
         else if (other.gameObject.CompareTag("KillZone"))
         {
@@ -61,51 +51,21 @@ public class PlayerGame8 : MonoBehaviour
         }
     }
 
-    private void AddScore()
-    {
-        score++;
-        UpdateScoreUI();
-
-        if (score > highScore)
-        {
-            highScore = score;
-            PlayerPrefs.SetInt("HighScore", highScore);
-            PlayerPrefs.Save();
-            UpdateScoreUI();
-        }
-    }
-
     private void KillPlayer()
     {
         rb.velocity = Vector3.zero;
-        rb.isKinematic = true; // Disable physics on the player
+        rb.isKinematic = true; // Disable physics
 
         if (gameOverPanel != null)
         {
-            gameOverPanel.SetActive(true); // Show the Game Over UI
+            gameOverPanel.SetActive(true); // Show Game Over UI
         }
 
-        gameObject.SetActive(false); // Disable the player object
-        Time.timeScale = 0f; // Pause the game
-    }
+        gameObject.SetActive(false); // Disable player
 
-    private void ClearPlayerPrefs()
-    {
-        PlayerPrefs.DeleteKey("HighScore"); // Clear the high score PlayerPrefs
-        highScore = 0;
-        UpdateScoreUI();
-    }
-
-    private void UpdateScoreUI()
-    {
-        if (scoreText != null)
+        if (GameManagerGame8.instance != null)
         {
-            scoreText.text = "Score: " + score;
-        }
-
-        if (highScoreText != null)
-        {
-            highScoreText.text = "High Score: " + highScore;
+            GameManagerGame8.instance.GameOver();
         }
     }
 }

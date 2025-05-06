@@ -18,7 +18,7 @@ public class SubmitNameAndScoreOnlyGame8 : MonoBehaviour
 
     private void Start()
     {
-        score = PlayerPrefs.GetInt("Game1_SubmitScore", 0);
+        score = PlayerPrefs.GetInt("Game8_SubmitScore", 0);
 
         submitButton.onClick.AddListener(OnSubmitClicked);
         continueButton.onClick.AddListener(OnContinueClicked);
