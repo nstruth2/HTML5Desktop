@@ -10,9 +10,12 @@ public class GameManagerGame8 : MonoBehaviour
     public Text highScoreText;
 
     private int score = 0;
-    private int highScore = 0;
+    private int localHighScore = 0;
+    private int fetchedHighScore = 0;
+    private string fetchedHighScorePlayer = "???";
 
     private bool isGameOver = false;
+    private bool hasFetchedHighScore = false;
 
     private void Awake()
     {
@@ -30,7 +33,7 @@ public class GameManagerGame8 : MonoBehaviour
     private void Start()
     {
         score = 0;
-        highScore = PlayerPrefs.GetInt("Game8_SubmitScore", 0);
+        localHighScore = PlayerPrefs.GetInt("Game8_SubmitScore", 0);
         UpdateUI();
     }
 
@@ -40,10 +43,10 @@ public class GameManagerGame8 : MonoBehaviour
 
         score++;
 
-        if (score > highScore)
+        if (score > localHighScore)
         {
-            highScore = score;
-            PlayerPrefs.SetInt("Game8_SubmitScore", highScore);
+            localHighScore = score;
+            PlayerPrefs.SetInt("Game8_SubmitScore", localHighScore);
         }
 
         UpdateUI();
@@ -53,14 +56,21 @@ public class GameManagerGame8 : MonoBehaviour
     {
         isGameOver = true;
 
-        // Save final score for submission
         PlayerPrefs.SetInt("Game8_SubmitScore", score);
         PlayerPrefs.Save();
 
-        Debug.Log($"Game Over. Final Score: {score}, High Score: {highScore}");
+        Debug.Log($"Game Over. Final Score: {score}, Local High Score: {localHighScore}");
 
-        // Load the score submission scene
-        SceneManager.LoadScene("Submit Score and Name Game 8"); // Replace with your actual submission scene name
+        SceneManager.LoadScene("Submit Score and Name Game 8");
+    }
+
+    public void SetFetchedHighScore(int fetchedScore, string fetchedPlayer = "???")
+    {
+        fetchedHighScore = fetchedScore;
+        fetchedHighScorePlayer = fetchedPlayer;
+        hasFetchedHighScore = true;
+
+        UpdateUI();
     }
 
     private void UpdateUI()
@@ -72,10 +82,24 @@ public class GameManagerGame8 : MonoBehaviour
 
         if (highScoreText != null)
         {
-            highScoreText.text = "High Score: " + highScore;
+            if (hasFetchedHighScore)
+            {
+                if (localHighScore > fetchedHighScore)
+                {
+                    highScoreText.text = $"Top Score: You: {localHighScore}";
+                }
+                else
+                {
+                    highScoreText.text = $"Top Score: {fetchedHighScorePlayer}: {fetchedHighScore}";
+                }
+            }
+            else
+            {
+                highScoreText.text = $"High Score: {localHighScore}";
+            }
         }
     }
 
     public int GetCurrentScore() => score;
-    public int GetHighScore() => highScore;
+    public int GetHighScore() => localHighScore;
 }

@@ -784,8 +784,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   jumpForce: 8
   gameOverPanel: {fileID: 1519404751}
-  scoreText: {fileID: 1301971533}
-  highScoreText: {fileID: 1004450060}
   clearPlayerPrefsButton: {fileID: 0}
 --- !u!1 &763277720
 GameObject:
@@ -952,7 +950,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scoreText: {fileID: 1301971533}
   highScoreText: {fileID: 1004450060}
-  playerScript: {fileID: 717721827}
 --- !u!4 &909476671
 Transform:
   m_ObjectHideFlags: 0
@@ -1002,8 +999,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -747.52, y: 326}
-  m_SizeDelta: {x: 299.8872, y: 288.8048}
+  m_AnchoredPosition: {x: -8.4662, y: 326}
+  m_SizeDelta: {x: 1777.9948, y: 288.8048}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1004450060
 MonoBehaviour:
@@ -1175,8 +1172,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -695, y: 254}
-  m_SizeDelta: {x: 404.9329, y: 211.4319}
+  m_AnchoredPosition: {x: -191.6, y: 254}
+  m_SizeDelta: {x: 1411.7, y: 211.4319}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1301971533
 MonoBehaviour:
@@ -1405,10 +1402,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 050e1a3eaceddd740a2b01eba6f8c1d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  highScoreText: {fileID: 1004450060}
   currentHighScore: 0
   currentHighScorePlayer: 
   hasFetched: 0
+  highScoreText: {fileID: 0}
 --- !u!4 &1949118988
 Transform:
   m_ObjectHideFlags: 0

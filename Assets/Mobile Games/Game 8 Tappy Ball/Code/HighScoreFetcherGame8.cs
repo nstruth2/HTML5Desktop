@@ -6,10 +6,12 @@ using UnityEngine.UI;
 
 public class HighScoreFetcherGame8 : MonoBehaviour
 {
-    public Text highScoreText; // Assign this in the Inspector
     public int currentHighScore = 0;
     public string currentHighScorePlayer = "";
-    public bool hasFetched = false; // <-- Added to indicate fetch completion
+    public bool hasFetched = false;
+
+    // Optional UI Text to display high score in Main Menu Game 8
+    public Text highScoreText;
 
     void Start()
     {
@@ -49,34 +51,32 @@ public class HighScoreFetcherGame8 : MonoBehaviour
                         currentHighScore = highestScore;
                         currentHighScorePlayer = topPlayers[0];
 
-                        if (topPlayers.Count == 1)
+                        // ✅ Update UI text only if available
+                        if (highScoreText != null)
                         {
                             highScoreText.text = $"Top Score: {currentHighScorePlayer}: {currentHighScore}";
                         }
-                        else
-                        {
-                            topPlayers.Sort();
-                            highScoreText.text = $"Top Score: {string.Join(", ", topPlayers)}: {currentHighScore}";
-                        }
+
+                        // ✅ Notify GameManager (in-game only)
+                        GameManagerGame8.instance?.SetFetchedHighScore(currentHighScore, currentHighScorePlayer);
 
                         hasFetched = true;
                     }
                     else
                     {
-                        highScoreText.text = "No high scores yet.";
+                        Debug.Log("No high scores yet.");
                         hasFetched = true;
                     }
                 }
                 else
                 {
-                    highScoreText.text = "No high scores yet.";
+                    Debug.Log("Empty response for high scores.");
                     hasFetched = true;
                 }
             }
             else
             {
                 Debug.LogError("Error fetching top scorers: " + www.error);
-                highScoreText.text = "Failed to load scores.";
                 hasFetched = true;
             }
         }
