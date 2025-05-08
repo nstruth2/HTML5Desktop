@@ -845,6 +845,7 @@ MonoBehaviour:
   currentHighScore: 0
   currentHighScorePlayer: 
   hasFetched: 0
+  highScoreText: {fileID: 7448680595339049988}
 --- !u!224 &4298939156449882226
 RectTransform:
   m_ObjectHideFlags: 0
