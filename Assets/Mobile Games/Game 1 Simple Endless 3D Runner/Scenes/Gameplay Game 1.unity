@@ -243,6 +243,7 @@ MonoBehaviour:
   highScoreText: {fileID: 115357237}
   currentHighScore: 0
   currentHighScorePlayer: 
+  hasFetched: 0
 --- !u!1 &115357236
 GameObject:
   m_ObjectHideFlags: 0
@@ -319,8 +320,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -296, y: 368}
-  m_SizeDelta: {x: 1166.1309, y: 183.9057}
+  m_AnchoredPosition: {x: 128, y: 766}
+  m_SizeDelta: {x: 1166.1309, y: 164.4433}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &204053621
 GameObject:
@@ -936,7 +937,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 638, y: -273.66}
+  m_AnchoredPosition: {x: 12.311, y: -556}
   m_SizeDelta: {x: 934.7531, y: 433.3203}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1038175700
@@ -1098,8 +1099,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -645.43, y: 249}
-  m_SizeDelta: {x: 467.2717, y: 112.1582}
+  m_AnchoredPosition: {x: -221.42996, y: 659.5937}
+  m_SizeDelta: {x: 467.2717, y: 100.2887}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1562168363
 MonoBehaviour:
