@@ -49,6 +49,9 @@ public class HighScoreFetcherGame6 : MonoBehaviour
                         currentHighScore = highestScore;
                         currentHighScorePlayer = topPlayers[0];
 
+                        // Notify GameManagerGame6 of the fetched score and player
+                        GameManagerGame6.instance.SetFetchedHighScore(currentHighScore, currentHighScorePlayer);
+
                         if (topPlayers.Count == 1)
                         {
                             highScoreText.text = $"Top Score: {currentHighScorePlayer}: {currentHighScore}";
@@ -58,7 +61,6 @@ public class HighScoreFetcherGame6 : MonoBehaviour
                             topPlayers.Sort();
                             highScoreText.text = $"Top Score: {string.Join(", ", topPlayers)}: {currentHighScore}";
                         }
-
                         hasFetched = true;
                     }
                     else
