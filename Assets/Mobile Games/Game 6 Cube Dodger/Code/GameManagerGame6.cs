@@ -19,10 +19,14 @@ public class GameManagerGame6 : MonoBehaviour
 
     [HideInInspector] public float currentEnemySpeed;
 
-    int score = 0;
-    int highScore = 0;
-    bool gameStarted = false;
-    bool isGameOver = false;
+    private int score = 0;
+    private int localHighScore = 0;
+    private int fetchedHighScore = 0;
+    private string fetchedHighScorePlayer = "???";
+
+    private bool gameStarted = false;
+    private bool isGameOver = false;
+    private bool hasFetchedHighScore = false;
 
     private void Awake()
     {
@@ -36,8 +40,8 @@ public class GameManagerGame6 : MonoBehaviour
     {
         currentEnemySpeed = initialEnemySpeed;
 
-        highScore = PlayerPrefs.GetInt("Game6_SubmitScore", 0);
-        highScoreText.text = "High Score: " + highScore.ToString();
+        localHighScore = PlayerPrefs.GetInt("Game6_SubmitScore", 0);
+        UpdateUI();
     }
 
     void Update()
@@ -82,15 +86,15 @@ public class GameManagerGame6 : MonoBehaviour
     public void ScoreUp()
     {
         score++;
-        scoreText.text = "Score: " + score.ToString();
 
-        if (score > highScore)
+        if (score > localHighScore)
         {
-            highScore = score;
-            highScoreText.text = "Top Score: You: " + highScore.ToString();
-            PlayerPrefs.SetInt("Game6_SubmitScore", highScore);
+            localHighScore = score;
+            PlayerPrefs.SetInt("Game6_SubmitScore", localHighScore);
             PlayerPrefs.Save();
         }
+
+        UpdateUI(); // move this to the end so it reflects the new state
     }
 
     public void GameOver()
@@ -101,10 +105,46 @@ public class GameManagerGame6 : MonoBehaviour
         StopAllCoroutines(); // Stop spawning and speed increase
         Debug.Log("Game Over");
 
-        // Optional: Hide score UI
         scoreText.gameObject.SetActive(false);
-
-        // Load the submit scene
         SceneManager.LoadScene("Submit Score and Name Game 6");
     }
+
+    public void SetFetchedHighScore(int fetchedScore, string fetchedPlayer = "???")
+    {
+        fetchedHighScore = fetchedScore;
+        fetchedHighScorePlayer = fetchedPlayer;
+        hasFetchedHighScore = true;
+
+        UpdateUI();
+    }
+
+    private void UpdateUI()
+    {
+        if (scoreText != null)
+        {
+            scoreText.text = "Score: " + score;
+        }
+
+        if (highScoreText != null)
+        {
+            if (hasFetchedHighScore)
+            {
+                if (localHighScore > fetchedHighScore)
+                {
+                    highScoreText.text = $"Top Score: You: {localHighScore}";
+                }
+                else
+                {
+                    highScoreText.text = $"Top Score: {fetchedHighScorePlayer}: {fetchedHighScore}";
+                }
+            }
+            else
+            {
+                highScoreText.text = $"High Score: {localHighScore}";
+            }
+        }
+    }
+
+    public int GetCurrentScore() => score;
+    public int GetHighScore() => localHighScore;
 }
