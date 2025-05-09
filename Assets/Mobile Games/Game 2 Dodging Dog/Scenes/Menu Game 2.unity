@@ -1396,9 +1396,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: MenuControllerGame2, Assembly-CSharp
-        m_MethodName: ExitToMainMenu
+      - m_Target: {fileID: 7065014404831655037}
+        m_TargetAssemblyTypeName: MainMenumanagerGame2, Assembly-CSharp
+        m_MethodName: LoadMainMenuScene
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

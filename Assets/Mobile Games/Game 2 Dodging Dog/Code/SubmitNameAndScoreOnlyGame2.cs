@@ -19,7 +19,7 @@ public class SubmitNameAndScoreOnlyGame2 : MonoBehaviour
     private void Start()
     {
         score = PlayerPrefs.GetInt("Game2_SubmitScore", 0);
-
+        if (submitButton == null) Debug.LogError("Submit button is NULL!");
         submitButton.onClick.AddListener(OnSubmitClicked);
         continueButton.onClick.AddListener(OnContinueClicked);
         retryButton.onClick.AddListener(OnRetryClicked); // 🔹 Add listener
