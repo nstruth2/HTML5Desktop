@@ -82,6 +82,6 @@ public class MainMenumanagerGame2 : MonoBehaviour
 
         isLoadingScene = true;
         Debug.Log("Loading Global Main Menu...");
-        SceneManager.LoadScene("Global Main Menu");
+        SceneManager.LoadScene("Main Menu");
     }
 }
