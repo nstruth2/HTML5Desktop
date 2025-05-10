@@ -109,6 +109,16 @@ public class GameManagerGame1 : MonoBehaviour
 
         player.SetActive(false);
 
-        SceneManager.LoadScene("Submit Score and Name Game 1");
+        // Check if the platform is mobile WebGL
+        if (Application.platform == RuntimePlatform.WebGLPlayer && Application.isMobilePlatform)
+        {
+            // If mobile WebGL, load the landscape prompt scene
+            SceneManager.LoadScene("Submit Score and Name Game 1 Landscape"); // Replace with your landscape prompt scene name
+        }
+        else
+        {
+            // If it's not mobile WebGL, proceed normally
+            SceneManager.LoadScene("Submit Score and Name Game 1");
+        }
     }
 }

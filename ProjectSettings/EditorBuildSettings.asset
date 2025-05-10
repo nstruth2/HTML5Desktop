@@ -5,7 +5,7 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Mobile Games/Main Menu/Main Menu.unity
     guid: 5e16d444f83278347ab9db9e64ea8b94
   - enabled: 1
@@ -20,71 +20,75 @@ EditorBuildSettings:
       and Name Game 1.unity
     guid: b5ee8b8345821624a906de826e5e273b
   - enabled: 1
+    path: Assets/Mobile Games/Game 1 Simple Endless 3D Runner/Scenes/Submit Score
+      and Name Game 1 Landscape.unity
+    guid: 443a7709f3122f14ab0f2a98b6134d96
+  - enabled: 0
     path: Assets/Mobile Games/Game 2 Dodging Dog/Scenes/Menu Game 2.unity
     guid: c0dc9a70188ef4a4db182d6bdb98a3af
-  - enabled: 1
+  - enabled: 0
     path: Assets/Mobile Games/Game 2 Dodging Dog/Scenes/Gameplay Game 2.unity
     guid: 4f599435c2f6445479d563cf46128390
-  - enabled: 1
+  - enabled: 0
     path: Assets/Mobile Games/Game 2 Dodging Dog/Scenes/Submit Score and Name Game
       2.unity
     guid: e60bc47526ab11e4d9130d6decb6a22a
-  - enabled: 1
+  - enabled: 0
     path: Assets/Mobile Games/Game 3 Car Game/Scenes/Menu Game 3.unity
     guid: 480632ebfda787b4ebb2ed4de12e59cc
-  - enabled: 1
+  - enabled: 0
     path: Assets/Mobile Games/Game 3 Car Game/Scenes/Gameplay Game 3.unity
     guid: 2251efb0ecb60e84bbbab9de7f4b8aea
-  - enabled: 1
+  - enabled: 0
     path: Assets/Mobile Games/Game 3 Car Game/Scenes/Submit Time and Name Game 3.unity
     guid: d5389229435b7434d855cd1c3e429930
-  - enabled: 1
+  - enabled: 0
     path: Assets/Mobile Games/Game 4 Line Runner/Scenes/Menu Game 4.unity
     guid: 9c28139865c0d214881610d47958fb65
-  - enabled: 1
+  - enabled: 0
     path: Assets/Mobile Games/Game 4 Line Runner/Scenes/Gameplay Game 4.unity
     guid: f58554037b0dd0645a8be8dd8d2f83b5
-  - enabled: 1
+  - enabled: 0
     path: Assets/Mobile Games/Game 4 Line Runner/Scenes/Submit Score And Name Game
       4.unity
     guid: 54cf7de3c396af64ebb2426048c46bb3
-  - enabled: 1
+  - enabled: 0
     path: Assets/Mobile Games/Game 5 Ball Smash/Scenes/Menu Game 5.unity
     guid: faf7875f3621a644baac553c68e65928
-  - enabled: 1
+  - enabled: 0
     path: Assets/Mobile Games/Game 5 Ball Smash/Scenes/Gameplay Game 5.unity
     guid: b5218b97ee6374245830ee7c410ad815
-  - enabled: 1
+  - enabled: 0
     path: Assets/Mobile Games/Game 5 Ball Smash/Scenes/Submit Score and Name Game
       5.unity
     guid: 86766acf0ece69344834f07052f9dbfc
-  - enabled: 1
+  - enabled: 0
     path: Assets/Mobile Games/Game 6 Cube Dodger/Scenes/Menu Game 6.unity
     guid: f5db960c8cf10444c8e0e47a09a01b4e
-  - enabled: 1
+  - enabled: 0
     path: Assets/Mobile Games/Game 6 Cube Dodger/Scenes/Gameplay Game 6.unity
     guid: 567f50dcef500cb4190dd8898da42d1a
-  - enabled: 1
+  - enabled: 0
     path: Assets/Mobile Games/Game 6 Cube Dodger/Scenes/Submit Score and Name Game
       6.unity
     guid: 2fd4e36d5abe2fc44a787ed741a8cb32
-  - enabled: 1
+  - enabled: 0
     path: Assets/Mobile Games/Game 7 Ball Bounce/Scenes/Menu Game 7.unity
     guid: e54cc530517865940a6de32bbc945104
-  - enabled: 1
+  - enabled: 0
     path: Assets/Mobile Games/Game 7 Ball Bounce/Scenes/Gameplay Game 7.unity
     guid: 3f7bf85a061d1fd4181c3450301d670f
-  - enabled: 1
+  - enabled: 0
     path: Assets/Mobile Games/Game 7 Ball Bounce/Scenes/Submit Score and Name Game
       7.unity
     guid: 2629132edd4e8d648bab2d0ec6ec359d
-  - enabled: 1
+  - enabled: 0
     path: Assets/Mobile Games/Game 8 Tappy Ball/Scenes/Menu Game 8.unity
     guid: 5b971e5027261ca489fccdebc838b390
-  - enabled: 1
+  - enabled: 0
     path: Assets/Mobile Games/Game 8 Tappy Ball/Scenes/Gameplay Game 8.unity
     guid: 2c4a4dfac35cb834aa8f31e0d5c3cff3
-  - enabled: 1
+  - enabled: 0
     path: Assets/Mobile Games/Game 8 Tappy Ball/Scenes/Submit Score and Name Game
       8.unity
     guid: fc0592c0c583af34ba0c8c7d43c94709

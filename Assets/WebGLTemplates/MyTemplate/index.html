@@ -60,27 +60,6 @@
       cursor: pointer;
       display: none;
     }
-
-    @media screen and (orientation:portrait) {
-      body::before {
-        content: "Please rotate your device to landscape.";
-        color: white;
-        font-size: 24px;
-        position: absolute;
-        top: 0;
-        left: 0;
-        z-index: 9999;
-        background: black;
-        width: 100vw;
-        height: 100vh;
-        text-align: center;
-        padding-top: 50vh;
-      }
-
-      #unity-container, #unity-canvas {
-        display: none;
-      }
-    }
   </style>
 </head>
 <body>
@@ -162,7 +141,6 @@
         progressBarFull.style.width = (100 * progress) + "%";
       }).then((unityInstance) => {
         loadingBar.style.display = "none";
-
         fullscreenButton.onclick = () => unityInstance.SetFullscreen(1);
 
         // Manual fullscreen prompt if needed
@@ -171,7 +149,6 @@
           unityInstance.SetFullscreen(1);
           fullscreenPrompt.style.display = "none";
         });
-
       }).catch((message) => {
         alert(message);
       });
