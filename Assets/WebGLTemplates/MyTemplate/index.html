@@ -20,8 +20,6 @@
     #unity-canvas {
       width: 100%;
       height: 100%;
-      max-width: 100vw;
-      max-height: 100vh;
       object-fit: contain;
     }
 
@@ -90,7 +88,6 @@
         <div id="unity-progress-bar-full"></div>
       </div>
     </div>
-    <div id="unity-warning"></div>
     <div id="unity-footer">
       <div id="unity-webgl-logo"></div>
       <div id="unity-fullscreen-button"></div>
@@ -194,32 +191,29 @@
       window.addEventListener('resize', resizeCanvas);
     });
 
-    // Orientation check for mobile WebGL
     function checkOrientation() {
-    const isLandscape = window.innerWidth > window.innerHeight;
-    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-    const warning = document.getElementById("orientation-warning");
-    const unityContainer = document.getElementById("unity-container");
+  const isLandscape = window.innerWidth > window.innerHeight;
+  const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+  const warning = document.getElementById("orientation-warning");
 
-    const scene = window.currentUnitySceneName || "";
-    const needsLandscape = scene.includes("Submit Score and Name Game");
+  const needsLandscape = true;
 
-    if (isMobile) {
-      if ((needsLandscape && !isLandscape) || (!needsLandscape && isLandscape)) {
-        warning.innerText = needsLandscape
-          ? "Please rotate your device to landscape mode to continue."
-          : "Please rotate your device to portrait mode to continue.";
-        warning.style.display = "flex";
-        unityContainer.style.display = "none";
-      } else {
-        warning.style.display = "none";
-        unityContainer.style.display = "block";
-      }
+  if (isMobile) {
+    if (needsLandscape && !isLandscape) {
+      warning.innerText = "Please rotate your device to landscape mode to continue.";
+      warning.style.display = "flex";
+    } else if (!needsLandscape && isLandscape) {
+      warning.innerText = "Please rotate your device to portrait mode to continue.";
+      warning.style.display = "flex";
     } else {
       warning.style.display = "none";
-      unityContainer.style.display = "block";
     }
+  } else {
+    warning.style.display = "none";
   }
+}
+
+
     window.addEventListener("resize", checkOrientation);
     window.addEventListener("orientationchange", checkOrientation);
   </script>
