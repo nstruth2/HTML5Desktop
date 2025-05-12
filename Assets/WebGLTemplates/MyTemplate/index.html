@@ -163,12 +163,12 @@
         loadingBar.style.display = "none";
         fullscreenButton.onclick = () => unityInstance.SetFullscreen(1);
 
-        // Manual fullscreen prompt
         fullscreenPrompt.style.display = "block";
         fullscreenPrompt.addEventListener("click", () => {
           unityInstance.SetFullscreen(1);
           fullscreenPrompt.style.display = "none";
         });
+
       }).catch((message) => {
         alert(message);
       });
@@ -190,35 +190,6 @@
       setTimeout(resizeCanvas, 2000);
       window.addEventListener('resize', resizeCanvas);
     });
-
-    function checkOrientation() {
-  const isLandscape = window.innerWidth > window.innerHeight;
-  const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-  const warning = document.getElementById("orientation-warning");
-
-  const needsLandscape = true;
-
-  if (isMobile) {
-    if (needsLandscape && !isLandscape) {
-      warning.innerText = "Please rotate your device to landscape mode to continue.";
-      warning.style.display = "flex";
-      console.log("Device needs to be in landscape mode.");
-    } else if (!needsLandscape && isLandscape) {
-      warning.innerText = "Please rotate your device to portrait mode to continue.";
-      warning.style.display = "flex";
-      console.log("Device needs to be in portrait mode.");
-    } else {
-      warning.style.display = "none";
-    }
-    console.log("Orientation is correct.");
-  } else {
-    warning.style.display = "none";
-  }
-}
-
-
-    window.addEventListener("resize", checkOrientation);
-    window.addEventListener("orientationchange", checkOrientation);
   </script>
 </body>
 </html>

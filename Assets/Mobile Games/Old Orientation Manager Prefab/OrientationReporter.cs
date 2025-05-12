@@ -33,14 +33,14 @@ public class OrientationManager : MonoBehaviour
 
     public void CheckOrientationAndPrompt(string sceneName)
     {
-        // Get orientation requirement from JS using the defined GetRequiredOrientation method
+    #if UNITY_WEBGL && !UNITY_EDITOR
         string requiredOrientation = GetRequiredOrientation(Application.productName, sceneName);
-
-        // If needed, prompt for orientation change
-        if (requiredOrientation != Screen.orientation.ToString().ToLower())
+        if (!string.IsNullOrEmpty(requiredOrientation) && 
+            requiredOrientation != Screen.orientation.ToString().ToLower())
         {
             PromptOrientationChange(requiredOrientation);
         }
+    #endif
     }
 
     [DllImport("__Internal")]
