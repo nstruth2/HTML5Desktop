@@ -45,15 +45,13 @@ var OrientationManagerLib = {
       // Find required orientation for current scene
       let requiredOrientation = null;
       for (const game of this.gameScenes) {
-        for (const scene of this.gameScenes) {
-          for (const scene of game.scenes) {
-            if (scene.sceneName === this.currentSceneName) {
-              requiredOrientation = scene.orientation;
-              break;
-            }
-          }
-          if (requiredOrientation) break;
+      for (const scene of game.scenes) {
+        if (scene.sceneName === this.currentSceneName) {
+          requiredOrientation = scene.orientation;
+          break;
         }
+      }
+      if (requiredOrientation) break;
       }
       
       if (!requiredOrientation) return;
