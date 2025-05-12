@@ -56,5 +56,5 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "All8GamesWorkingExceptBuginGame6SettingLandscapeandTogglingVirtualKeyboard5.9.2025T1206PM.sln"
+    "dotnet.defaultSolution": "All8GamesWorkingHTML5VersionButLandscapeModeSuggestNotWorking5.11.2025T721PM.sln"
 }

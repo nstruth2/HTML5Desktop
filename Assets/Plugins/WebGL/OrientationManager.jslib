@@ -1,59 +1,105 @@
 mergeInto(LibraryManager.library, {
-    gameOrientationMap: [],
-    orientationInitialized: false,
-
-    // Initialize the orientation map with games and their required scene orientations
-    InitializeOrientationMap: function () {
-        if (window.orientationInitialized) return;
-
-        // Initialize the orientation map for all games and scenes
-        window.gameOrientationMap = [
-            { gameName: "Game1", scenes: [
-                { sceneName: "Menu Game 1", orientation: "portrait" },
-                { sceneName: "Gameplay Game 1", orientation: "portrait" },
-                { sceneName: "Submit Score and Name Game 1", orientation: "landscape" }
-            ]},
-            { gameName: "Game2", scenes: [
-                { sceneName: "Menu Game 2", orientation: "portrait" },
-                { sceneName: "Gameplay Game 2", orientation: "portrait" },
-                { sceneName: "Submit Score and Name Game 2", orientation: "landscape" }
-            ]},
-            { gameName: "Game3", scenes: [
-                { sceneName: "Menu Game 3", orientation: "portrait" },
-                { sceneName: "Gameplay Game 3", orientation: "portrait" },
-                { sceneName: "Submit Score and Name Game 3", orientation: "landscape" }
-            ]}
-        ];
-
-        window.orientationInitialized = true;
+  gameScenes: [
+    {
+      gameName: "Game1",
+      scenes: [
+        { sceneName: "Menu Game 1", orientation: "portrait" },
+        { sceneName: "Gameplay Game 1", orientation: "portrait" },
+        { sceneName: "Submit Score and Name Game 1 Landscape", orientation: "landscape" }
+      ]
     },
-
-    // Fetch the required orientation for a given game and scene
-    GetRequiredOrientation: function (gameName, sceneName) {
-        if (!window.gameOrientationMap.length) {
-            console.error("Orientation map not initialized.");
-            return "portrait"; // Default orientation
-        }
-
-        for (let game of window.gameOrientationMap) {
-            if (game.gameName === gameName) {
-                for (let scene of game.scenes) {
-                    if (scene.sceneName === sceneName) {
-                        return scene.orientation;
-                    }
-                }
-            }
-        }
-
-        return "portrait"; // Default orientation if not found
+    {
+      gameName: "Game2",
+      scenes: [
+        { sceneName: "Menu Game 2", orientation: "portrait" },
+        { sceneName: "Gameplay Game 2", orientation: "portrait" },
+        { sceneName: "Submit Score and Name Game 2 Lansdscape", orientation: "landscape" }
+      ]
     },
-
-    // Function to prompt the user to switch orientation
-    PromptOrientationChange: function (requiredOrientation) {
-        if (requiredOrientation === "landscape") {
-            alert("Please switch your device to landscape mode for a better experience.");
-        } else if (requiredOrientation === "portrait") {
-            alert("Please switch your device to portrait mode for a better experience.");
-        }
+    {
+      gameName: "Game3",
+      scenes: [
+        { sceneName: "Menu Game 3", orientation: "portrait" },
+        { sceneName: "Gameplay Game 3", orientation: "portrait" },
+        { sceneName: "Submit Score and Name Game 3", orientation: "landscape" }
+      ]
     }
+  ],
+
+  currentSceneName: null,
+
+  SetCurrentScene: function (sceneNamePtr) {
+    const sceneName = UTF8ToString(sceneNamePtr);
+    Module.currentSceneName = sceneName;
+
+    if (typeof window !== "undefined") {
+      Module.checkOrientation();
+
+      if (!Module._orientationListenersAdded) {
+        window.addEventListener("resize", Module.checkOrientation);
+        window.addEventListener("orientationchange", Module.checkOrientation);
+        Module._orientationListenersAdded = true;
+      }
+    }
+  },
+
+  checkOrientation: function () {
+    if (typeof window === "undefined" || !Module.currentSceneName) return;
+
+    let currentOrientation;
+    if (window.screen && window.screen.orientation) {
+      currentOrientation = window.screen.orientation.type.includes('landscape') ? 'landscape' : 'portrait';
+    } else {
+      currentOrientation = window.innerWidth > window.innerHeight ? 'landscape' : 'portrait';
+    }
+
+    let requiredOrientation = null;
+
+    for (const game of Module.gameScenes) {
+      for (const scene of game.scenes) {
+        if (scene.sceneName === Module.currentSceneName) {
+          requiredOrientation = scene.orientation;
+          break;
+        }
+      }
+      if (requiredOrientation) break;
+    }
+
+    if (!requiredOrientation) return;
+
+    if (requiredOrientation !== currentOrientation) {
+      SendMessage("OrientationWarning", "ShowWarning", requiredOrientation);
+    } else {
+      SendMessage("OrientationWarning", "HideWarning");
+    }
+  },
+
+  PromptOrientationChange: function (orientation) {
+    if (orientation === "landscape") {
+      alert("Please rotate your device to landscape mode to continue.");
+    } else if (orientation === "portrait") {
+      alert("Please rotate your device to portrait mode to continue.");
+    }
+  },
+
+  ResetOrientationOverride: function () {
+    console.log("Orientation override reset.");
+  },
+
+  GetRequiredOrientation: function (gameNamePtr, sceneNamePtr) {
+    const gameName = UTF8ToString(gameNamePtr);
+    const sceneName = UTF8ToString(sceneNamePtr);
+
+    for (const game of Module.gameScenes) {
+      if (game.gameName === gameName) {
+        for (const scene of game.scenes) {
+          if (scene.sceneName === sceneName) {
+            return allocate(intArrayFromString(scene.orientation), 'i8', ALLOC_STACK);
+          }
+        }
+      }
+    }
+
+    return allocate(intArrayFromString("unknown"), 'i8', ALLOC_STACK);
+  }
 });

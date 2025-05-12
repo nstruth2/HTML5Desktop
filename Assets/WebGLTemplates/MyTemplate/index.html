@@ -202,12 +202,15 @@
     if (needsLandscape && !isLandscape) {
       warning.innerText = "Please rotate your device to landscape mode to continue.";
       warning.style.display = "flex";
+      console.log("Device needs to be in landscape mode.");
     } else if (!needsLandscape && isLandscape) {
       warning.innerText = "Please rotate your device to portrait mode to continue.";
       warning.style.display = "flex";
+      console.log("Device needs to be in portrait mode.");
     } else {
       warning.style.display = "none";
     }
+    console.log("Orientation is correct.");
   } else {
     warning.style.display = "none";
   }
