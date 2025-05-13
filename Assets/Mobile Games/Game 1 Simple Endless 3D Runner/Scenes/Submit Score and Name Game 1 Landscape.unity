@@ -1654,6 +1654,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 55923695389236634, guid: 8ca93bb1d8eb05345982fdc3471c7c68, type: 3}
+      propertyPath: warningText
+      value: 
+      objectReference: {fileID: 1953153611}
+    - target: {fileID: 55923695389236634, guid: 8ca93bb1d8eb05345982fdc3471c7c68, type: 3}
+      propertyPath: warningOverlay
+      value: 
+      objectReference: {fileID: 1707915240}
     - target: {fileID: 1149899973561843083, guid: 8ca93bb1d8eb05345982fdc3471c7c68, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1641.9745
@@ -1698,49 +1706,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: OrientationWarning
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 1342480342308349803, guid: 8ca93bb1d8eb05345982fdc3471c7c68, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 4556167413016540883, guid: 8ca93bb1d8eb05345982fdc3471c7c68, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 5026752935653110873}
-    - targetCorrespondingSourceObject: {fileID: 4556167413016540883, guid: 8ca93bb1d8eb05345982fdc3471c7c68, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 5026752935653110874}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8ca93bb1d8eb05345982fdc3471c7c68, type: 3}
---- !u!1 &5026752935653110872 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4556167413016540883, guid: 8ca93bb1d8eb05345982fdc3471c7c68, type: 3}
-  m_PrefabInstance: {fileID: 5026752935653110871}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &5026752935653110873
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5026752935653110872}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ecfa186836e22c2438dd1fb3a6940856, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &5026752935653110874
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5026752935653110872}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 377fd47e1a473644ab74446299095c7f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  warningOverlay: {fileID: 1707915240}
-  warningText: {fileID: 1953153611}
 --- !u!114 &5199153502493587722
 MonoBehaviour:
   m_ObjectHideFlags: 0

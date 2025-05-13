@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1149899973561843083}
-  - component: {fileID: 1342480342308349803}
+  - component: {fileID: 55923695389236634}
   m_Layer: 0
   m_Name: OrientationReporter
   m_TagString: Untagged
@@ -32,7 +32,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1342480342308349803
+--- !u!114 &55923695389236634
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -44,6 +44,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 377fd47e1a473644ab74446299095c7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enforceOrientation: 1
-  currentGame: Game1
-  pauseOnIncorrectOrientation: 1
+  warningOverlay: {fileID: 0}
+  warningText: {fileID: 0}

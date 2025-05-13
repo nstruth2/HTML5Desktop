@@ -13,13 +13,20 @@ public class OrientationOverlayManager : MonoBehaviour
 
     void Start()
     {
-        DontDestroyOnLoad(gameObject);
+        Debug.Log("Hello from Unity");
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         requiredOrientation = GetOrientationForScene(scene.name);
+
+        // Send the scene name to JavaScript using ExternalCall
+        if (Application.platform == RuntimePlatform.WebGLPlayer)
+        {
+            // Use ExternalCall to call SetCurrentScene in JS
+            Application.ExternalCall("SetCurrentScene", scene.name);
+        }
 
         // Find even if inactive
         var allTransforms = Resources.FindObjectsOfTypeAll<Transform>();
