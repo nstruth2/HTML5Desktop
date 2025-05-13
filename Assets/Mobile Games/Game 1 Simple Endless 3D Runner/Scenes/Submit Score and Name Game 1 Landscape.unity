@@ -802,7 +802,7 @@ GameObject:
   - component: {fileID: 1953153612}
   - component: {fileID: 1953153611}
   m_Layer: 5
-  m_Name: OrientationText
+  m_Name: Orientation Direction
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1727,8 +1727,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ecfa186836e22c2438dd1fb3a6940856, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  warningPanel: {fileID: 0}
-  warningText: {fileID: 0}
 --- !u!114 &5026752935653110874
 MonoBehaviour:
   m_ObjectHideFlags: 0
