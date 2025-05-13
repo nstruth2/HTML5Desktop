@@ -1,157 +1,64 @@
 using UnityEngine;
-using System.Runtime.InteropServices;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class OrientationManager : MonoBehaviour
+public class OrientationOverlayManager : MonoBehaviour
 {
-    // Import functions from the jslib file
-    [DllImport("__Internal")]
-    private static extern void SetCurrentScene(string sceneName);
-    
-    [DllImport("__Internal")]
-    private static extern void CheckOrientation();
-    
-    [DllImport("__Internal")]
-    private static extern void ShowOrientationWarning(string requiredOrientation);
-    
-    [DllImport("__Internal")]
-    private static extern void HideOrientationWarning();
-    
-    [DllImport("__Internal")]
-    private static extern string GetRequiredOrientation(string gameName, string sceneName);
-    
-    [DllImport("__Internal")]
-    private static extern string GetCurrentOrientation();
-    
-    // Singleton instance
-    public static OrientationManager Instance { get; private set; }
-    
-    [Header("Configuration")]
-    [Tooltip("Should orientation check be enforced for this game")]
-    public bool enforceOrientation = true;
-    
-    [Tooltip("Current game name (must match the jslib configuration)")]
-    public string currentGame = "Game1";
-    
-    [Tooltip("Should the game pause when orientation is incorrect")]
-    public bool pauseOnIncorrectOrientation = true;
-    
-    // Keep track of the current scene
-    private string currentScene;
-    private bool gameWasPaused = false;
-    
-    private void Awake()
+    public GameObject warningOverlay;
+    public Text warningText;
+
+    private string requiredOrientation = "landscape";
+    private string currentOrientation = "landscape";
+
+    void Start()
     {
-        // Setup singleton pattern
-        if (Instance == null)
+        DontDestroyOnLoad(gameObject);
+        SceneManager.sceneLoaded += OnSceneLoaded;
+        OnSceneLoaded(SceneManager.GetActiveScene(), LoadSceneMode.Single);
+    }
+
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        requiredOrientation = GetOrientationForScene(scene.name);
+        CheckOrientation();
+    }
+
+    string GetOrientationForScene(string sceneName)
+    {
+        // Return "landscape" by default, as the orientation logic is now handled by JS
+        return "landscape"; 
+    }
+
+    // This method will be called by JavaScript when the orientation changes
+    public void OnBrowserOrientationChanged(string orientation, string requiredOrientation)
+    {
+        currentOrientation = orientation.ToLower();
+        this.requiredOrientation = requiredOrientation.ToLower();
+        CheckOrientation();
+    }
+
+    void CheckOrientation()
+    {
+        if (currentOrientation != requiredOrientation)
         {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
-            
-            // Register for scene change events
-            SceneManager.sceneLoaded += OnSceneLoaded;
+            warningOverlay.SetActive(true);
+            warningText.text = $"Please rotate your device to {requiredOrientation}.";
         }
         else
         {
-            Destroy(gameObject);
-            return;
+            warningOverlay.SetActive(false);
         }
     }
-    
-    private void OnDestroy()
+
+    public void ShowWarning(string orientation)
     {
-        // Unregister from scene change events
-        SceneManager.sceneLoaded -= OnSceneLoaded;
+        currentOrientation = orientation.ToLower();
+        requiredOrientation = orientation.ToLower(); // This is okay because JS already validated
+        CheckOrientation();
     }
-    
-    private void Start()
+
+    public void HideWarning()
     {
-        // Set initial scene
-        currentScene = SceneManager.GetActiveScene().name;
-        SetSceneToJS(currentScene);
-        
-        Debug.Log("OrientationManager initialized with game: " + currentGame);
-    }
-    
-    // Called when a scene is loaded
-    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-    {
-        // Auto-detect scene changes
-        currentScene = scene.name;
-        SetSceneToJS(currentScene);
-        
-        Debug.Log("Scene changed to: " + currentScene);
-    }
-    
-    // Set the scene to JavaScript
-    private void SetSceneToJS(string sceneName)
-    {
-        #if !UNITY_EDITOR && UNITY_WEBGL
-        if (enforceOrientation)
-        {
-            Debug.Log("Setting current scene in JS: " + sceneName);
-            SetCurrentScene(sceneName);
-        }
-        #else
-        Debug.Log("OrientationManager: SetScene called in Editor or non-WebGL build.");
-        #endif
-    }
-    
-    // Force check the orientation (can be called from UI buttons)
-    public void ForceCheckOrientation()
-    {
-        #if !UNITY_EDITOR && UNITY_WEBGL
-        if (enforceOrientation)
-        {
-            Debug.Log("Forcing orientation check from Unity");
-            CheckOrientation();
-        }
-        #endif
-    }
-    
-    // Callback when orientation doesn't match requirement (called from JavaScript)
-    public void OnOrientationMismatch(string requiredOrientation)
-    {
-        Debug.Log($"Orientation mismatch! Required: {requiredOrientation}");
-        
-        if (pauseOnIncorrectOrientation && Time.timeScale > 0)
-        {
-            // Remember that we paused the game
-            gameWasPaused = true;
-            
-            // Pause the game
-            Time.timeScale = 0;
-            
-            // Optionally disable audio
-            AudioListener.pause = true;
-            
-            Debug.Log("Game paused due to orientation mismatch");
-        }
-    }
-    
-    // Callback when orientation is correct (called from JavaScript)
-    public void OnOrientationCorrect()
-    {
-        Debug.Log("Orientation is now correct!");
-        
-        if (gameWasPaused)
-        {
-            // Resume the game
-            Time.timeScale = 1;
-            
-            // Re-enable audio
-            AudioListener.pause = false;
-            
-            gameWasPaused = false;
-            
-            Debug.Log("Game resumed after orientation corrected");
-        }
-    }
-    
-    // Manually set the current scene (use this when SceneManager.LoadScene is called)
-    public void SetScene(string sceneName)
-    {
-        currentScene = sceneName;
-        SetSceneToJS(sceneName);
+        warningOverlay.SetActive(false);
     }
 }
