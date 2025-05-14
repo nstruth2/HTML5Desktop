@@ -14,7 +14,7 @@ var OrientationManagerLib = {
         scenes: [
           { sceneName: "Menu Game 2", orientation: "portrait" },
           { sceneName: "Gameplay Game 2", orientation: "portrait" },
-          { sceneName: "Submit Score and Name Game 2 Lansdscape", orientation: "landscape" }
+          { sceneName: "Submit Score and Name Game 2 Landscape", orientation: "landscape" }
         ]
       },
       {
@@ -29,108 +29,105 @@ var OrientationManagerLib = {
     currentSceneName: null,
     _orientationListenersAdded: false,
     _boundCheckFn: null,
-    
-    // Check the current orientation against required orientation for the scene
-  // Check orientation logic
-      checkOrientation: function() {
-        if (typeof window === "undefined" || !this.currentSceneName) return;
 
-        // Determine current device orientation
-        let currentOrientation;
-        if (window.screen && window.screen.orientation) {
-            currentOrientation = window.screen.orientation.type.includes('landscape') ? 'landscape' : 'portrait';
-        } else {
-            currentOrientation = window.innerWidth > window.innerHeight ? 'landscape' : 'portrait';
+    checkOrientation: function () {
+      if (typeof window === "undefined" || !this.currentSceneName) return;
+
+      let currentOrientation;
+      if (window.screen && window.screen.orientation) {
+        currentOrientation = window.screen.orientation.type.includes('landscape') ? 'landscape' : 'portrait';
+      } else {
+        currentOrientation = window.innerWidth > window.innerHeight ? 'landscape' : 'portrait';
+      }
+
+      let requiredOrientation = null;
+      for (const game of this.gameScenes) {
+        for (const scene of game.scenes) {
+          if (scene.sceneName === this.currentSceneName) {
+            requiredOrientation = scene.orientation;
+            break;
+          }
         }
+        if (requiredOrientation) break;
+      }
 
-        // Find the required orientation for the current scene using the gameScenes data
-        let requiredOrientation = null;
-        for (const game of this.gameScenes) {
-            for (const scene of game.scenes) {
-                if (scene.sceneName === this.currentSceneName) {
-                    requiredOrientation = scene.orientation;
-                    break;
-                }
-            }
-            if (requiredOrientation) break;
-        }
+      console.log(`Detected orientation: ${currentOrientation}, Required orientation: ${requiredOrientation}`);
 
-        if (!requiredOrientation) return;
+      if (!requiredOrientation) return;
 
-        console.log(`Required orientation for scene "${this.currentSceneName}" is: ${requiredOrientation}`);
-
-        // Send the current scene name and its required orientation to Unity
-        if (typeof Unity !== 'undefined' && Unity.call) {
-            Unity.call("OnBrowserOrientationChanged", currentOrientation, requiredOrientation);
-        }
+      if (typeof window.Unity !== 'undefined' && typeof window.Unity.call === 'function') {
+        const message = JSON.stringify({
+          current: currentOrientation,
+          required: requiredOrientation,
+          scene: this.currentSceneName
+        });
+        Unity.call(message);
+      }
     },
-    
-    // Setup event listeners for orientation changes
-    setupListeners: function() {
+
+    setupListeners: function () {
       if (this._orientationListenersAdded) return;
-      
+
       if (!this._boundCheckFn) {
         this._boundCheckFn = this.checkOrientation.bind(this);
       }
-      
+
       window.addEventListener("resize", this._boundCheckFn);
       window.addEventListener("orientationchange", this._boundCheckFn);
       this._orientationListenersAdded = true;
-      
+
       console.log("Orientation listeners added");
     }
   },
 
-  // Set the current scene and check orientation
-  SetCurrentScene: function(sceneNamePtr) {
+  SetCurrentScene: function (sceneNamePtr) {
+    if (typeof window === 'undefined') return;
+
     var sceneName = UTF8ToString(sceneNamePtr);
+    console.log(`SetCurrentScene called with: ${sceneName}`);
+
     gameLibrary.currentSceneName = sceneName;
-    
-    if (typeof window !== "undefined") {
-      // Setup listeners if not already done
-      gameLibrary.setupListeners();
-      
-      // Check orientation immediately
-      gameLibrary.checkOrientation();
-    }
+    gameLibrary.setupListeners();
+    gameLibrary.checkOrientation();
   },
-  
-  // Show a prompt to change orientation
-  PromptOrientationChange: function(orientationPtr) {
+
+  PromptOrientationChange: function (orientationPtr) {
+    // Removed window.alert logic. Unity can handle displaying this message in UI.
     var orientation = UTF8ToString(orientationPtr);
-    if (orientation === "landscape") {
-      window.alert("Please rotate your device to landscape mode to continue.");
-    } else if (orientation === "portrait") {
-      window.alert("Please rotate your device to portrait mode to continue.");
-    }
+    console.log("PromptOrientationChange called for: " + orientation);
   },
-  
-  // Reset any orientation override
-  ResetOrientationOverride: function() {
+
+  ResetOrientationOverride: function () {
     console.log("Orientation override reset.");
   },
-  
-  // Get the required orientation for a specific game and scene
-  GetRequiredOrientation: function(gameNamePtr, sceneNamePtr) {
+
+  GetRequiredOrientation: function (gameNamePtr, sceneNamePtr) {
     var gameName = UTF8ToString(gameNamePtr);
     var sceneName = UTF8ToString(sceneNamePtr);
-    
+
     for (const game of gameLibrary.gameScenes) {
       if (game.gameName === gameName) {
         for (const scene of game.scenes) {
           if (scene.sceneName === sceneName) {
-            console.log(`Required orientation for game "${gameName}", scene "${sceneName}" is: ${scene.orientation}`);
+            console.log(`Required orientation for "${gameName}" scene "${sceneName}" is: ${scene.orientation}`);
             return allocate(intArrayFromString(scene.orientation), 'i8', ALLOC_NORMAL);
           }
         }
       }
     }
-    
-    console.log(`Required orientation for game "${gameName}", scene "${sceneName}" is: unknown`);
+
+    console.log(`Orientation unknown for game: ${gameName}, scene: ${sceneName}`);
     return allocate(intArrayFromString("unknown"), 'i8', ALLOC_NORMAL);
   }
 };
 
-// Register the library with Emscripten
+// Register internal shared dependency
 autoAddDeps(OrientationManagerLib, '$gameLibrary');
+
+// Merge all into Unity's runtime
 mergeInto(LibraryManager.library, OrientationManagerLib);
+
+// Explicit global function export
+mergeInto(LibraryManager.library, {
+  SetCurrentScene: OrientationManagerLib.SetCurrentScene
+});

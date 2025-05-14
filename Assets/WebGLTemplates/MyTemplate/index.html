@@ -190,20 +190,21 @@
       setTimeout(resizeCanvas, 2000);
       window.addEventListener('resize', resizeCanvas);
     });
+
     function detectOrientationAndSendToUnity() {
-    const isLandscape = window.innerWidth > window.innerHeight;
-    const orientation = isLandscape ? 'landscape' : 'portrait';
-    
-    if (typeof unityInstance !== 'undefined') {
-      unityInstance.SendMessage('OrientationOverlayManager', 'OnBrowserOrientationChanged', orientation);
+      const isLandscape = window.innerWidth > window.innerHeight;
+      const orientation = isLandscape ? 'landscape' : 'portrait';
+      
+      if (typeof unityInstance !== 'undefined') {
+        unityInstance.SendMessage('OrientationWarning', 'ReceiveOrientationData', orientation);
+      }
     }
-  }
 
-  window.addEventListener("resize", detectOrientationAndSendToUnity);
-  window.addEventListener("orientationchange", detectOrientationAndSendToUnity);
+    window.addEventListener("resize", detectOrientationAndSendToUnity);
+    window.addEventListener("orientationchange", detectOrientationAndSendToUnity);
 
-  // Initial call
-  window.onload = () => setTimeout(detectOrientationAndSendToUnity, 100);
+    // Initial call
+    window.onload = () => setTimeout(detectOrientationAndSendToUnity, 100);
   </script>
 </body>
 </html>
