@@ -19,12 +19,6 @@ public class OrientationWarning : MonoBehaviour
     {
         Debug.Log("[OrientationOverlay] Initialized.");
 
-#if !UNITY_WEBGL || UNITY_EDITOR
-        SceneManager.sceneLoaded += OnSceneLoaded;
-        // Also handle the current scene immediately
-        OnSceneLoaded(SceneManager.GetActiveScene(), LoadSceneMode.Single);
-#endif
-
         if (directionText == null)
         {
             Debug.LogWarning("[OrientationOverlay] directionText is not assigned in the Inspector.");
@@ -33,19 +27,25 @@ public class OrientationWarning : MonoBehaviour
         {
             directionText.gameObject.SetActive(false); // Hide initially
         }
+
+        // Register scene loaded event (Editor or WebGL)
+        SceneManager.sceneLoaded += OnSceneLoaded;
+        // Call immediately for the first scene
+        OnSceneLoaded(SceneManager.GetActiveScene(), LoadSceneMode.Single);
     }
 
-#if !UNITY_WEBGL || UNITY_EDITOR
+    void OnDestroy()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         Debug.Log($"[OrientationOverlay] Scene Loaded: {scene.name}");
-
-        // Call JS function to set the current scene
         SetCurrentScene(scene.name);
     }
-#endif
 
-    // ✅ Called from JS via SendMessage in WebGL builds
+    // ✅ Called from JS via SendMessage
     public void ReceiveOrientationData(string json)
     {
         Debug.Log($"[OrientationOverlay] Received orientation data: {json}");
@@ -96,16 +96,14 @@ public class OrientationWarning : MonoBehaviour
         directionText?.gameObject.SetActive(false);
     }
 
-    // ✅ One-way JS call from Unity
     public void SetCurrentScene(string sceneName)
     {
         Debug.Log($"[OrientationOverlay] SetCurrentScene called with: {sceneName}");
 
 #if UNITY_WEBGL && !UNITY_EDITOR
-        if (Application.platform == RuntimePlatform.WebGLPlayer)
-        {
-            SetCurrentSceneJS(sceneName); // Call into JS .jslib
-        }
+        SetCurrentSceneJS(sceneName);
+#else
+        Debug.Log("[OrientationOverlay] Skipping JS call in non-WebGL build.");
 #endif
     }
 
