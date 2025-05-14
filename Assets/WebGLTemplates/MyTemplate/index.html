@@ -6,7 +6,6 @@
   <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, user-scalable=no, shrink-to-fit=yes">
   <title>{{{ PRODUCT_NAME }}}</title>
   <link rel="shortcut icon" href="TemplateData/favicon.ico">
-  <link rel="stylesheet" href="TemplateData/style.css">
   <style>
     html, body, #unity-container {
       margin: 0;
@@ -191,20 +190,6 @@
       window.addEventListener('resize', resizeCanvas);
     });
 
-    function detectOrientationAndSendToUnity() {
-      const isLandscape = window.innerWidth > window.innerHeight;
-      const orientation = isLandscape ? 'landscape' : 'portrait';
-      
-      if (typeof unityInstance !== 'undefined') {
-        unityInstance.SendMessage('OrientationWarning', 'ReceiveOrientationData', orientation);
-      }
-    }
-
-    window.addEventListener("resize", detectOrientationAndSendToUnity);
-    window.addEventListener("orientationchange", detectOrientationAndSendToUnity);
-
-    // Initial call
-    window.onload = () => setTimeout(detectOrientationAndSendToUnity, 100);
   </script>
 </body>
 </html>

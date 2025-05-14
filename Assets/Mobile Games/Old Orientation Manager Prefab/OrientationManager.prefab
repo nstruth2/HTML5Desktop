@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1149899973561843083}
   - component: {fileID: 55923695389236634}
   m_Layer: 0
-  m_Name: OrientationReporter
+  m_Name: OrientationManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

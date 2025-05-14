@@ -1,8 +1,9 @@
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using System.Runtime.InteropServices;
 
-public class OrientationOverlayManager : MonoBehaviour
+public class OrientationWarning : MonoBehaviour
 {
     public Text directionText;
 
@@ -10,14 +11,19 @@ public class OrientationOverlayManager : MonoBehaviour
     private string currentOrientation = "";
 
 #if UNITY_WEBGL && !UNITY_EDITOR
-    [System.Runtime.InteropServices.DllImport("__Internal")]
-    private static extern void SetCurrentScene(string sceneName);
+    [DllImport("__Internal")]
+    private static extern void SetCurrentSceneJS(string sceneName);
 #endif
 
     void Start()
     {
         Debug.Log("[OrientationOverlay] Initialized.");
+
+#if !UNITY_WEBGL || UNITY_EDITOR
         SceneManager.sceneLoaded += OnSceneLoaded;
+        // Also handle the current scene immediately
+        OnSceneLoaded(SceneManager.GetActiveScene(), LoadSceneMode.Single);
+#endif
 
         if (directionText == null)
         {
@@ -25,20 +31,21 @@ public class OrientationOverlayManager : MonoBehaviour
         }
         else
         {
-            directionText.gameObject.SetActive(false); // Hide it at start
+            directionText.gameObject.SetActive(false); // Hide initially
         }
     }
 
+#if !UNITY_WEBGL || UNITY_EDITOR
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         Debug.Log($"[OrientationOverlay] Scene Loaded: {scene.name}");
 
-#if UNITY_WEBGL && !UNITY_EDITOR
+        // Call JS function to set the current scene
         SetCurrentScene(scene.name);
-#endif
     }
+#endif
 
-    // Called from JS via SendMessage
+    // ✅ Called from JS via SendMessage in WebGL builds
     public void ReceiveOrientationData(string json)
     {
         Debug.Log($"[OrientationOverlay] Received orientation data: {json}");
@@ -86,10 +93,20 @@ public class OrientationOverlayManager : MonoBehaviour
 
     public void HideWarning()
     {
-        if (directionText != null)
+        directionText?.gameObject.SetActive(false);
+    }
+
+    // ✅ One-way JS call from Unity
+    public void SetCurrentScene(string sceneName)
+    {
+        Debug.Log($"[OrientationOverlay] SetCurrentScene called with: {sceneName}");
+
+#if UNITY_WEBGL && !UNITY_EDITOR
+        if (Application.platform == RuntimePlatform.WebGLPlayer)
         {
-            directionText.gameObject.SetActive(false);
+            SetCurrentSceneJS(sceneName); // Call into JS .jslib
         }
+#endif
     }
 
     [System.Serializable]
