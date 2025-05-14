@@ -195,7 +195,7 @@
     const orientation = isLandscape ? 'landscape' : 'portrait';
     
     if (typeof unityInstance !== 'undefined') {
-      unityInstance.SendMessage('OrientationWarning', 'OnBrowserOrientationChanged', orientation);
+      unityInstance.SendMessage('OrientationOverlayManager', 'OnBrowserOrientationChanged', orientation);
     }
   }
 

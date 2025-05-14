@@ -5,8 +5,7 @@ using System.Linq;
 
 public class OrientationOverlayManager : MonoBehaviour
 {
-    public GameObject warningOverlay;
-    public Text warningText;
+    public Text directionText;
 
     private string requiredOrientation = "landscape";
     private string currentOrientation = "landscape";
@@ -15,32 +14,21 @@ public class OrientationOverlayManager : MonoBehaviour
     {
         Debug.Log("Hello from Unity");
         SceneManager.sceneLoaded += OnSceneLoaded;
+
+        if (directionText == null)
+        {
+            Debug.LogWarning($"[OrientationOverlay] Missing directionText in scene: {UnityEngine.SceneManagement.SceneManager.GetActiveScene().name}", this);
+        }
+        
     }
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         requiredOrientation = GetOrientationForScene(scene.name);
 
-        // Send the scene name to JavaScript using ExternalCall
         if (Application.platform == RuntimePlatform.WebGLPlayer)
         {
-            // Use ExternalCall to call SetCurrentScene in JS
             Application.ExternalCall("SetCurrentScene", scene.name);
-        }
-
-        // Find even if inactive
-        var allTransforms = Resources.FindObjectsOfTypeAll<Transform>();
-        var panelTransform = allTransforms.FirstOrDefault(t => t.name == "OrientationPanel");
-
-        if (panelTransform != null)
-        {
-            warningOverlay = panelTransform.gameObject;
-            warningText = warningOverlay.GetComponentInChildren<Text>(true);
-            Debug.Log("[OrientationOverlay] OrientationPanel and warningText found.");
-        }
-        else
-        {
-            Debug.LogWarning("[OrientationOverlay] Could not find 'OrientationPanel' in the scene.");
         }
 
         CheckOrientation();
@@ -48,11 +36,9 @@ public class OrientationOverlayManager : MonoBehaviour
 
     string GetOrientationForScene(string sceneName)
     {
-        // JS determines actual orientation needs — default to landscape
-        return "landscape"; 
+        return "landscape";
     }
 
-    // Called by JS on orientation change
     public void OnBrowserOrientationChanged(string orientation, string requiredOrientation)
     {
         Debug.Log($"[OrientationOverlay] JS called with current: {orientation}, required: {requiredOrientation}");
@@ -64,9 +50,9 @@ public class OrientationOverlayManager : MonoBehaviour
 
     void CheckOrientation()
     {
-        if (warningOverlay == null || warningText == null)
+        if (directionText == null)
         {
-            Debug.LogWarning("[OrientationOverlay] Missing references — skipping CheckOrientation.");
+            Debug.LogWarning("[OrientationOverlay] Missing directionText.");
             return;
         }
 
@@ -74,30 +60,64 @@ public class OrientationOverlayManager : MonoBehaviour
 
         if (currentOrientation != requiredOrientation)
         {
-            warningOverlay.SetActive(true);
-            warningText.text = $"Please rotate your device to {requiredOrientation}.";
-            Debug.Log("[OrientationOverlay] Showing warning overlay.");
+            directionText.text = $"Please rotate your device to {requiredOrientation}.";
+            directionText.enabled = true;
         }
         else
         {
-            warningOverlay.SetActive(false);
-            Debug.Log("[OrientationOverlay] Hiding warning overlay.");
+            directionText.enabled = false;
         }
     }
 
     public void ShowWarning(string orientation)
     {
         currentOrientation = orientation.ToLower();
-        requiredOrientation = orientation.ToLower(); // JS already validated
+        requiredOrientation = orientation.ToLower();
         CheckOrientation();
     }
 
     public void HideWarning()
     {
-        if (warningOverlay != null)
+        if (directionText != null)
         {
-            warningOverlay.SetActive(false);
-            Debug.Log("[OrientationOverlay] Manually hiding warning overlay.");
+            directionText.enabled = false;
         }
     }
+
+    void CreateDirectionText()
+    {
+        GameObject canvasGO = new GameObject("OrientationCanvas");
+        Canvas canvas = canvasGO.AddComponent<Canvas>();
+        canvas.renderMode = RenderMode.ScreenSpaceOverlay;
+        canvas.sortingOrder = 1000;
+
+        CanvasScaler scaler = canvasGO.AddComponent<CanvasScaler>();
+        scaler.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
+
+        canvasGO.AddComponent<GraphicRaycaster>();
+
+        GameObject textGO = new GameObject("DirectionText");
+        textGO.transform.SetParent(canvasGO.transform, false);
+
+        directionText = textGO.AddComponent<Text>();
+        directionText.alignment = TextAnchor.MiddleCenter;
+        directionText.font = Resources.GetBuiltinResource<Font>("Arial.ttf");
+        directionText.fontSize = 36;
+        directionText.color = Color.blue;
+
+        // ✅ Set your initial message here
+        directionText.text = $"Please rotate your device to {requiredOrientation}.";
+        directionText.enabled = true; // Show it immediately for testing
+
+        // 🔑 Prevent text from clipping
+        directionText.horizontalOverflow = HorizontalWrapMode.Overflow;
+        directionText.verticalOverflow = VerticalWrapMode.Overflow;
+
+        RectTransform rectTransform = directionText.GetComponent<RectTransform>();
+        rectTransform.anchorMin = new Vector2(0, 0);
+        rectTransform.anchorMax = new Vector2(1, 1);
+        rectTransform.offsetMin = Vector2.zero;
+        rectTransform.offsetMax = Vector2.zero;
+    }
+
 }
