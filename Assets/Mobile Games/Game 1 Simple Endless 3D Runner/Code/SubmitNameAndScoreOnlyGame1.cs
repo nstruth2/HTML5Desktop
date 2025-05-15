@@ -109,11 +109,11 @@ public class SubmitNameAndScoreOnlyGame1 : MonoBehaviour
 
     public void OnContinueClicked()
     {
-        SceneManager.LoadScene("Menu Game 1");
+        SceneManager.LoadScene("Main Menu");
     }
 
     public void OnRetryClicked()
     {
-        SceneManager.LoadScene("Gameplay Game 1"); // 🔹 Correct retry scene
+        SceneManager.LoadScene("Gameplay Game 2"); // 🔹 Correct retry scene
     }
 }

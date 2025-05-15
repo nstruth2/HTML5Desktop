@@ -63,7 +63,7 @@ public class GameManagerGame2 : MonoBehaviour
         PlayerPrefs.SetInt("Game2_SubmitScore", score);
         PlayerPrefs.Save();
 
-        SceneManager.LoadScene("Submit Score And Name Game 2");
+        SceneManager.LoadScene("Game Over Game 2");
     }
 
     public void ClearHighScore()

@@ -118,7 +118,7 @@ public class GameManagerGame1 : MonoBehaviour
         else
         {
             // If it's not mobile WebGL, proceed normally
-            SceneManager.LoadScene("Submit Score and Name Game 1");
+            SceneManager.LoadScene("Game Over Game 1");
         }
     }
 }
