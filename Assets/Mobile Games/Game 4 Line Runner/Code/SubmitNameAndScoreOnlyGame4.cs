@@ -23,10 +23,6 @@ public class SubmitNameAndScoreOnlyGame4 : MonoBehaviour
         submitButton.onClick.AddListener(OnSubmitClicked);
         continueButton.onClick.AddListener(OnContinueClicked);
         retryButton.onClick.AddListener(OnRetryClicked); // 🔹 Attach retry listener
-
-        // 🔹 Hide buttons initially
-        continueButton.gameObject.SetActive(false);
-        retryButton.gameObject.SetActive(false);
     }
 
     public void OnSubmitClicked()
@@ -106,7 +102,7 @@ public class SubmitNameAndScoreOnlyGame4 : MonoBehaviour
 
     private void OnContinueClicked()
     {
-        SceneManager.LoadScene("Menu Game 4");
+        SceneManager.LoadScene("Main Menu");
     }
 
     private void OnRetryClicked()

@@ -43,7 +43,7 @@ public class GameplayGame5 : MonoBehaviour
 
         // Save formatted time string for display
         PlayerPrefs.SetString("Game5_SubmitTime", FormatTime(elapsedTime));
-        SceneManager.LoadScene("Submit Score and Name Game 5");
+        SceneManager.LoadScene("Game Over Game 5");
     }
 
     public void Restart()

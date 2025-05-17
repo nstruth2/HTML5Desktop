@@ -78,8 +78,8 @@ public class ScoreSystemFrom3GamesPackGame2 : MonoBehaviour
     {
         Debug.Log("Coroutine started. Waiting for 1 second...");
         yield return new WaitForSeconds(1f); // Delay ensures PlayerPrefs save completes
-        Debug.Log("Loading scene: Submit Time and Name Game 3");
-        SceneManager.LoadScene("Submit Time and Name Game 3");
+        Debug.Log("Loading scene: Game Over Game 3");
+        SceneManager.LoadScene("Game Over Game 3");
     }
 
     private string FormatTime(decimal time)

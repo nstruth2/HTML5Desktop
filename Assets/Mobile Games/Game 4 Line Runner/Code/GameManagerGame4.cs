@@ -91,7 +91,7 @@ public class GameManagerGame4 : MonoBehaviour
         PlayerPrefs.SetInt("CurrentHighScore", currentHighScore);  // Save current high score
 
         // Load the Submit Score And Name Game 4 scene where users can enter their name and score
-        SceneManager.LoadScene("Submit Score And Name Game 4");  // Transition to score submission scene
+        SceneManager.LoadScene("Game Over Game 4");  // Transition to score submission scene
     }
 
     public void UpdateLives()

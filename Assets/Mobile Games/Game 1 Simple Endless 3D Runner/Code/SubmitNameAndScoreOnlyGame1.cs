@@ -26,10 +26,6 @@ public class SubmitNameAndScoreOnlyGame1 : MonoBehaviour
 
         if (continueButton == null) Debug.LogError("Continue button is NULL!");
         if (retryButton == null) Debug.LogError("Retry button is NULL!");
-
-        // 🔹 Hide buttons initially
-        continueButton.gameObject.SetActive(false);
-        retryButton.gameObject.SetActive(false);
     }
 
     public void OnSubmitClicked()

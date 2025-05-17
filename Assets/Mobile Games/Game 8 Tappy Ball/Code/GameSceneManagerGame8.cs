@@ -61,7 +61,7 @@ public class GameManagerGame8 : MonoBehaviour
 
         Debug.Log($"Game Over. Final Score: {score}, Local High Score: {localHighScore}");
 
-        SceneManager.LoadScene("Submit Score and Name Game 8");
+        SceneManager.LoadScene("Game Over Game 8");
     }
 
     public void SetFetchedHighScore(int fetchedScore, string fetchedPlayer = "???")
