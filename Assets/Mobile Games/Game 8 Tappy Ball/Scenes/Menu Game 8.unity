@@ -719,7 +719,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Main Menu
+  m_Text: Menu
 --- !u!1 &2755811565804367887
 GameObject:
   m_ObjectHideFlags: 0
@@ -910,7 +910,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -448.73, y: -196}
-  m_SizeDelta: {x: 897.4554, y: 117.7923}
+  m_SizeDelta: {x: 1031.9077, y: 656}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &5973877579462604731
 RectTransform:
@@ -1312,7 +1312,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 335.02, y: -196}
-  m_SizeDelta: {x: 670.0466, y: 87.7411}
+  m_SizeDelta: {x: 709.6619, y: 492}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &8678047040121108367
 MonoBehaviour:
@@ -1347,7 +1347,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Tap to Play
+  m_Text: Click to Play
 --- !u!1 &9084086107249389432
 GameObject:
   m_ObjectHideFlags: 0

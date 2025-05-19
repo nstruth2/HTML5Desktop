@@ -7,7 +7,6 @@ public class ScoreSystemFrom3GamesPackGame2 : MonoBehaviour
 {
     [SerializeField] private TMP_Text timeText;
     [SerializeField] private TMP_Text bestTimeText;
-    [SerializeField] private TMP_Text messageText;
 
     public const string BestTimeKey = "BestTime3GamesPackGame2";
     public const string LastTimeKey = "LastTime3GamesPackGame2";
@@ -25,7 +24,6 @@ public class ScoreSystemFrom3GamesPackGame2 : MonoBehaviour
         bestTime = ParseTime(bestTimeStr);
 
         timeText.text = "Time: 00:00.00";
-        messageText.text = "";
         bestTimeText.text = "Best Time: " + (bestTime > 0 ? FormatTime(bestTime) : "--:--.--");
     }
 
@@ -61,7 +59,6 @@ public class ScoreSystemFrom3GamesPackGame2 : MonoBehaviour
             string bestTimeStr = FormatTime(bestTime);
             PlayerPrefs.SetString(BestTimeKey, bestTimeStr); // Save the best time as formatted string
             PlayerPrefs.SetInt(BeatBestTimeKey, 1);
-            messageText.text = "You beat the best time!";
         }
         else
         {

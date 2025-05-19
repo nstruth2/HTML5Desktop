@@ -56,5 +56,5 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "NativeMobileVersionHavetoFixAllGames5.14.2025T818PM.sln"
+    "dotnet.defaultSolution": "HTML5DesktopVersionFixedGame1ScoringMechanismPostGameOverScenes.14.2025T847PM.sln"
 }

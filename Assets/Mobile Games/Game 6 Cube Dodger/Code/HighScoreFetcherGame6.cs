@@ -19,7 +19,7 @@ public class HighScoreFetcherGame6 : MonoBehaviour
 
     IEnumerator FetchTopScorers()
     {
-        string url = "https://ourgoodguide.com/MobileProject/GetTopScoresandNames/get_top_score_game_6.php";
+        string url = "https://ourgoodguide.com/HTML5DesktopProject/GetTopScoresandNames/get_top_score_game_6.php";
         using (UnityWebRequest www = UnityWebRequest.Get(url))
         {
             yield return www.SendWebRequest();

@@ -12,8 +12,8 @@ public class SubmitNameAndScoreOnlyGame5 : MonoBehaviour
     public Button retryButton; // 🔹 New retry button
     public Text rankText;
 
-    private string submitScoreURL = "https://ourgoodguide.com/MobileProject/ScoreandNameSubmission/submit_time_game_5.php";
-    private string checkRankURL = "https://ourgoodguide.com/MobileProject/CheckRank/check_rank_game_5.php";
+    private string submitScoreURL = "https://ourgoodguide.com/HTML5DesktopProject/ScoreandNameSubmission/submit_time_game_5.php";
+    private string checkRankURL = "https://ourgoodguide.com/HTML5DesktopProject/CheckRank/check_rank_game_5.php";
     private string time_raw = "";
 
     private void Start()

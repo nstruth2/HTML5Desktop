@@ -227,8 +227,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 734.62, y: 861.399}
-  m_SizeDelta: {x: 326.93, y: 170.8511}
+  m_AnchoredPosition: {x: 1101.4, y: 446.14}
+  m_SizeDelta: {x: 655.5, y: 148.32}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &845414104
 MonoBehaviour:
@@ -464,8 +464,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 100
+    m_Font: {fileID: 12800000, guid: ca2fcfb91f09e8847876ae47a0f1be1b, type: 3}
+    m_FontSize: 50
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 1
@@ -751,7 +751,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: ca2fcfb91f09e8847876ae47a0f1be1b, type: 3}
     m_FontSize: 75
     m_FontStyle: 0
     m_BestFit: 0
@@ -1156,11 +1156,11 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 35
+    m_Font: {fileID: 12800000, guid: ca2fcfb91f09e8847876ae47a0f1be1b, type: 3}
+    m_FontSize: 50
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 10
+    m_MinSize: 5
     m_MaxSize: 52
     m_Alignment: 4
     m_AlignByGeometry: 0
@@ -1168,7 +1168,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Submit High Score & Name
+  m_Text: Submit Score and Name
 --- !u!114 &3002186563847325978
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1264,7 +1264,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 860, y: 608.96}
+  m_AnchoredPosition: {x: 493, y: 741}
   m_SizeDelta: {x: 528.3067, y: 252.7484}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3732757916088733019
@@ -1321,11 +1321,11 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: ca2fcfb91f09e8847876ae47a0f1be1b, type: 3}
     m_FontSize: 75
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 7
+    m_MinSize: 0
     m_MaxSize: 75
     m_Alignment: 0
     m_AlignByGeometry: 0
@@ -1460,8 +1460,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 1266.5, y: 865.96}
-  m_SizeDelta: {x: 577.36, y: 179.9692}
+  m_AnchoredPosition: {x: 1101.4, y: 239.7913}
+  m_SizeDelta: {x: 655.53, y: 174.3867}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &6195244031863483306
 GameObject:
@@ -1737,8 +1737,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 990, y: 516.82}
-  m_SizeDelta: {x: 800.6, y: 151.2497}
+  m_AnchoredPosition: {x: 1101.4, y: 887}
+  m_SizeDelta: {x: 655.49, y: 151.2497}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8116482872352856468
 CanvasRenderer:
@@ -1814,10 +1814,10 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: ca2fcfb91f09e8847876ae47a0f1be1b, type: 3}
-    m_FontSize: 60
+    m_FontSize: 50
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 10
+    m_MinSize: 5
     m_MaxSize: 61
     m_Alignment: 4
     m_AlignByGeometry: 0
@@ -1825,7 +1825,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Go to  Menu
+  m_Text: Menu
 --- !u!224 &8689648625502646106
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1843,8 +1843,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 1319, y: 675.45}
-  m_SizeDelta: {x: 472.34, y: 119.777}
+  m_AnchoredPosition: {x: 1101.4, y: 663.4901}
+  m_SizeDelta: {x: 655.5055, y: 205.77}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &8885023891342198541
 GameObject:

@@ -20,7 +20,7 @@ public class HighScoreFetcherGame5 : MonoBehaviour
 
    IEnumerator FetchBestTimes()
     {
-        string url = "https://ourgoodguide.com/MobileProject/GetTopScoresandNames/get_best_time_game_5.php";
+        string url = "https://ourgoodguide.com/HTML5DesktopProject/GetTopScoresandNames/get_best_time_game_5.php";
         using (UnityWebRequest www = UnityWebRequest.Get(url))
         {
             yield return www.SendWebRequest();

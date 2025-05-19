@@ -962,7 +962,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Main Menu
+  m_Text: Menu
 --- !u!114 &2869189774125163018
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1136,8 +1136,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -448.73, y: -196}
-  m_SizeDelta: {x: 897.4554, y: 117.7923}
+  m_AnchoredPosition: {x: -417.21774, y: -89.75857}
+  m_SizeDelta: {x: 981.488, y: 401.1029}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &5973877579462604731
 RectTransform:
@@ -1481,8 +1481,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 335.02, y: -196}
-  m_SizeDelta: {x: 670.0466, y: 87.7411}
+  m_AnchoredPosition: {x: 335.02, y: -88.8583}
+  m_SizeDelta: {x: 670.04, y: 302.0245}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &8678047040121108367
 MonoBehaviour:
@@ -1517,7 +1517,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Tap to Play
+  m_Text: Click to Play
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

@@ -16,20 +16,15 @@ public class GameManagerGame1 : MonoBehaviour
     public Text scoreText;
     public Text highScoreText;
 
-    public GameObject playButton;
     public GameObject player;
-    public GameObject mainMenu;
 
     public HighScoreFetcherGame1 highScoreFetcher;
 
     void Start()
     {
         highScoreText.text = "Fetching top score...";
-        mainMenu.SetActive(true);
         player.SetActive(false);
-        playButton.SetActive(false);
 
-        // Find and cache the high score fetcher
         highScoreFetcher = FindObjectOfType<HighScoreFetcherGame1>();
 
         if (highScoreFetcher == null)
@@ -38,10 +33,10 @@ public class GameManagerGame1 : MonoBehaviour
             return;
         }
 
-        StartCoroutine(CacheHighScoreWhenReady());
+        StartCoroutine(CacheHighScoreAndStartGame());
     }
 
-    IEnumerator CacheHighScoreWhenReady()
+    IEnumerator CacheHighScoreAndStartGame()
     {
         while (highScoreFetcher.currentHighScore == 0 && !highScoreFetcher.hasFetched)
         {
@@ -51,7 +46,8 @@ public class GameManagerGame1 : MonoBehaviour
         cachedHighScore = highScoreFetcher.currentHighScore;
         highScoreText.text = $"High Score: {highScoreFetcher.currentHighScorePlayer}: {cachedHighScore}";
         highScoreFetched = true;
-        playButton.SetActive(true);
+
+        GameStart(); // Start game immediately after fetching score
     }
 
     IEnumerator SpawnObstacles()
@@ -63,12 +59,19 @@ public class GameManagerGame1 : MonoBehaviour
         }
     }
 
-    void ScoreUp()
+    public void ScoreUp()
     {
-        if (!highScoreFetched) return;
+        Debug.Log("ScoreUp called. highScoreFetched = " + highScoreFetched);
+
+        if (!highScoreFetched)
+        {
+            Debug.Log("ScoreUp blocked: highScore not fetched yet.");
+            return;
+        }
 
         score++;
         scoreText.text = $"Score: {score}";
+        Debug.Log("Score incremented: " + score);
 
         if (score > cachedHighScore)
         {
@@ -79,11 +82,6 @@ public class GameManagerGame1 : MonoBehaviour
         }
     }
 
-    public void OnPlayButtonPressed()
-    {
-        if (highScoreFetched)
-            GameStart();
-    }
 
     void GameStart()
     {
@@ -92,16 +90,12 @@ public class GameManagerGame1 : MonoBehaviour
 
         player.transform.position = playerStartPoint.position;
         player.SetActive(true);
-        mainMenu.SetActive(false);
-        playButton.SetActive(false);
 
         StartCoroutine(SpawnObstacles());
-        InvokeRepeating(nameof(ScoreUp), 2f, 1f);
     }
 
     public void GameOver()
     {
-        CancelInvoke(nameof(ScoreUp));
         StopAllCoroutines();
 
         PlayerPrefs.SetInt("Game1_SubmitScore", score);
@@ -109,15 +103,12 @@ public class GameManagerGame1 : MonoBehaviour
 
         player.SetActive(false);
 
-        // Check if the platform is mobile WebGL
         if (Application.platform == RuntimePlatform.WebGLPlayer && Application.isMobilePlatform)
         {
-            // If mobile WebGL, load the landscape prompt scene
-            SceneManager.LoadScene("Submit Score and Name Game 1 Landscape"); // Replace with your landscape prompt scene name
+            SceneManager.LoadScene("Submit Score and Name Game 1 Landscape");
         }
         else
         {
-            // If it's not mobile WebGL, proceed normally
             SceneManager.LoadScene("Game Over Game 1");
         }
     }
