@@ -2104,7 +2104,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 873273648}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.10795952, y: -5.1911473e-18, z: -4.0376155e-17, w: 0.9941553}
+  m_LocalRotation: {x: 0.10795951, y: 0.000000007407035, z: -8.0436113e-10, w: 0.9941553}
   m_LocalPosition: {x: -92.7, y: 15.867001, z: -141.23999}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2775,7 +2775,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1091441977}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.10795952, y: -5.1911473e-18, z: -4.0376155e-17, w: 0.9941553}
+  m_LocalRotation: {x: 0.10795951, y: 0.000000007407035, z: -8.0436113e-10, w: 0.9941553}
   m_LocalPosition: {x: -92.7, y: 15.867001, z: -141.23999}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -3489,7 +3489,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 2
+  m_HorizontalAlignment: 1
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -3548,7 +3548,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -424.51147, y: 217.99988}
+  m_AnchoredPosition: {x: 253, y: 155.01}
   m_SizeDelta: {x: 1440, y: 310.021}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1001 &1354434959
@@ -5137,8 +5137,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -424.51, y: 141}
-  m_SizeDelta: {x: 1318.0618, y: 213.3843}
+  m_AnchoredPosition: {x: 474.41, y: 223}
+  m_SizeDelta: {x: 1882.8215, y: 208.0564}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1797505380
 CanvasRenderer:
@@ -5202,7 +5202,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 2
+  m_HorizontalAlignment: 1
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0

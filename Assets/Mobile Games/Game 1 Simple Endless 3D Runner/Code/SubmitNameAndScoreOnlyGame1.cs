@@ -12,7 +12,7 @@ public class SubmitNameAndScoreOnlyGame1 : MonoBehaviour
     public Text rankText;
     public Button retryButton; // 🔹 New retry button
 
-    private string submitScoreURL = "https://ourgoodguide.com/MHTML5DesktopProject/ScoreandNameSubmission/submit_score_game_1.php";
+    private string submitScoreURL = "https://ourgoodguide.com/HTML5DesktopProject/ScoreandNameSubmission/submit_score_game_1.php";
     private string checkRankURL = "https://ourgoodguide.com/HTML5DesktopProject/CheckRank/check_rank_game_1.php";
     private int score = 0;
 

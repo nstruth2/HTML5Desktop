@@ -322,8 +322,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -261, y: 377}
-  m_SizeDelta: {x: 1166.1309, y: 164.4433}
+  m_AnchoredPosition: {x: 34.20642, y: 377}
+  m_SizeDelta: {x: 1756.5437, y: 164.4433}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1001 &193938550
 PrefabInstance:
@@ -1171,23 +1171,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1374900928 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5251278707736055784, guid: f80d356e445b4b3469c5780cf5d2675b, type: 3}
-  m_PrefabInstance: {fileID: 5453037606268999452}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1374900931
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1374900928}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 26798130ed3fe6843b696f8188c10bb9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1428866620
 GameObject:
   m_ObjectHideFlags: 0
@@ -1253,8 +1236,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -575.29, y: 256}
-  m_SizeDelta: {x: 537.5555, y: 143.78}
+  m_AnchoredPosition: {x: -422.03, y: 256}
+  m_SizeDelta: {x: 844.07, y: 143.78}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1562168363
 MonoBehaviour:
@@ -1696,10 +1679,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 5251278707736055784, guid: f80d356e445b4b3469c5780cf5d2675b, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1374900931}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f80d356e445b4b3469c5780cf5d2675b, type: 3}
 --- !u!4 &5679302456487071820
 Transform:

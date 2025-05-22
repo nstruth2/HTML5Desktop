@@ -12,7 +12,6 @@ public class GameManagerGame7 : MonoBehaviour
 
     public Text scoreText;
     public Text highScoreText;
-    public GameObject mainMenuUI;
     public BallGame7 ballScript;
 
     private void Awake()
@@ -22,7 +21,6 @@ public class GameManagerGame7 : MonoBehaviour
 
     void Start()
     {
-        mainMenuUI.SetActive(true);
         scoreText.gameObject.SetActive(false);
         highScoreText.gameObject.SetActive(true);
 
@@ -39,7 +37,6 @@ public class GameManagerGame7 : MonoBehaviour
 
     public void StartGame()
     {
-        mainMenuUI.SetActive(false);
         scoreText.gameObject.SetActive(true);
         Time.timeScale = 1;
         ballScript.BeginGame();

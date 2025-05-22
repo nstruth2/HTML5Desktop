@@ -11182,6 +11182,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: GamePlayUI
       objectReference: {fileID: 0}
+    - target: {fileID: 6489362626699537724, guid: 017802c58a80ed3408e4575187349014, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 1076.7789
+      objectReference: {fileID: 0}
+    - target: {fileID: 6489362626699537724, guid: 017802c58a80ed3408e4575187349014, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -283.32745
+      objectReference: {fileID: 0}
     - target: {fileID: 7440100623704102801, guid: 017802c58a80ed3408e4575187349014, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
