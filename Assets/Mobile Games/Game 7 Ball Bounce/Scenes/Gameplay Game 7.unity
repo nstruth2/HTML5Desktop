@@ -350,9 +350,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21e752bda0b33ef4cbf9df510262e269, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scoreText: {fileID: 0}
+  scoreText: {fileID: 676324083}
   highScoreText: {fileID: 696631378}
-  mainMenuUI: {fileID: 0}
   ballScript: {fileID: 683902472}
 --- !u!4 &551400680
 Transform:
@@ -1208,8 +1207,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa142a5ef6419714793e2afc39f1125f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 10
   ballCollider: {fileID: 683902471}
+  screenEdgeBuffer: 0.5
 --- !u!1 &1747753518
 GameObject:
   m_ObjectHideFlags: 0

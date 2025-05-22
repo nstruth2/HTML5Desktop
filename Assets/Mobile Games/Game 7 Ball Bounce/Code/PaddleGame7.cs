@@ -1,47 +1,52 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PaddleGame7 : MonoBehaviour
 {
-    public float moveSpeed = 10f;
-    public Collider2D ballCollider; // Reference to the ball's collider
+    public Collider2D ballCollider;
+    public float screenEdgeBuffer = 0.5f; // Prevents paddle from going offscreen
+    
     private Rigidbody2D rb;
     private Vector2 startPosition;
+    private float minXBound;
+    private float maxXBound;
 
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
-
-        // Constrain movement to the X-axis (Freeze Y movement & rotation)
         rb.constraints = RigidbodyConstraints2D.FreezeRotation | RigidbodyConstraints2D.FreezePositionY;
     }
 
     void Start()
     {
-        // Ensure no collision between the paddle and ball
         if (ballCollider != null)
         {
-            Physics2D.IgnoreCollision(GetComponent<Collider2D>(), ballCollider, false); // Allow collision
+            Physics2D.IgnoreCollision(GetComponent<Collider2D>(), ballCollider, false);
         }
 
-        // Store the starting position (Y should remain constant)
         startPosition = transform.position;
+        CalculateScreenBounds();
     }
 
     void Update()
     {
-        TouchMove();
+        FollowMouse();
     }
 
-    void TouchMove()
+    void CalculateScreenBounds()
     {
-        if (Input.GetMouseButton(0)) // Detect mouse click or touch
-        {
-            Vector2 touchPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Camera mainCamera = Camera.main;
+        Vector2 screenBounds = mainCamera.ScreenToWorldPoint(new Vector2(Screen.width, Screen.height));
+        float paddleHalfWidth = GetComponent<Collider2D>().bounds.extents.x;
+        
+        minXBound = -screenBounds.x + paddleHalfWidth + screenEdgeBuffer;
+        maxXBound = screenBounds.x - paddleHalfWidth - screenEdgeBuffer;
+    }
 
-            // Move the paddle only on the X-axis while keeping Y constant
-            transform.position = new Vector2(touchPos.x, startPosition.y);
-        }
+    void FollowMouse()
+    {
+        Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        float targetX = Mathf.Clamp(mousePosition.x, minXBound, maxXBound);
+        // Instantly set position, only X changes
+        rb.position = new Vector2(targetX, startPosition.y);
     }
 }

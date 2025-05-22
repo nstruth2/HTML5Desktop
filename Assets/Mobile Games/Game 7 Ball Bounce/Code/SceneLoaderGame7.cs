@@ -7,7 +7,7 @@ public class SceneLoaderGame7 : MonoBehaviour
     public void Submit()
     {
         Time.timeScale = 1f;
-        SceneManager.LoadScene("Submit Score and Name Game 4"); // Replace with your actual menu scene name
+        SceneManager.LoadScene("Submit Score and Name Game 7"); // Replace with your actual menu scene name
     }
 
     // Retry the current game scene

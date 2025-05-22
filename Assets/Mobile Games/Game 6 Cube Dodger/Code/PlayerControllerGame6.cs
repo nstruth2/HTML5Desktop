@@ -4,56 +4,34 @@ using UnityEngine;
 
 public class PlayerControllerGame6 : MonoBehaviour
 {
-
-    public float dodgeSpeed;
     public float maxX;
 
-    float xInput;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
     void Update()
     {
-        xInput = Input.GetAxis("Horizontal");
-
-        TouchInput();
-
-        transform.Translate(xInput * dodgeSpeed * Time.deltaTime, 0, 0);
-
-        float limitedX = Mathf.Clamp(transform.position.x, -maxX, maxX);
-        transform.position = new Vector3(limitedX, transform.position.y, transform.position.z);
+        FollowMouseX();
     }
 
-    void TouchInput()
+    void FollowMouseX()
     {
-        if (Input.GetMouseButton(0))
-        {
-            Vector3 touchPos = Input.mousePosition;
-            touchPos.z = Camera.main.WorldToScreenPoint(transform.position).z; // Maintain Z depth
+        // Get mouse position in screen space and convert to world space
+        Vector3 mouseScreenPos = Input.mousePosition;
+        mouseScreenPos.z = Camera.main.WorldToScreenPoint(transform.position).z; // Maintain Z depth
 
-            Vector3 worldPos = Camera.main.ScreenToWorldPoint(touchPos);
+        Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(mouseScreenPos);
 
-            // Snap to the touch X position instantly, clamped within maxX range
-            float clampedX = Mathf.Clamp(worldPos.x, -maxX, maxX);
-            transform.position = new Vector3(clampedX, transform.position.y, transform.position.z);
+        // Clamp the X position within maxX bounds
+        float clampedX = Mathf.Clamp(mouseWorldPos.x, -maxX, maxX);
 
-            // Prevent keyboard input from interfering
-            xInput = 0;
-        }
+        // Set the player's position (only X changes)
+        transform.position = new Vector3(clampedX, transform.position.y, transform.position.z);
     }
 
     private void OnTriggerEnter(Collider col)
     {
-        if(col.gameObject.tag == "Enemy")
+        if (col.gameObject.tag == "Enemy")
         {
             GameManagerGame6.instance.GameOver();
             Destroy(gameObject);
         }
     }
-
 }
