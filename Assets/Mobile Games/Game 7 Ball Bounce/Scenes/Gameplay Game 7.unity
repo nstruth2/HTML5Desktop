@@ -353,6 +353,7 @@ MonoBehaviour:
   scoreText: {fileID: 676324083}
   highScoreText: {fileID: 696631378}
   ballScript: {fileID: 683902472}
+  highScoreFetcher: {fileID: 0}
 --- !u!4 &551400680
 Transform:
   m_ObjectHideFlags: 0
