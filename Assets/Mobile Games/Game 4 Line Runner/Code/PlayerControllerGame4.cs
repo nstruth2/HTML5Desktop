@@ -20,7 +20,7 @@ public class PlayerControllerGame4 : MonoBehaviour
             {
                 particle.SetActive(true);
             }
-            if(Input.GetMouseButtonDown(0))
+            if(Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Space))
             {
                 PositionSwitch();
             }

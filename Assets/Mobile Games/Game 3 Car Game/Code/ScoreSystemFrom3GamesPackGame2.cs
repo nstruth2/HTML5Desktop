@@ -74,7 +74,7 @@ public class ScoreSystemFrom3GamesPackGame2 : MonoBehaviour
     private System.Collections.IEnumerator DelayedSceneLoad()
     {
         Debug.Log("Coroutine started. Waiting for 1 second...");
-        yield return new WaitForSeconds(1f); // Delay ensures PlayerPrefs save completes
+        yield return new WaitForSeconds(.1f); // Delay ensures PlayerPrefs save completes
         Debug.Log("Loading scene: Game Over Game 3");
         SceneManager.LoadScene("Game Over Game 3");
     }

@@ -23,7 +23,7 @@ public class PlayerGame8 : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Space))
         {
             rb.velocity = Vector3.up * jumpForce; // Apply upward force
         }

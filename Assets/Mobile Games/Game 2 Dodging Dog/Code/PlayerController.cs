@@ -26,21 +26,25 @@ public class PlayerControllerDodgingDog : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        if(Input.GetMouseButton(0))
+        float horizontal = 0f;
+
+        // Check left/right movement input
+        if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A))
         {
-            if(Input.mousePosition.x < Screen.width/2)
-            {
-                //move left
-                rb.velocity = Vector2.left * moveSpeed;
-                sp.flipX = true;
-            }
-            else
-            {
-                //move right
-                rb.velocity = Vector2.right * moveSpeed;
-                sp.flipX = false;
-            }
-            //6:18
+            horizontal = -1f;
+        }
+        else if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D))
+        {
+            horizontal = 1f;
+        }
+
+        // Apply movement
+        rb.velocity = new Vector2(horizontal * moveSpeed, rb.velocity.y);
+
+        // Flip sprite based on direction
+        if (horizontal != 0)
+        {
+            sp.flipX = horizontal < 0;
         }
     }
 }

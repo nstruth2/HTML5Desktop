@@ -12,6 +12,19 @@ public class CarFrom3GamesPackGame2 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+    // Keyboard steering
+    if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A))
+    {
+        Steer(-1); // Steer left
+    }
+    else if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D))
+    {
+        Steer(1); // Steer right
+    }
+    else
+    {
+        Steer(0); // Go straight
+    }
         speed += speedGainPerSecond * Time.deltaTime;
         transform.Rotate(0f, steerValue * turnSpeed * Time.deltaTime, 0f);
         transform.Translate(Vector3.forward * speed * Time.deltaTime);

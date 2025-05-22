@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1888880206831654674}
   - component: {fileID: 5270895268071651298}
   - component: {fileID: 5341092311193067134}
-  - component: {fileID: 9080348325138138168}
+  - component: {fileID: 8194261890780854764}
   m_Layer: 0
   m_Name: Obstacle
   m_TagString: Obstacle
@@ -121,7 +121,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: -10
---- !u!114 &9080348325138138168
+--- !u!114 &8194261890780854764
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
